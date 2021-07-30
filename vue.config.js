@@ -1,5 +1,5 @@
 'use strict'
-const path = require('path')
+const path = require('path');
 const defaultSettings = require('./src/config/index.js')
 // js css文件大小
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin

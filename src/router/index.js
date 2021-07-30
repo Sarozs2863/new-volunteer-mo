@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import { constantRouterMap } from './router.config.js'
 
-Vue.use(Router);
+Vue.use(Router)
 
 const createRouter = () =>
   new Router({
@@ -12,7 +12,6 @@ const createRouter = () =>
     routes: constantRouterMap
   })
 
-const router = createRouter();
-
+const router = createRouter()
 
 export default router

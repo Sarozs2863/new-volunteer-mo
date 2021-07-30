@@ -4,7 +4,7 @@ import { Toast } from 'vant'
 
 // create an axios instance
 const service = axios.create({
-  baseURL: process.env.VUE_APP_BASE_API, // url = base api url + request url
+  baseURL: process.env.VUE_APP_BASE_API, // url = base apFi url + request url
   timeout: 5000, // request timeout
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
@@ -22,7 +22,7 @@ service.interceptors.request.use(
       })
     }
     if (store.getters.token) {
-      config.headers['token'] = ''
+      //   config.headers['token'] = store.getters.token;
     }
     return config
   },
@@ -48,24 +48,24 @@ service.interceptors.response.use(
           // ...
           break
         default:
-            return Promise.reject(res || 'error')
+          return Promise.reject(res || 'error')
       }
     } else {
       return Promise.resolve(res)
     }
   },
   error => {
-    Toast.clear();
+    Toast.clear()
     console.log('err' + error) // for debug
-    switch(error.response.status) {
-        case 401:
-            // ...
-            break;
-        case 500:
-            // ...
-            break;
-        default: 
-           return Promise.reject(error);
+    switch (error.response.status) {
+      case 401:
+        // ...
+        break
+      case 500:
+        // ...
+        break
+      default:
+        return Promise.reject(error)
     }
   }
 )

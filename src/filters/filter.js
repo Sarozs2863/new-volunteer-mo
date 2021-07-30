@@ -2,6 +2,7 @@
  *格式化时间
  *yyyy-MM-dd hh:mm:ss
  */
+
 function formatDate(time, fmt) {
   if (time === undefined || '') {
     return
@@ -36,8 +37,4 @@ function hidePhone(phone) {
   return phone.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')
 }
 
-
-export {
-    hidePhone,
-    formatDate
-}
+export { hidePhone, formatDate }

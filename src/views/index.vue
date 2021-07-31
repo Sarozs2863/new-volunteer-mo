@@ -14,7 +14,7 @@
                 <van-row type="flex" justify="center">
                     <span class="user-name fs-xxs">张一三</span>
                     <div class="user-statu">
-                        <van-button type="primary" size="mini">优秀</van-button>
+                        <van-tag type="success" size="large ">{{ creditRating }}</van-tag>
                     </div>
                 </van-row>
                 <van-row class="fs-xxxs d-flex jc-center" style="line-height:20px" gutter="20">
@@ -70,6 +70,7 @@ export default {
     data() {
         return {
             loading: true,
+            creditRating: '★★★',
             functions: [
                 {
                     id: 1,
@@ -118,7 +119,7 @@ export default {
 }
 .user-statu {
     margin-left: 12px;
-    line-height: 25px;
+    line-height: 34px;
 }
 .func-area {
     margin-top: 20px;

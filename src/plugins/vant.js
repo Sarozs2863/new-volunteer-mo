@@ -17,7 +17,8 @@ import {
     Grid,
     GridItem,
     Skeleton,
-    Empty
+    Empty,
+    Tag
 } from 'vant';
 Vue.use(Button);
 Vue.use(Cell);
@@ -35,3 +36,4 @@ Vue.use(Grid);
 Vue.use(GridItem);
 Vue.use(Skeleton);
 Vue.use(Empty);
+Vue.use(Tag);

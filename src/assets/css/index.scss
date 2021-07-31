@@ -1,123 +1,116 @@
 html,
 body .app {
-  color: #333333;
-  font-family: Arial, Helvetica, 'STHeiti STXihei', 'Microsoft YaHei', Tohoma, sans-serif;
-  background-color: #f8f8f8;
+    color: #333333;
+    font-family: Arial, Helvetica, 'STHeiti STXihei', 'Microsoft YaHei', Tohoma, sans-serif;
+    //   background-color: #f8f8f8;
+    background-color: #fff;
 }
-
-
 $colors: (
-	"primary": #0557D7,
-	"success": #4cd964,
-	"warning": #f0ad4e,
-	"error": #dd524d,
-    "background": #f8f8f8
+    'primary': #0557d7,
+    'success': #4cd964,
+    'warning': #f0ad4e,
+    'error': #dd524d,
+    'background': #f8f8f8
 );
 
 // 文字颜色 背景颜色
 // bgc-white text-primary
 @each $colorKey, $color in $colors {
-	.text-#{$colorKey} {
-		color: $color;
-	}
-	.bgc-#{$colorKey} {
-		background-color: $color;
-	}
+    .text-#{$colorKey} {
+        color: $color;
+    }
+    .bgc-#{$colorKey} {
+        background-color: $color;
+    }
 }
 
-.bold{
-	font-weight: bold;
+.bold {
+    font-weight: bold;
 }
 // font-size fs-sm fs-md
 $base-font-size: 1rem;
 $font-sizes: (
-	xxs: 0.6154,
+    xxxs: 0.382,
+    xxs: 0.6154,
     xs: 0.7692,
     //10px
-    sm: 0.9231,
+        sm: 0.9231,
     //12px
-    md: 1,
+        md: 1,
     //13px
-    lg: 1.0769,
+        lg: 1.0769,
     //14px
-    xl: 1.2308,
-	xxl: 2
+        xl: 1.2308,
+    xxl: 2
 );
 @each $sizeKey, $size in $font-sizes {
-	.fs-#{$sizeKey} {
-		font-size: $size * $base-font-size;
-	}
-};
+    .fs-#{$sizeKey} {
+        font-size: $size * $base-font-size;
+    }
+}
 
 // text text-right text-center
 @each $var in (left, right, center) {
-	.text-#{$var} {
-		text-align: $var;
-	}
+    .text-#{$var} {
+        text-align: $var;
+    }
 }
 
-
-
-// 边框圆角 
+// 边框圆角
 $rd-sm: 4rpx;
 $rd-md: 1rem;
 $rd-lg: 12rpx;
 
-
-
 // flex
-.d-flex{
-	display: flex;
+.d-flex {
+    display: flex;
 }
 // 垂直方向的flex布局
-.flex-column{
-	flex-direction: column;
+.flex-column {
+    flex-direction: column;
 }
 // 左边为1 右边的自己拉伸
-.flex-1{
-	flex: 1; // 等价于 flex-grow: 1
+.flex-1 {
+    flex: 1; // 等价于 flex-grow: 1
 }
 
 $flex-jc: (
-	start: flex-start,
-	end: flex-end,
-	center: center,
-	between: space-between,
-	around: space-around
+    start: flex-start,
+    end: flex-end,
+    center: center,
+    between: space-between,
+    around: space-around
 );
-@each $k, $v in $flex-jc{
-	.jc-#{$k} {
-		justify-content: $v;
-	}
+@each $k, $v in $flex-jc {
+    .jc-#{$k} {
+        justify-content: $v;
+    }
 }
 
 $flex-ai: (
-	start: flex-start,
-	end: flex-end,
-	center: flex-center,
-	stretch: stretch // 交叉轴等高
+    start: flex-start,
+    end: flex-end,
+    center: flex-center,
+    stretch: stretch // 交叉轴等高
 );
-@each $k, $v in $flex-ai{
-	.-#{$k} {
-		align-items: $v;
-	}
+@each $k, $v in $flex-ai {
+    .-#{$k} {
+        align-items: $v;
+    }
 }
-
-
 
 // spacing
 // .mt-1 => margin-top level 1
 
-
 $spacing-types: (
     m: margin,
-    p: padding,
+    p: padding
 );
 $spacing-directions: (
     t: top,
     r: right,
     b: bottom,
-    l: left,
+    l: left
 );
 $spacing-base-size: 1;
 $spacing-sizes: (
@@ -126,63 +119,61 @@ $spacing-sizes: (
     2: 0.5rem,
     3: 1rem,
     4: 1.5rem,
-    5: 3rem,
+    5: 3rem
 );
 
 @each $typeKey, $type in $spacing-types {
-	// m-1
-	@each $sizeKey, $size in $spacing-sizes {
-		.#{$typeKey}-#{$sizeKey}{
-			#{$type}: $size * $spacing-base-size;
-		}
-	}
-	// mx-1
-	@each $sizeKey, $size in $spacing-sizes {
-		.#{$typeKey}x-#{$sizeKey}{
-			#{$type}-left: $size * $spacing-base-size;
-			#{$type}-right: $size * $spacing-base-size;
-		}
-		.#{$typeKey}y-#{$sizeKey}{
-			#{$type}-top: $size * $spacing-base-size;
-			#{$type}-bottom: $size * $spacing-base-size;
-		}
-	}
-	// mt-1
+    // m-1
+    @each $sizeKey, $size in $spacing-sizes {
+        .#{$typeKey}-#{$sizeKey} {
+            #{$type}: $size * $spacing-base-size;
+        }
+    }
+    // mx-1
+    @each $sizeKey, $size in $spacing-sizes {
+        .#{$typeKey}x-#{$sizeKey} {
+            #{$type}-left: $size * $spacing-base-size;
+            #{$type}-right: $size * $spacing-base-size;
+        }
+        .#{$typeKey}y-#{$sizeKey} {
+            #{$type}-top: $size * $spacing-base-size;
+            #{$type}-bottom: $size * $spacing-base-size;
+        }
+    }
+    // mt-1
     @each $directionKey, $direction in $spacing-directions {
-		@each $sizeKey, $size in $spacing-sizes {
-			.#{$typeKey}#{$directionKey}-#{$sizeKey}{
-				#{$type}-#{$direction}: $size * $spacing-base-size;
-			}
-		}
-	}
+        @each $sizeKey, $size in $spacing-sizes {
+            .#{$typeKey}#{$directionKey}-#{$sizeKey} {
+                #{$type}-#{$direction}: $size * $spacing-base-size;
+            }
+        }
+    }
 }
 
-
 // 卡片边框
-.card{
-	border-radius: 0.6rem;
-	background-color: #fff;
-	box-shadow: 0 8px 12px #ebedf0;
-	margin: 0 0.5rem;
+.card {
+    border-radius: 0.6rem;
+    background-color: #fff;
+    box-shadow: 0 8px 12px #ebedf0;
+    margin: 0 0.5rem;
 }
 
 .small-card {
-	border-radius: .6rem;
-	background-color: #fff;
-	box-shadow: 0 8px 12px #ebedf0;
+    border-radius: 0.6rem;
+    background-color: #fff;
+    box-shadow: 0 8px 12px #ebedf0;
 }
 
-  
 @mixin clearfix {
     &:after {
-      content: "";
-      display: table;
-      clear: both;
+        content: '';
+        display: table;
+        clear: both;
     }
-  }
-   
-  // 多行隐藏
-  @mixin textoverflow($clamp:1) {
+}
+
+// 多行隐藏
+@mixin textoverflow($clamp: 1) {
     display: block;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -191,7 +182,4 @@ $spacing-sizes: (
     -webkit-line-clamp: $clamp;
     /*! autoprefixer: ignore next */
     -webkit-box-orient: vertical;
-  }
-
-
-
+}

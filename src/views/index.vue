@@ -40,13 +40,13 @@
             </van-row>
           </div>
         </div>
-        <!-- 底部功能区域 -->
-        <div class="funcArea">
-          <van-grid :column-num="3" style="margin-top:220px">
-            <van-grid-item v-for="value in functions" :key="value.id" :icon="value.icon" :text="value.text" />
-          </van-grid>
-        </div>
       </van-row>
+    </div>
+    <!-- 底部功能区域 -->
+    <div class="funcArea">
+      <van-grid :column-num="3" clickable>
+        <van-grid-item v-for="value in functions" :key="value.id" :icon="value.icon" :text="value.text" />
+      </van-grid>
     </div>
   </div>
 </template>
@@ -113,11 +113,16 @@ export default {
   background-color: #fff;
   box-shadow: 0px 0px 5px 5px rgba(255, 255, 255, 0.452);
 }
-.funcArea {
-  margin-top: 150px;
-  background-color: #fff;
-  // height: 400px;
+.BlueArea {
+  background-color: rgb(95, 139, 233);
   width: 100%;
+  height: 200px;
+}
+.funcArea {
+  margin-top: 220px;
+  width: 100%;
+  border-top: rgb(184, 184, 184) solid 0.032rem;
+  border-bottom: rgb(168, 168, 168) solid 0.032rem;
 }
 .van-password-input__item {
   border: solid rgb(150, 148, 148) 1px;
@@ -128,10 +133,5 @@ export default {
   border-radius: 50px;
   width: 90%;
   font-size: 0.488rem;
-}
-.BlueArea {
-  background-color: rgb(95, 139, 233);
-  width: 100%;
-  height: 200px;
 }
 </style>

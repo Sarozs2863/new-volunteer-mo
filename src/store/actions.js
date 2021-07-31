@@ -1,4 +1,4 @@
-import { login } from '@/api/user'
+import { getVolunteerToken } from '@/api/user'
 
 export default {
     async setToken({ commit, state}) {

@@ -36,7 +36,7 @@
                 <van-button type="info" block class="mt-1 submitBtn">提交工时</van-button>
               </div>
               <!-- 数字键盘 -->
-              <van-number-keyboard v-model="validCode" :show="showKeyboard" @blur="showKeyboard = false" />
+              <!-- <van-number-keyboard v-model="validCode" :show="showKeyboard" @blur="showKeyboard = false" /> -->
             </van-row>
           </div>
         </div>
@@ -44,9 +44,9 @@
     </div>
     <!-- 底部功能区域 -->
     <div class="funcArea">
-      <van-grid :column-num="3" clickable>
+      <!-- <van-grid :column-num="3" clickable>
         <van-grid-item v-for="value in functions" :key="value.id" :icon="value.icon" :text="value.text" />
-      </van-grid>
+      </van-grid> -->
     </div>
   </div>
 </template>

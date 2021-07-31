@@ -3,9 +3,9 @@ import request from './request'
 
 
 // 用户名称 get 方法
-function login(params) {
+function getVolunteerToken(params) {
   return request({
-    url: 'user/token',
+    url: '/login/mobile',
     method: 'get',
     params,
     hideloading: true // vant 加载效果
@@ -13,5 +13,5 @@ function login(params) {
 }
 
 export {
-    login
+  getVolunteerToken
 }

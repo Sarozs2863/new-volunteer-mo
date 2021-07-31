@@ -11,13 +11,19 @@ import {
   Icon,
   Image,
   Card,
+  Dialog,
   PasswordInput,
   NumberKeyboard,
   Divider,
   Grid,
-  GridItem
+  Radio,
+  GridItem,
+  Toast
 } from 'vant'
 Vue.use(Button)
+Vue.use(Radio)
+Vue.use(Toast)
+Vue.use(Dialog)
 Vue.use(Cell)
 Vue.use(List)
 Vue.use(Tabbar).use(TabbarItem)

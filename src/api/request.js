@@ -1,6 +1,6 @@
-import axios from 'axios'
-import store from '@/store'
-import { Toast } from 'vant'
+import axios from 'axios';
+import store from '@/store';
+import { Toast } from 'vant';
 
 // create an axios instance
 const service = axios.create({
@@ -8,8 +8,9 @@ const service = axios.create({
   timeout: 5000, // request timeout
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+    // 'token': store.getters.
   }
-})
+});
 
 //  请求拦截
 service.interceptors.request.use(
@@ -19,55 +20,53 @@ service.interceptors.request.use(
       // loading
       Toast.loading({
         forbidClick: true
-      })
+      });
     }
-    if (store.getters.token) {
-      //   config.headers['token'] = store.getters.token;
-    }
-    return config
+    console.log('commit request interceptor');
+    return config;
   },
   error => {
-    console.log(error)
-    return Promise.reject(error)
+    console.log(error);
+    return Promise.reject(error);
   }
-)
+);
 // respone 响应拦截
 service.interceptors.response.use(
   response => {
-    Toast.clear() // 加载效果停止
-    const res = response.data
+    Toast.clear(); // 加载效果停止
+    const res = response.data;
     if (res.status && res.status !== 200) {
       switch (res.status) {
         case 11101:
           // ...
-          break
+          break;
         case 11102:
           // ...
-          break
+          break;
         case 11103:
           // ...
-          break
+          break;
         default:
-          return Promise.reject(res || 'error')
+          return Promise.reject(res || 'error');
       }
     } else {
-      return Promise.resolve(res)
+      return Promise.resolve(res);
     }
   },
   error => {
-    Toast.clear()
-    console.log('err' + error) // for debug
+    Toast.clear();
+    console.log('err' + error); // for debug
     switch (error.response.status) {
       case 401:
         // ...
-        break
+        break;
       case 500:
         // ...
-        break
+        break;
       default:
-        return Promise.reject(error)
+        return Promise.reject(error);
     }
   }
-)
+);
 
-export default service
+export default service;

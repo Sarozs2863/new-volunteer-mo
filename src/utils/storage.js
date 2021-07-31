@@ -1,4 +1,5 @@
 // 命名空间区分不同项目或模块的localStorage
+
 const namespace = "mobile";
 function saveItem (key, value) {
     // 命名空间作为key，键值对（key-val）都是字符串，需要将字符串类型的value 转换为 对象类型

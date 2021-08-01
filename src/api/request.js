@@ -6,23 +6,22 @@ import { Toast } from 'vant';
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // url = base apFi url + request url
   timeout: 5000, // request timeout
-  headers: {
-    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-    // 'token': store.getters.
-  }
 });
 
 //  请求拦截
 service.interceptors.request.use(
   config => {
-    // 不传递默认开启loading
+    if(config.url === '/login/mobile' || config.url === '/login/mp'){
+      config.headers['token'] = store.state.platformToken;
+    } else {
+      config.headers['token'] = store.state.volunteerToken;
+    }
+
     if (!config.hideloading) {
-      // loading
       Toast.loading({
         forbidClick: true
       });
     }
-    console.log('commit request interceptor');
     return config;
   },
   error => {

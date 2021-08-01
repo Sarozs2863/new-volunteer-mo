@@ -6,7 +6,7 @@ import request from './request'
 function getVolunteerToken(params) {
   return request({
     url: '/login/mobile',
-    method: 'get',
+    method: 'POST',
     params,
     hideloading: true // vant 加载效果
   })

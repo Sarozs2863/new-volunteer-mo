@@ -8,39 +8,35 @@ export default {
   name: 'App',
   data() {
     return {
-      helperToken: '',
-      environment: ''
+      platformToken: '',
     };
   },
   methods: {
     // 判断环境
-    testEnvironment() {
+    testPlatform() {
       if (this.$cookies.get('cookie')) {
-        this.xxx = '';
+        this.platformToken = this.$cookies.get('cookie');
         return 'andriod';
-      } else if (this.$router.query) {
-        // ...
-      } else if (this.xxx) {
-        // 小程序
-        // ...
+      } else if (this.$router.query.token) {
+        this.platformToken = this.$cookies.get('cookie');
+        if (this.$router.query.platform === 'mp') {
+          return 'mp';
+        } else if (this.$router.query.platform === 'ios') {
+          return 'ios';
+        }
       }
     },
     getHelperToken() {
-      let env = this.testEnvironment();
-      switch (env) {
-        case 'andriod':
-          this.$toast('android');
-          break;
-        default:
-          this.$toast('test failed');
-          break;
-      }
-      // 获取volunteerToken，传递...
-      // this.$store.dispatch('get')
+      let platform = this.testPlatform();
+      this.$store.commit('setPlatform', platform);
+      this.$store.commit('setPlatformToken', this.platformToken);
+      this.$toast(platform);
     }
   },
-  mounted() {
-    this.getHelperToken();
+  async mounted() {
+    await this.getHelperToken();
+    await this.$store.dispatch('setVolunteerToken');
+
   }
 };
 </script>

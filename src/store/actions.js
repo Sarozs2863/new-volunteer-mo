@@ -1,10 +1,9 @@
-import { getVolunteerToken } from '@/api/user'
-
+import { getVolunteerToken } from '@/api/user';
 export default {
-    async setToken({ commit, state}) {
-        const { data : token } = await login();
-        console.log(token);
-        commit('setToken', token);
+    async setVolunteerToken({ commit, state }) {
+        const { data : token } = await getVolunteerToken();
+        window.localStorage.volunteerToken = JSON.stringify(token);
+        commit('setVolunteerToken', token);
     }
 };
 

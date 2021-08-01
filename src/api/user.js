@@ -3,15 +3,15 @@ import request from './request'
 
 
 // 用户名称 get 方法
-function login(params) {
+function getVolunteerToken(params) {
   return request({
-    url: 'user/token',
-    method: 'get',
+    url: '/login/mobile',
+    method: 'POST',
     params,
-    hideloading: true // vant 加载效果
+    hideloading: false // vant 加载效果
   })
 }
 
 export {
-    login
+  getVolunteerToken
 }

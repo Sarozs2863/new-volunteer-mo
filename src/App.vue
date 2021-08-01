@@ -8,7 +8,7 @@ export default {
   name: 'App',
   data() {
     return {
-      platformToken: '',
+      platformToken: ''
     };
   },
   methods: {
@@ -27,16 +27,15 @@ export default {
       }
     },
     getHelperToken() {
-      let platform = this.testPlatform();
-      this.$store.commit('setPlatform', platform);
-      this.$store.commit('setPlatformToken', this.platformToken);
-      this.$toast(platform);
+      // let platform = this.testPlatform();
+      // this.$store.commit('setPlatform', platform);
+      // this.$store.commit('setPlatformToken', this.platformToken);
+      // this.$toast(platform);
     }
   },
-  async mounted() {
-    await this.getHelperToken();
-    await this.$store.dispatch('setVolunteerToken');
-
+  mounted() {
+    // await this.getHelperToken();
+    // await this.$store.dispatch('setVolunteerToken');
   }
 };
 </script>

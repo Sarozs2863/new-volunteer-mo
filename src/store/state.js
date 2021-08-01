@@ -1,6 +1,7 @@
 export default {
     platform: '',
     platformToken: '',
-    volunteerToken: window.localStorage.volunteerToken,
-    name: '',
+    volunteerToken: '',
+    userInfo:'',
+    recentActs: []
 }

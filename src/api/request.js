@@ -4,8 +4,8 @@ import { Toast } from 'vant';
 
 // create an axios instance
 const service = axios.create({
-  baseURL: process.env.VUE_APP_BASE_API, // url = base apFi url + request url
-  timeout: 5000, // request timeout
+  baseURL: process.env.VUE_APP_BASE_API, 
+  timeout: 5000
 });
 
 //  请求拦截
@@ -35,6 +35,7 @@ service.interceptors.response.use(
     Toast.clear(); // 加载效果停止
     const res = response.data;
     if (res.status && res.status !== 200) {
+      Toast(res.msg);
       switch (res.status) {
         case 11101:
           // ...

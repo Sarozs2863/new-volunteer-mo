@@ -7,6 +7,15 @@ export default {
     },
     setVolunteerToken(state, token) {
         state.volunteerToken = token;
+    },
+    setUserInfo(state, userInfo) {
+        state.userInfo = userInfo;
+    },
+    setHourView(state, hourView) {
+        state.hourView = hourView;
+    },
+    setRecentActs(state, recentActs) {
+        state.recentActs = recentActs;
     }
        
 }

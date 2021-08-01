@@ -1,26 +1,32 @@
 // 按需全局引入 vant组件
 import Vue from 'vue';
 import {
-    Button,
-    List,
-    Cell,
-    Tabbar,
-    TabbarItem,
-    Row,
-    Col,
-    Icon,
-    Image,
-    Card,
-    PasswordInput,
-    NumberKeyboard,
-    Divider,
-    Grid,
-    GridItem,
-    Skeleton,
-    Empty,
-    Tag
+  Button,
+  List,
+  Cell,
+  Tabbar,
+  TabbarItem,
+  Row,
+  Col,
+  Icon,
+  Image,
+  Card,
+  Dialog,
+  PasswordInput,
+  NumberKeyboard,
+  Divider,
+  Grid,
+  Radio,
+  GridItem,
+  Toast,
+  Skeleton,
+  Empty,
+  Tag
 } from 'vant';
 Vue.use(Button);
+Vue.use(Radio);
+Vue.use(Toast);
+Vue.use(Dialog);
 Vue.use(Cell);
 Vue.use(List);
 Vue.use(Tabbar).use(TabbarItem);

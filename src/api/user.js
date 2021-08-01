@@ -1,17 +1,43 @@
-// axios
-import request from './request'
+import request from './request';
 
-
-// 用户名称 get 方法
-function login(params) {
+function getVolunteerToken(platform) {
+  let url;
+  if (platform === 'mp') {
+    url = '/login/mp';
+  } else {
+    url = '/login/mobile';
+  }
   return request({
-    url: 'user/token',
-    method: 'get',
-    params,
-    hideloading: true // vant 加载效果
-  })
+    url: url,
+    method: 'POST',
+    hideloading: false // vant 加载效果
+  });
 }
 
-export {
-    login
+function getUserInfo() {
+  return request({
+    url: '/enterPage/studentInfo',
+    method: 'GET',
+    hideloading: true
+  });
 }
+
+// 获取工时概览 已参与 xx 活动， 已认证 xxx 工时， 未认证 xxx 工时
+function getHourView() {
+  console.log('getHourView');
+  return request({
+    url: '/volunteer/public/sumTime',
+    method: 'GET',
+    hideloading: true // vant 加载效果
+  });
+}
+
+function getActsList() {
+  return request({
+    url: 'volunteer/public/volunteerTime',
+    method: 'GET',
+    hideloading: true // vant 加载效果
+  });
+}
+
+export { getVolunteerToken, getUserInfo, getHourView, getActsList };

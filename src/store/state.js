@@ -1,4 +1,7 @@
 export default {
-    name: '',
-    token: '',
+    platform: '',
+    platformToken: '',
+    volunteerToken: '',
+    userInfo:'',
+    recentActs: []
 }

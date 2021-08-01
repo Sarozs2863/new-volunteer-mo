@@ -12,19 +12,19 @@
           <van-image round width="2.5rem" height="2.5rem" :src="require('../assets/img/head.png')" />
         </van-row>
         <van-row type="flex" justify="center">
-          <span class="user-name fs-xxs">{{ userInfo.studentName }}</span>
+          <span class="user-name fs-xxs">张一三</span>
           <div class="user-statu">
             <van-tag type="success" size="large ">{{ creditRating }}</van-tag>
           </div>
         </van-row>
         <van-row class="fs-xxxs d-flex jc-center" style="line-height:20px" gutter="20">
-          <van-col>{{ userInfo.collegeName }}</van-col>
-          <van-col>{{ userInfo.studentNum }} </van-col>
+          <van-col>计算机科学与技术学院 </van-col>
+          <van-col>202013407000 </van-col>
         </van-row>
       </div>
     </div>
 
-    <ActCard></ActCard>
+    <AcCard></AcCard>
     <!-- 底部功能区域 -->
     <div class="func-area">
       <van-grid :column-num="3" clickable>
@@ -61,20 +61,16 @@
 </template>
 
 <script>
-import ActCard from '../components/ActCard';
-import { getUserInfo } from '@/api/user';
+import { mapActions } from 'vuex'
+import AcCard from '../components/ActCard';
 export default {
-  name: 'home',
+  name: 'HomePage',
   components: {
-    ActCard
+    AcCard
   },
   data() {
     return {
-      userInfo: {
-        studentName: 'XXX',
-        collegeName: 'xxx学院',
-        studentNum: '123456789000'
-      },
+      user: {},
       loading: true,
       creditRating: '★★★',
       functions: [
@@ -111,10 +107,38 @@ export default {
       ]
     };
   },
+  
+  methods: {
+    testPlatform() {
+      if (this.$cookies.get('cookie')) {
+        this.platformToken = this.$cookies.get('cookie');
+        return 'andriod';
+      } else if (this.$router.query.token) {
+        this.platformToken = this.$cookies.get('cookie');
+        if (this.$router.query.platform === 'mp') {
+          return 'mp';
+        } else if (this.$router.query.platform === 'ios') {
+          return 'ios';
+        } else {
+          this.$toast('未检测到用户信息！');
+          return;
+        }
+      }
+    },
+    getPlatformToken() {
+      let platform = this.testPlatform();
+      this.$store.commit('setPlatform', platform);
+      this.$store.commit('setPlatformToken', this.platformToken);
+      // this.$toast(platform);
+    },
+    ...mapActions(['setVolunteerToken', 'setUserInfo', 'setHourView', 'setRecentActs']),
+  },
   async mounted() {
-    let { data: res } = await getUserInfo();
-    this.userInfo = res;
-    console.log(res);
+    this.getPlatformToken();
+    await this.setVolunteerToken();
+    await this.setUserInfo();
+    await this.setHourView();
+    await this.setRecentActs();
   }
 };
 </script>

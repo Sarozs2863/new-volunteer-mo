@@ -45,8 +45,7 @@ module.exports = {
             @import "@/assets/css/index.scss";
           `
       }
-    },
-    modules: false
+    }
   },
   configureWebpack: config => {
     config.name = name

@@ -8,7 +8,7 @@ function getVolunteerToken(params) {
     url: '/login/mobile',
     method: 'POST',
     params,
-    hideloading: true // vant 加载效果
+    hideloading: false // vant 加载效果
   })
 }
 

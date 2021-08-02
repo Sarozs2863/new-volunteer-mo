@@ -37,10 +37,10 @@
 
 <script>
 import { mapActions } from 'vuex';
-import ValidCodeCard from '../components/ValidCodeCard.vue';
-import UserInfo from '../components/UserInfo.vue';
-import FuncArea from '../components/FuncArea.vue';
-import ActList from '../components/ActList.vue';
+import ValidCodeCard from '@/components/ValidCodeCard.vue';
+import UserInfo from '@/components/UserInfo.vue';
+import FuncArea from '@/components/FuncArea.vue';
+import ActList from '@/components/ActList.vue';
 export default {
   name: 'HomePage',
   components: {

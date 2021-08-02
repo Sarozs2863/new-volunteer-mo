@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import ActCard from '../components/ActCard.vue';
+import ActCard from '@/components/ActCard.vue';
 export default {
   name: 'ActList',
   components: {

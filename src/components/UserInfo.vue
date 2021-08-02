@@ -2,7 +2,7 @@
   <!-- 头像以及个人信息区域 -->
   <div>
     <van-row class="d-flex jc-center ">
-      <van-image round width="2.5rem" height="2.5rem" :src="require('../assets/img/head.png')" />
+      <van-image round width="2.5rem" height="2.5rem" :src="require('@/assets/img/head.png')" />
     </van-row>
     <van-row style="margin-top:5px" type="flex" justify="center">
       <span class=" fs-xxs text-background">{{ $store.state.userInfo.studentName }}</span>

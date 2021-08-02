@@ -21,7 +21,8 @@ import {
   Toast,
   Skeleton,
   Empty,
-  Tag
+  Tag,
+  NoticeBar
 } from 'vant';
 Vue.use(Button);
 Vue.use(Radio);
@@ -43,3 +44,4 @@ Vue.use(GridItem);
 Vue.use(Skeleton);
 Vue.use(Empty);
 Vue.use(Tag);
+Vue.use(NoticeBar);

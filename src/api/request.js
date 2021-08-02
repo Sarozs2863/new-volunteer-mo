@@ -11,14 +11,11 @@ const service = axios.create({
 //  请求拦截
 service.interceptors.request.use(
   config => {
-    // if(config.url === '/login/mobile' || config.url === '/login/mp'){
-    //   config.headers['token'] = store.state.platformToken;
-    // } else {
-    //   config.headers['token'] = store.state.volunteerToken;
-    // }
-    // mytoken
-    config.headers['token'] =
-      'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0YWciOjAsImV4cCI6MTYyNzgzMTcyMiwic3R1ZGVudE51bSI6IjIwMjAxMzQwNzEwOCJ9.77dV-hzJUpqhviQzNpZOML4ONAIriP42HuT4kwXYhZY';
+    if (config.url === '/login/mobile' || config.url === '/login/mp') {
+      config.headers['token'] = store.state.platformToken;
+    } else {
+      config.headers['token'] = store.state.volunteerToken;
+    }
 
     if (!config.hideloading) {
       Toast.loading({

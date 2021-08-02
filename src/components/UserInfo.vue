@@ -4,7 +4,7 @@
     <van-row class="d-flex jc-center ">
       <van-image round width="2.5rem" height="2.5rem" :src="require('../assets/img/head.png')" />
     </van-row>
-    <van-row type="flex" justify="center">
+    <van-row style="margin-top:5px" type="flex" justify="center">
       <span class=" fs-xxs text-background">{{ $store.state.userInfo.studentName }}</span>
       <div class="user-statu">
         <van-tag type="success" size="large ">{{ creditRating }}</van-tag>

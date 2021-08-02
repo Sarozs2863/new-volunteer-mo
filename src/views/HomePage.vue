@@ -5,11 +5,17 @@
       <van-notice-bar left-icon="volume-o" :text="notice" />
       <!-- 顶部按钮区域 -->
       <van-row class="d-flex jc-end">
-        <van-icon name="question-o" class="m-10 " size="23px" color="#fff" />
+        <van-icon name="question-o" class="m-10 " size="23px" color="#fff" @click="guideDialogShow = true" />
         <van-icon name="more-o" class="m-10 " size="23px" color="#fff" />
       </van-row>
+      <!-- 用户反馈 -->
+      <van-dialog v-model="guideDialogShow" title="用户反馈" confirm-button-color="#006eff">
+        <div class="feedback">
+          {{ notice }}
+        </div>
+      </van-dialog>
       <!-- 头像以及个人信息区域 -->
-      <div class="user-info mt-1">
+      <div class="user-info">
         <UserInfo></UserInfo>
       </div>
     </div>
@@ -45,6 +51,7 @@ export default {
   },
   data() {
     return {
+      guideDialogShow: false,
       notice: '用户反馈qq群：926518229。若工时信息与志愿者证不对应，请联系该活动的活动负责人或向院青队咨询'
     };
   },
@@ -90,6 +97,10 @@ export default {
 .blue-area {
   background-color: rgb(25, 137, 250);
   width: 100%;
-  height: 330px;
+  height: 325px;
+}
+.feedback {
+  text-align: center;
+  padding: 0.45rem;
 }
 </style>

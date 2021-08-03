@@ -7,10 +7,9 @@
   "wrap_line_length": 120,
   "wrap_attributes": "auto",
   "proseWrap": "always",
-  "arrowParens": "avoid",
+  "arrowParens": "always",
   "bracketSpacing": true,
-  "jsxBracketSameLine": true,
-  "useTabs": false,
+  "useTabs": true,    
   "overrides": [
     {
       "files": ".prettierrc",
@@ -18,6 +17,5 @@
         "parser": "json"
       }
     }
-  ],
-  "endOfLine": "auto"
+  ]
 }

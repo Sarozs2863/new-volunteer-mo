@@ -14,7 +14,7 @@ export default {
   },
   setHourView(state, hourView) {
     state.hourView = hourView;
-    // console.log(hourView);
+    console.log('工时概览', state.hourView);
   },
   setRecentActs(state, recentActs) {
     state.recentActs = recentActs;

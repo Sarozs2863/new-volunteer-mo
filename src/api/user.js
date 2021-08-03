@@ -21,7 +21,6 @@ function getUserInfo() {
     hideloading: true
   });
 }
-
 // 获取工时概览 已参与 xx 活动， 已认证 xxx 工时， 未认证 xxx 工时
 function getHourView() {
   console.log('getHourView');
@@ -37,6 +36,15 @@ function getActsList() {
     url: 'volunteer/public/volunteerTime',
     method: 'GET',
     hideloading: true // vant 加载效果
+  });
+}
+
+// 提交工时验证码
+function submitValidCode() {
+  return request({
+    url: '/enterPage/studentInfo',
+    method: 'GET',
+    hideloading: true
   });
 }
 

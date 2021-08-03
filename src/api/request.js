@@ -4,14 +4,14 @@ import { Toast } from 'vant';
 
 // create an axios instance
 const service = axios.create({
-  baseURL: process.env.VUE_APP_BASE_API, 
+  baseURL: process.env.VUE_APP_BASE_API,
   timeout: 5000
 });
 
 //  请求拦截
 service.interceptors.request.use(
   config => {
-    if(config.url === '/login/mobile' || config.url === '/login/mp'){
+    if (config.url === '/login/mobile' || config.url === '/login/mp') {
       config.headers['token'] = store.state.platformToken;
     } else {
       config.headers['token'] = store.state.volunteerToken;

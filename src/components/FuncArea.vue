@@ -39,7 +39,7 @@ export default {
           id: 4,
           icon: 'warn-o',
           text: '违规举报',
-          path: '/report'
+          path: '/reasons'
         },
         {
           id: 5,

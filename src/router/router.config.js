@@ -33,8 +33,8 @@ export const constantRouterMap = [
   },
   // 违规举报页面
   {
-    path: '/report',
-    component: () => import('@/views/Report')
+    path: '/reasons',
+    component: () => import('@/views/report/Reasons')
   },
   // 举报记录页面
   {

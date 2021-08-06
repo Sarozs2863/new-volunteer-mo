@@ -1,7 +1,13 @@
 <template>
   <div>
     <van-grid :column-num="3" clickable>
-      <van-grid-item v-for="value in functions" :key="value.id" :icon="value.icon" :text="value.text" />
+      <van-grid-item
+        v-for="value in functions"
+        :to="value.path"
+        :key="value.id"
+        :icon="value.icon"
+        :text="value.text"
+      />
     </van-grid>
   </div>
 </template>
@@ -14,32 +20,38 @@ export default {
         {
           id: 1,
           icon: 'todo-list-o',
-          text: '活动招募'
+          text: '活动招募',
+          path: '/actrecruit'
         },
         {
           id: 2,
           icon: 'smile-o',
-          text: '信用等级'
+          text: '信用等级',
+          path: '/creditlevel'
         },
         {
           id: 3,
           icon: 'notes-o',
-          text: '我参与的'
+          text: '工时概览',
+          path: '/mytimes'
         },
         {
           id: 4,
           icon: 'warn-o',
-          text: '违规举报'
+          text: '违规举报',
+          path: '/reasons'
         },
         {
           id: 5,
           icon: 'eye-o',
-          text: '举报记录'
+          text: '举报记录',
+          path: '/reportlist'
         },
         {
           id: 6,
           icon: 'edit',
-          text: '活动策划'
+          text: '活动策划',
+          path: ''
         }
       ]
     };

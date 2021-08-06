@@ -1,7 +1,8 @@
 export default {
-    platform: '',
-    platformToken: '',
-    volunteerToken: '',
-    userInfo:'',
-    recentActs: []
-}
+  platform: '',
+  platformToken: '',
+  volunteerToken: '',
+  userInfo: '',
+  hourView: {},
+  recentActs: []
+};

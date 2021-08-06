@@ -4,6 +4,7 @@ import {
   Button,
   List,
   Cell,
+  CellGroup,
   Tabbar,
   TabbarItem,
   Row,
@@ -22,13 +23,18 @@ import {
   Skeleton,
   Empty,
   Tag,
-  NoticeBar
+  NoticeBar,
+  NavBar,
+  Checkbox,
+  CheckboxGroup,
+  Field
 } from 'vant';
 Vue.use(Button);
 Vue.use(Radio);
 Vue.use(Toast);
 Vue.use(Dialog);
 Vue.use(Cell);
+Vue.use(CellGroup);
 Vue.use(List);
 Vue.use(Tabbar).use(TabbarItem);
 Vue.use(Row);
@@ -45,3 +51,7 @@ Vue.use(Skeleton);
 Vue.use(Empty);
 Vue.use(Tag);
 Vue.use(NoticeBar);
+Vue.use(NavBar);
+Vue.use(Checkbox);
+Vue.use(CheckboxGroup);
+Vue.use(Field);

@@ -2,7 +2,7 @@ export const constantRouterMap = [
   // 主页面
   {
     path: '/',
-    component: () => import('@/views/HomePage'),
+    component: () => import('@/views/Home/index'),
     meta: {
       title: '志愿者服务',
       keepAlive: false

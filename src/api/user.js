@@ -35,7 +35,7 @@ function getActsList() {
   return request({
     url: 'volunteer/public/volunteerTime',
     method: 'GET',
-    hideloading: true // vant 加载效果
+    hideloading: true
   });
 }
 

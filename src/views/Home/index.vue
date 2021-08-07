@@ -14,33 +14,26 @@
           {{ notice }}
         </div>
       </van-dialog>
-      <!-- 头像以及个人信息区域 -->
-      <div class="user-info">
-        <UserInfo></UserInfo>
-      </div>
+        <UserInfo class="user-info"></UserInfo>
     </div>
-    <!-- 提交工时验证码区域 -->
-    <div class="card main-card d-flex jc-center mt-2">
-      <ValidCodeCard></ValidCodeCard>
-    </div>
-    <!-- 底部功能区域 -->
-    <div class="func-area" style="margin-top: 15px;">
-      <FuncArea></FuncArea>
-    </div>
-
-    <!-- 活动列表卡片 -->
-    <div>
-      <ActList></ActList>
-    </div>
+    <ValidCodeCard class="card main-card d-flex jc-center mt-2"></ValidCodeCard>
+    <FuncArea class="func-area" style="margin-top: 15px;"></FuncArea>
+    <ActList></ActList>
+    
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
-import ValidCodeCard from '@/components/ValidCodeCard.vue';
-import UserInfo from '@/components/UserInfo.vue';
-import FuncArea from '@/components/FuncArea.vue';
+// 活动列表 全局组件
 import ActList from '@/components/ActList.vue';
+// 六位认证码区域
+import ValidCodeCard from './components/ValidCodeCard.vue';
+// 学生信息区域
+import UserInfo from './components/UserInfo.vue';
+// 功能区
+import FuncArea from './components/FuncArea.vue';
+
 export default {
   name: 'HomePage',
   components: {

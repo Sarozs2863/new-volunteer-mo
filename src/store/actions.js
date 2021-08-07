@@ -24,5 +24,17 @@ export default {
     }
     // console.log(recentActs);
     commit('setRecentActs', recentActs);
+  },
+  doSetHourView(context, payload) {
+    return new Promise((resolve, reject) => {
+      hourOverview()
+        .then(res => {
+          Toast.clear();
+          localStorage.setItem('hourView', JSON.stringify(res.data));
+          context.commit('setHourView', res.data);
+          resolve(res);
+        })
+        .catch(err => reject(err));
+    });
   }
 };

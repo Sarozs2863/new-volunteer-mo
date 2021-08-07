@@ -8,6 +8,13 @@ export const constantRouterMap = [
       keepAlive: false
     }
   },
+  // 提交工时
+  {
+    path: '/approveAct',
+    name: 'ApproveAct',
+    component: () => import('@/views/approveAct'),
+    meta: { title: '工时提交 - 志愿者服务', keepAlive: false }
+  },
   {
     path: '/test',
     component: () => import('@/views/Test.vue')

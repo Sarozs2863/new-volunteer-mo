@@ -38,6 +38,13 @@ export const constantRouterMap = [
 		path: '/mytimes',
 		component: () => import('@/views/MyVolTime')
 	},
+	// 志愿者活动列表
+	{
+		path: '/actList',
+		name: 'AllActList',
+		component: () => import('@/views/AllActList'),
+		meta: { title: '活动列表 - 志愿者服务', keepAlive: false }
+	},
 	// 违规举报页面---举报-1
 	{
 		path: '/reasons',
@@ -52,7 +59,7 @@ export const constantRouterMap = [
 		path: '/details',
 		component: () => import('@/views/report/Details'),
 		meta: {
-			title: '举报原因',
+			title: '举报详情',
 			keepAlive: false
 		}
 	},

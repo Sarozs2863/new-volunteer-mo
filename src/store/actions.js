@@ -1,7 +1,7 @@
 import { getVolunteerToken, getUserInfo, getHourView, getActsList } from '@/api/user';
 export default {
   async setVolunteerToken({ commit, state }) {
-    let { data: token } = await getVolunteerToken();
+    let { data : token } = await getVolunteerToken();
     commit('setVolunteerToken', token);
   },
   async setUserInfo({ commit, state }) {

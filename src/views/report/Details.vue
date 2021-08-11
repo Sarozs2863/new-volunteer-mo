@@ -7,7 +7,6 @@
 			此次举报将全程保护您的个人信息，请实事求是、放心填写！
 		</van-notice-bar>
 
-		<van-form @submit="onSubmit">
 			<!-- 此次志愿活动名称 -->
 			<van-field
 				v-model="details.activityName"
@@ -75,14 +74,13 @@
 				placeholder="被举报人的姓名"
 			/>
 			<div style="margin: 16px;">
-				<van-button round block type="info" native-type="submit">提交举报</van-button>
+				<van-button round block type="info" @click="onSubmit()">提交举报</van-button>
 			</div>
-		</van-form>
 	</div>
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
+import { commitReport } from '@/api/report';
 export default {
 	data() {
 		return {
@@ -100,19 +98,16 @@ export default {
 			}
 		};
 	},
-	created() {
-		this.details.informPersonNum = this.$store.state.userInfo.studentNum;
-		console.log(this.$store.state.userInfo.studentNum);
+	mounted() {
+		console.log(this.$route.params);
+		this.details = this.$route.params.reasons;
 	},
 	methods: {
-		...mapMutations([
-			'commitReport' // 将 `this.commitReport()` 映射为 `this.$store.commit('commitReport')`
-		]),
 		async onSubmit() {
-			this.$store.commit('setDetails', this.details);
-			const { msg } = await this.commitReport();
-			console.log(msg);
-			console.log(this.$store.state.reportInfo);
+			this.details.informPersonNum = this.$store.state.userInfo.studentNum;
+			console.log(this.details);
+			let { msg } = await commitReport(this.details);
+			this.$toast(msg);
 		},
 		StartTimeConfirm(time) {
 			this.details.startTime =

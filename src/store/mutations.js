@@ -33,13 +33,5 @@ export default {
 		state.reportInfo.activityName = details.activityName;
 		state.reportInfo.informPersonNum = details.informPersonNum;
 	},
-	// 提交举报
-	commitReport(state) {
-		request({
-			url: '/inform/insert',
-			method: 'POST',
-			hideloading: true, // vant 加载效果
-			params: state.reportInfo
-		});
-	}
+	
 };

@@ -1,3 +1,4 @@
+
 export const constantRouterMap = [
 	// 主页面
 	{
@@ -52,27 +53,13 @@ export const constantRouterMap = [
 		meta: {
 			title: '举报详情',
 			keepAlive: false
-		},
-		children: [
-			// 举报详情页面
-			{
-				path: 'details',
-				component: () => import('@/views/report/Details'),
-				meta: {
-					title: '举报详情',
-					keepAlive: false
-				}
-			}
-		]
-	},
-
-	{
-		path: '/details',
-		component: () => import('@/views/report/Details'),
-		meta: {
-			title: '举报详情',
-			keepAlive: false
 		}
+	
+	},
+	{
+		path: 'details',
+		name: 'Details',
+		component: () => import('@/views/report/Details')
 	},
 	// 举报记录页面
 	{

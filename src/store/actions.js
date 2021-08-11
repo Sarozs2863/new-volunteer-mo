@@ -18,7 +18,7 @@ export default {
 		// console.log(data.list);
 		let recentActs;
 		if (data.list.length >= 3) {
-			recentActs = data.list.slice(-3);
+			recentActs = data.list.slice(0, 3);
 		} else {
 			recentActs = data.list;
 		}

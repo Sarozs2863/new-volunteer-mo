@@ -28,10 +28,14 @@ import {
 	Checkbox,
 	CheckboxGroup,
 	Field,
-	Form
+	Form,
+	RadioGroup,
+	Popup,
+	DatetimePicker
 } from 'vant';
 Vue.use(Button);
 Vue.use(Radio);
+Vue.use(RadioGroup);
 Vue.use(Toast);
 Vue.use(Dialog);
 Vue.use(Cell);
@@ -57,3 +61,5 @@ Vue.use(Checkbox);
 Vue.use(CheckboxGroup);
 Vue.use(Field);
 Vue.use(Form);
+Vue.use(Popup);
+Vue.use(DatetimePicker);

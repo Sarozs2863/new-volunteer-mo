@@ -45,16 +45,27 @@ export const constantRouterMap = [
 		component: () => import('@/views/AllActList'),
 		meta: { title: '活动列表 - 志愿者服务', keepAlive: false }
 	},
-	// 违规举报页面---举报-1
+	// 违规举报页面
 	{
-		path: '/reasons',
+		path: '/report',
 		component: () => import('@/views/report/Reasons'),
 		meta: {
-			title: '举报原因',
+			title: '举报详情',
 			keepAlive: false
-		}
+		},
+		children: [
+			// 举报详情页面
+			{
+				path: 'details',
+				component: () => import('@/views/report/Details'),
+				meta: {
+					title: '举报详情',
+					keepAlive: false
+				}
+			}
+		]
 	},
-	// 举报信息详情---举报-2
+
 	{
 		path: '/details',
 		component: () => import('@/views/report/Details'),

@@ -1,6 +1,5 @@
 <template>
 	<div>
-		<!-- <h1 class="text-center">违规举报页面</h1> -->
 		<van-nav-bar
 			title="违规举报"
 			left-text="返回"
@@ -20,24 +19,45 @@
 		<van-row class="text-center m-1 fs-xxs">
 			请选择举报原因
 		</van-row>
-		<!-- 复选框 -->
-		<van-checkbox-group v-model="result">
-			<van-cell-group>
-				<van-cell
-					v-for="(item, index) in reasons"
-					clickable
-					:key="item"
-					:title="`${index + 1}. ${item}`"
-					@click="toggle(index)"
-				>
-					<template #right-icon>
-						<van-checkbox :name="item" ref="checkboxes" />
-					</template>
-				</van-cell>
-			</van-cell-group>
-		</van-checkbox-group>
-		<!-- 其他原因 -->
-		<van-field v-model="otherrason" rows="4" autosize label="6.其他原因：" type="textarea" :placeholder="palceholder" />
+		<!-- 单选框 -->
+		<div>
+			<van-radio-group v-model="reasons.reason" @change="showOtherReasonArea">
+				<van-cell-group>
+					<van-cell title="1. 参与志愿服务活动时迟到或早退。" clickable @click="reasons.reason = '1'">
+						<template #right-icon>
+							<van-radio name="1" />
+						</template>
+					</van-cell>
+					<van-cell title="2. 参与志愿活动旷到。" clickable @click="reasons.reason = '2'">
+						<template #right-icon>
+							<van-radio name="2" />
+						</template>
+					</van-cell>
+					<van-cell title="3. 从事与工作无关或影响志愿活动开展的个人活动" clickable @click="reasons.reason = '3'">
+						<template #right-icon>
+							<van-radio name="3" />
+						</template>
+					</van-cell>
+					<van-cell title="4. 其他理由" clickable @click="reasons.reason = '4'">
+						<template #right-icon>
+							<van-radio name="4" />
+						</template>
+					</van-cell>
+					<van-cell>
+						<template #right-icon>
+							<van-field
+								v-if="showOtherReason"
+								v-model="reasons.reasonOther"
+								rows="4"
+								autosize
+								type="textarea"
+								:placeholder="palceholder"
+							/>
+						</template>
+					</van-cell>
+				</van-cell-group>
+			</van-radio-group>
+		</div>
 	</div>
 </template>
 
@@ -46,23 +66,33 @@ export default {
 	data() {
 		return {
 			palceholder: '请输入具体原因',
-			reasons: ['做与志愿服务活动无关的事情', '进行影响活动开展的个人活动', '迟到', '早退', '旷到'],
-			result: [],
-			otherrason: ''
+			showOtherReason: false,
+			reasons: {
+				reason: '',
+				reasonOther: ''
+			}
 		};
 	},
 	methods: {
 		onClickRight() {
-			if (this.otherrason === '') {
-				console.log('结果', this.result);
+			if (this.reasons.reason === '') {
+				this.$toast('您还未选择任何举报原因！请先选择。');
+			} else if (this.reasons.reason === '4' && this.reasons.reasonOther === '') {
+				this.$toast('请填写具体其他原因');
 			} else {
-				this.result.push(this.otherrason);
-				console.log('结果', this.result);
+				if (this.reasons.reason === '4') {
+				} else {
+					this.reasons.reasonOther = '无其他原因';
+				}
+				this.$store.commit('setReasons', this.reasons);
+				// console.log(this.$store.state.reportInfo);
+				this.$router.push('/details');
 			}
-			this.$router.push('/details');
 		},
-		toggle(index) {
-			this.$refs.checkboxes[index].toggle();
+
+		showOtherReasonArea() {
+			console.log(this.reasons.reason);
+			this.reasons.reason === '4' ? (this.showOtherReason = true) : (this.showOtherReason = false);
 		}
 	}
 };

@@ -112,8 +112,12 @@ export default {
 	methods: {
 		async onSubmit() {
 			this.details.informPersonNum = this.$store.state.userInfo.studentNum;
-			console.log(this.details);
-			let res = await commitReport(this.details, this.reportPhotos);
+			
+			const form = new FormData();
+			for (let i = 0; i < this.reportPhotos.length; i++) {
+				form.append('file', this.reportPhotos[i].file);
+			}
+			let res = await commitReport(this.details, form);
 			if (res.code === 0) {
 				this.$toast.success('提交举报成功!');
 			} else {

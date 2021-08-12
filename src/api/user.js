@@ -31,11 +31,12 @@ function getHourView() {
 	});
 }
 
-function getActsList() {
+function getActsList(param) {
 	return request({
 		url: 'volunteer/public/volunteerTime',
 		method: 'GET',
-		hideloading: true
+		hideloading: true,
+		params: param
 	});
 }
 

@@ -7,75 +7,81 @@
 			此次举报将全程保护您的个人信息，请实事求是、放心填写！
 		</van-notice-bar>
 
-			<!-- 此次志愿活动名称 -->
-			<van-field
-				v-model="details.activityName"
-				autocomplete="off"
-				name="志愿活动名称"
-				label="活动名称"
-				colon
-				required
-				placeholder="此次志愿活动名称"
-				:rules="[{ required: true, message: '请填写活动名称' }]"
+		<!-- 此次志愿活动名称 -->
+		<van-field
+			v-model="details.activityName"
+			autocomplete="off"
+			name="志愿活动名称"
+			label="活动名称"
+			colon
+			required
+			placeholder="此次志愿活动名称"
+			:rules="[{ required: true, message: '请填写活动名称' }]"
+		/>
+		<!-- 选择开始时间 -->
+		<van-field
+			clickable
+			colon
+			required
+			:rules="[{ required: true, message: '请填写活动大致开始时间' }]"
+			name="datetimePicker1"
+			:value="details.startTime"
+			autocomplete="off"
+			label="开始时间"
+			placeholder="点击选择活动大致开始时间"
+			@click="showStartPicker = true"
+		/>
+		<van-popup v-model="showStartPicker" position="bottom">
+			<van-datetime-picker
+				type="datetime"
+				title="年-月-日-时-分"
+				:min-date="minDate"
+				:max-date="maxDate"
+				@confirm="StartTimeConfirm"
+				@cancel="showStartPicker = false"
 			/>
-			<!-- 选择开始时间 -->
-			<van-field
-				clickable
-				colon
-				required
-				:rules="[{ required: true, message: '请填写活动大致开始时间' }]"
-				name="datetimePicker1"
-				:value="details.startTime"
-				autocomplete="off"
-				label="开始时间"
-				placeholder="点击选择活动大致开始时间"
-				@click="showStartPicker = true"
+		</van-popup>
+		<!-- 选择结束时间 -->
+		<van-field
+			clickable
+			colon
+			required
+			:rules="[{ required: true, message: '请填写活动大致结束时间' }]"
+			name="datetimePicker2"
+			:value="details.endTime"
+			autocomplete="off"
+			label="结束时间"
+			placeholder="点击选择活动大致结束时间"
+			@click="showEndPicker = true"
+		/>
+		<van-popup v-model="showEndPicker" position="bottom">
+			<van-datetime-picker
+				type="datetime"
+				title="年-月-日-时-分"
+				:min-date="newMinDate"
+				:max-date="maxDate"
+				@confirm="EndTimeConfirm"
+				@cancel="showEndPicker = false"
 			/>
-			<van-popup v-model="showStartPicker" position="bottom">
-				<van-datetime-picker
-					type="datetime"
-					title="年-月-日-时-分"
-					:min-date="minDate"
-					:max-date="maxDate"
-					@confirm="StartTimeConfirm"
-					@cancel="showStartPicker = false"
-				/>
-			</van-popup>
-			<!-- 选择结束时间 -->
-			<van-field
-				clickable
-				colon
-				required
-				:rules="[{ required: true, message: '请填写活动大致结束时间' }]"
-				name="datetimePicker2"
-				:value="details.endTime"
-				autocomplete="off"
-				label="结束时间"
-				placeholder="点击选择活动大致结束时间"
-				@click="showEndPicker = true"
-			/>
-			<van-popup v-model="showEndPicker" position="bottom">
-				<van-datetime-picker
-					type="datetime"
-					title="年-月-日-时-分"
-					:min-date="newMinDate"
-					:max-date="maxDate"
-					@confirm="EndTimeConfirm"
-					@cancel="showEndPicker = false"
-				/>
-			</van-popup>
-			<!-- Ta的姓名 -->
-			<van-field
-				v-model="details.reportedPerson"
-				autocomplete="off"
-				name="被举报人姓名"
-				label="Ta的姓名"
-				colon
-				placeholder="被举报人的姓名"
-			/>
-			<div style="margin: 16px;">
-				<van-button round block type="info" @click="onSubmit()">提交举报</van-button>
-			</div>
+		</van-popup>
+		<!-- Ta的姓名 -->
+		<van-field
+			v-model="details.reportedPerson"
+			autocomplete="off"
+			name="被举报人姓名"
+			label="Ta的姓名"
+			colon
+			placeholder="被举报人的姓名"
+		/>
+		<!-- 文件上传 -->
+		<van-field name="uploader" label="照片" colon>
+			<template #input>
+				<van-uploader :multiple="true" capture="camera" v-model="reportPhotos" />
+			</template>
+		</van-field>
+		<div style="margin: 16px;">
+			<van-button round block type="info" @click="onSubmit()">提交举报</van-button>
+		</div>
 	</div>
 </template>
 
@@ -95,7 +101,8 @@ export default {
 				endTime: '',
 				activityName: '',
 				informPersonNum: ''
-			}
+			},
+			reportPhotos: []
 		};
 	},
 	mounted() {
@@ -106,8 +113,16 @@ export default {
 		async onSubmit() {
 			this.details.informPersonNum = this.$store.state.userInfo.studentNum;
 			console.log(this.details);
-			let { msg } = await commitReport(this.details);
-			this.$toast(msg);
+			let res = await commitReport(this.details, this.reportPhotos);
+			if (res.code === 0) {
+				this.$toast.success('提交举报成功!');
+			} else {
+				this.$toast.fail(res.msg);
+			}
+			// 提交成功回到首页
+			setTimeout(() => {
+				this.$router.push('/');
+			}, 1500);
 		},
 		StartTimeConfirm(time) {
 			this.details.startTime =

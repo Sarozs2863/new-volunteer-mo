@@ -31,7 +31,8 @@ import {
 	Form,
 	RadioGroup,
 	Popup,
-	DatetimePicker
+	DatetimePicker,
+	Uploader
 } from 'vant';
 Vue.use(Button);
 Vue.use(Radio);
@@ -63,3 +64,4 @@ Vue.use(Field);
 Vue.use(Form);
 Vue.use(Popup);
 Vue.use(DatetimePicker);
+Vue.use(Uploader);

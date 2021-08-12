@@ -75,7 +75,7 @@ export default {
 	},
 	methods: {
 		onClickRight() {
-			console.log(111);
+			// console.log(111);
 			if (this.reasons.reason === '') {
 				this.$toast('您还未选择任何举报原因！请先选择。');
 			} else if (this.reasons.reason === '4' && this.reasons.reasonOther === '') {

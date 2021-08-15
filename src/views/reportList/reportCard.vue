@@ -4,8 +4,8 @@
 			<van-col class="left" span="13">
 				<van-row class="act_name">{{ report.activityName }}</van-row>
 				<div class="date_crater">举报时间：{{ report.createTime }}</div>
-				<van-row class="organization">被举报人：{{ report.reportedPerson }}</van-row> </van-col
-			>report.id
+				<van-row class="organization">被举报人：{{ report.reportedPerson }}</van-row>
+			</van-col>
 			<van-col class="right">
 				<van-row
 					><van-button type="info" style="margin-left:-20px" @click="confirmCancelReport(report.id)"
@@ -35,7 +35,6 @@ export default {
 			} else {
 				this.$toast.fail(res.msg);
 			}
-			this.$parent.getList();
 		},
 		confirmCancelReport(reportId) {
 			Dialog.confirm({
@@ -44,6 +43,9 @@ export default {
 			})
 				.then(() => {
 					this.cancelReport(reportId);
+					setTimeout(() => {
+						this.$parent.getList();
+					}, 1500);
 				})
 				.catch(() => {
 					// on cancel

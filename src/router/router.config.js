@@ -1,4 +1,3 @@
-
 export const constantRouterMap = [
 	// 主页面
 	{
@@ -54,7 +53,6 @@ export const constantRouterMap = [
 			title: '举报详情',
 			keepAlive: false
 		}
-	
 	},
 	{
 		path: 'details',
@@ -64,7 +62,7 @@ export const constantRouterMap = [
 	// 举报记录页面
 	{
 		path: '/reportlist',
-		component: () => import('@/views/ReportList')
+		component: () => import('@/views/reportList/ReportList')
 	},
 	// 404页面
 	{

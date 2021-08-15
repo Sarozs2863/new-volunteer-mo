@@ -14,6 +14,7 @@ export default {
 		startTime: '',
 		endTime: '',
 		informPersonNum: '',
-		activityName: ''
+		activityName: '',
+		collegeId: 0
 	}
 };

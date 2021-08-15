@@ -100,7 +100,8 @@ export default {
 				startTime: '',
 				endTime: '',
 				activityName: '',
-				informPersonNum: ''
+				informPersonNum: '',
+				college: 0
 			},
 			reportPhotos: []
 		};
@@ -112,11 +113,14 @@ export default {
 	methods: {
 		async onSubmit() {
 			this.details.informPersonNum = this.$store.state.userInfo.studentNum;
-			
+			this.details.college = this.$store.state.userInfo.collegeId;
 			const form = new FormData();
 			for (let i = 0; i < this.reportPhotos.length; i++) {
+				console.log('0.file', this.reportPhotos[i].file);
 				form.append('file', this.reportPhotos[i].file);
 			}
+			console.log(this.details);
+			// console.log(form);
 			let res = await commitReport(this.details, form);
 			if (res.code === 0) {
 				this.$toast.success('提交举报成功!');

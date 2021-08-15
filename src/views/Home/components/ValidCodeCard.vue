@@ -3,7 +3,7 @@
     <van-row class="mt-2">
       <van-password-input
         info="在上方输入正确的认证码，即可提交工时"
-        :value="validCode"
+        :value="verifyCode"
         :mask="false"
         :gutter="10"
         length="6"
@@ -11,21 +11,61 @@
         @focus="showKeyboard = true"
       />
       <div class="d-flex jc-center mt-1">
-        <van-button type="info" block class="mt-1 submit-btn ">提交工时</van-button>
+        <van-button
+          type="info"
+          block
+          class="mt-1 submit-btn "
+          :disabled="verifyCode.length < 6 ? true : false"
+          @click="commitVerifyCode()"
+          >提交工时</van-button
+        >
       </div>
       <!-- 数字键盘 -->
-      <van-number-keyboard v-model="validCode" :show="showKeyboard" @blur="showKeyboard = false" />
+      <van-number-keyboard v-model="verifyCode" :show="showKeyboard" @blur="showKeyboard = false" />
     </van-row>
   </div>
 </template>
 
 <script>
+import { getApprovedActId } from '@/api/volunteerHome';
 export default {
   data() {
     return {
-      validCode: '',
+      verifyCode: '',
       showKeyboard: false
     };
+  },
+  methods: {
+    // 输入六位验证码跳转到提交工时页面
+    async commitVerifyCode() {
+      const res = await getApprovedActId(this.verifyCode);
+      if (res.data === null) {
+        this.$toast({
+          message: '六位随机码无效！随机码错误或者过期'
+        });
+        return;
+      }
+      // 传活动id
+      const activityId = res.data.activityId;
+      const sheetId = res.data.volunteerCheckId;
+      const activityDate = res.data.activityDate;
+      const activityName = res.data.activityName;
+      const volunteerTimes = res.data.volunteerTimes;
+      const crater = res.data.crater;
+      // this.$router.push(`/approveAct/${this.approveActId}/${this.verifyCode}`)
+      this.$router.push({
+        name: 'ApproveAct',
+        params: {
+          activityId: activityId,
+          sheetId: sheetId,
+          activityDate: activityDate,
+          randomString: this.verifyCode,
+          volunteerTimes: volunteerTimes,
+          crater: crater,
+          activityName: activityName
+        }
+      });
+    }
   }
 };
 </script>

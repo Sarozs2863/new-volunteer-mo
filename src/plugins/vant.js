@@ -1,36 +1,42 @@
 // 按需全局引入 vant组件
 import Vue from 'vue';
 import {
-  Button,
-  List,
-  Cell,
-  CellGroup,
-  Tabbar,
-  TabbarItem,
-  Row,
-  Col,
-  Icon,
-  Image,
-  Card,
-  Dialog,
-  PasswordInput,
-  NumberKeyboard,
-  Divider,
-  Grid,
-  Radio,
-  GridItem,
-  Toast,
-  Skeleton,
-  Empty,
-  Tag,
-  NoticeBar,
-  NavBar,
-  Checkbox,
-  CheckboxGroup,
-  Field
+	Button,
+	List,
+	Cell,
+	CellGroup,
+	Tabbar,
+	TabbarItem,
+	Row,
+	Col,
+	Icon,
+	Image,
+	Card,
+	Dialog,
+	PasswordInput,
+	NumberKeyboard,
+	Divider,
+	Grid,
+	Radio,
+	GridItem,
+	Toast,
+	Skeleton,
+	Empty,
+	Tag,
+	NoticeBar,
+	NavBar,
+	Checkbox,
+	CheckboxGroup,
+	Field,
+	Form,
+	RadioGroup,
+	Popup,
+	DatetimePicker,
+	Uploader
 } from 'vant';
 Vue.use(Button);
 Vue.use(Radio);
+Vue.use(RadioGroup);
 Vue.use(Toast);
 Vue.use(Dialog);
 Vue.use(Cell);
@@ -55,3 +61,7 @@ Vue.use(NavBar);
 Vue.use(Checkbox);
 Vue.use(CheckboxGroup);
 Vue.use(Field);
+Vue.use(Form);
+Vue.use(Popup);
+Vue.use(DatetimePicker);
+Vue.use(Uploader);

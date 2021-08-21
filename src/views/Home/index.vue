@@ -52,11 +52,11 @@ export default {
 			if (this.$cookies.get('cookie')) {
 				this.platformToken = this.$cookies.get('cookie');
 				return 'andriod';
-			} else if (this.$router.query.token) {
-				this.platformToken = this.$cookies.get('cookie');
-				if (this.$router.query.platform === 'mp') {
+			} else if (this.$route.query.token) {
+				this.platformToken = this.$route.query.token;
+				if (this.$route.query.platform === 'mp') {
 					return 'mp';
-				} else if (this.$router.query.platform === 'ios') {
+				} else if (this.$route.query.platform === 'ios') {
 					return 'ios';
 				} else {
 					this.$toast('未检测到用户信息！');

@@ -2,6 +2,7 @@ export default {
 	platform: '',
 	platformToken: '',
 	volunteerToken: '',
+	// 用户个人信息
 	userInfo: '',
 	// 根据性别确定头像
 	gender: '',

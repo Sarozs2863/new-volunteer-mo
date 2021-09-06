@@ -8,6 +8,8 @@ export default {
 	gender: '',
 	// 信用等级
 	creditLevel: '',
+	// 信用标签类型(默认为绿色)
+	creditTag: 'primary ',
 	creditLevelCount: 0,
 	// 惩罚次数（0星次数）
 	punishedTimes: 0,

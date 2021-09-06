@@ -7,7 +7,7 @@
 		<van-row style="margin-top:5px" type="flex" justify="center">
 			<span class=" fs-xxs text-background">{{ $store.state.userInfo.studentName }}</span>
 			<div class="user-statu">
-				<van-tag type="success" size="large ">{{ $store.state.creditLevel }}</van-tag>
+				<van-tag :type="$store.state.creditTag" size="large ">{{ $store.state.creditLevel }}</van-tag>
 			</div>
 		</van-row>
 		<van-row class="fs-xxxs d-flex jc-center" style="line-height:20px" gutter="20">
@@ -21,6 +21,14 @@
 export default {
 	data() {
 		return {};
+	},
+	mounted() {
+		// console.log('this.$store.state.creditLevel', this.$store.state.creditLevel);
+		// if (this.$store.state.creditLevel === '⚠') {
+		// 	this.tag_type = 'danger';
+		// } else {
+		// 	this.tag_type = 'success';
+		// }
 	}
 };
 </script>

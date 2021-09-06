@@ -3,7 +3,15 @@
 		<div class="back_to_top" v-if="flag_scroll">
 			<van-icon class="back_btn" name="arrow-up" @click="backTop"> </van-icon>
 		</div>
-		<van-nav-bar title="活动列表" left-arrow fixed placeholder @click-left="$router.go(-1)"> </van-nav-bar>
+		<van-nav-bar
+			:style="{ display: $store.state.platform === 'mp' ? 'none' : '' }"
+			title="活动列表"
+			left-arrow
+			fixed
+			placeholder
+			@click-left="$router.go(-1)"
+		>
+		</van-nav-bar>
 		<div class="content">
 			<van-empty v-if="actList.length == 0" description="你还没有参与过志愿活动哦！"></van-empty>
 			<van-list

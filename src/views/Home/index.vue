@@ -20,7 +20,13 @@
 		<ActList></ActList>
 		<copyright></copyright>
 
-		<van-dialog v-model="loginDialogShow" title="用户登录" show-cancel-button confirmButtonColor="#1989FA" @confirm="webLogin">
+		<van-dialog
+			v-model="loginDialogShow"
+			title="用户登录"
+			show-cancel-button
+			confirmButtonColor="#1989FA"
+			@confirm="webLogin"
+		>
 			<div style="margin-top: 20px;">
 				<van-field v-model="stuNo" label="学号" placeholder="请输入学号" />
 				<van-field v-model="password" label="密码" placeholder="请输入密码" />
@@ -99,7 +105,6 @@ export default {
 		},
 		async webLogin() {
 			// let params = {
-				
 			// }
 			// let res = await login()
 		},

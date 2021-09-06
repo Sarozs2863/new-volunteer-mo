@@ -1,6 +1,14 @@
 <template>
 	<div>
-		<van-nav-bar title="信用等级" left-text="返回" left-arrow fixed placeholder @click-left="$router.go(-1)">
+		<van-nav-bar
+			:style="{ display: $store.state.platform === 'mp' ? 'none' : '' }"
+			title="信用等级"
+			left-text="返回"
+			left-arrow
+			fixed
+			placeholder
+			@click-left="$router.go(-1)"
+		>
 		</van-nav-bar>
 		<div class="creditCard">
 			<van-row class="creditItems">

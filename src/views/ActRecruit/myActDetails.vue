@@ -1,6 +1,12 @@
 <template>
 	<div>
-		<van-nav-bar title="活动招募详情" left-text="返回" left-arrow @click-left="$router.go(-1)" />
+		<van-nav-bar
+			:style="{ display: $store.state.platform === 'mp' ? 'none' : '' }"
+			title="活动招募详情"
+			left-text="返回"
+			left-arrow
+			@click-left="$router.go(-1)"
+		/>
 		<van-cell-group>
 			<van-cell center size="large" title="活动名称：" :value="actDetails.activityName" />
 			<van-cell center size="large" title="主办组织：" :value="actDetails.organization" />

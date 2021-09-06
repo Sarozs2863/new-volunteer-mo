@@ -38,7 +38,7 @@ export const constantRouterMap = [
 			keepAlive: false
 		}
 	},
-	// 活动招募详情页面
+	// 我的活动页面
 	{
 		path: 'myactdetails',
 		name: 'myActDetails',
@@ -83,6 +83,15 @@ export const constantRouterMap = [
 	{
 		path: '/reportlist',
 		component: () => import('@/views/reportList/ReportList')
+	},
+	// 活动策划页面
+	{
+		path: '/applyact',
+		component: () => import('@/views/notsupport'),
+		meta: {
+			title: '活动策划',
+			keepAlive: false
+		}
 	},
 	// 404页面
 	{

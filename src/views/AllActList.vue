@@ -16,13 +16,13 @@
 				<ActCard v-if="actList.length > 0" :actList="actList"></ActCard>
 			</van-list>
 		</div>
-		<!-- <copyright></copyright> -->
+		<Copyright></Copyright>
 	</div>
 </template>
 
 <script>
 import ActCard from '@/components/ActCard.vue';
-// import copyright from '@/components/Copyright.vue';
+import Copyright from '@/components/Copyright.vue';
 import { mapState } from 'vuex';
 import { getActsList } from '@/api/user.js';
 
@@ -43,8 +43,8 @@ export default {
 		...mapState(['getActsList', 'platform'])
 	},
 	components: {
-		ActCard
-		// copyright
+		ActCard,
+		Copyright
 	},
 	mounted() {
 		window.addEventListener('scroll', this.handleScroll, true);

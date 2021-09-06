@@ -19,6 +19,7 @@
 		<ValidCodeCard class="card main-card d-flex jc-center mt-2"></ValidCodeCard>
 		<FuncArea class="func-area" style="margin-top: 15px;"></FuncArea>
 		<ActList></ActList>
+		<copyright></copyright>
 	</div>
 </template>
 
@@ -26,6 +27,7 @@
 import { mapActions } from 'vuex';
 // 活动列表 全局组件
 import ActList from '@/views/Home/components/ActList.vue';
+import copyright from '@/components/Copyright.vue';
 // 六位认证码区域
 import ValidCodeCard from './components/ValidCodeCard.vue';
 // 学生信息区域
@@ -39,7 +41,8 @@ export default {
 		ValidCodeCard,
 		UserInfo,
 		FuncArea,
-		ActList
+		ActList,
+		copyright
 	},
 	data() {
 		return {
@@ -52,11 +55,11 @@ export default {
 			if (this.$cookies.get('cookie')) {
 				this.platformToken = this.$cookies.get('cookie');
 				return 'andriod';
-			} else if (this.$router.query.token) {
-				this.platformToken = this.$cookies.get('cookie');
-				if (this.$router.query.platform === 'mp') {
+			} else if (this.$route.query.token) {
+				this.platformToken = this.$route.query.token;
+				if (this.$route.query.platform === 'mp') {
 					return 'mp';
-				} else if (this.$router.query.platform === 'ios') {
+				} else if (this.$route.query.platform === 'ios') {
 					return 'ios';
 				} else {
 					this.$toast('未检测到用户信息！');
@@ -70,7 +73,7 @@ export default {
 			this.$store.commit('setPlatform', platform);
 			this.$store.commit('setPlatformToken', this.platformToken);
 		},
-		...mapActions(['setVolunteerToken', 'setUserInfo', 'setHourView', 'setRecentActs'])
+		...mapActions(['setVolunteerToken', 'setUserInfo', 'setHourView', 'setRecentActs', 'setCreditLevel'])
 	},
 	async mounted() {
 		this.getPlatformToken();
@@ -78,6 +81,7 @@ export default {
 		await this.setUserInfo();
 		await this.setHourView();
 		await this.setRecentActs();
+		await this.setCreditLevel();
 	}
 };
 </script>

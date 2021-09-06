@@ -147,7 +147,7 @@ export default {
 									message: '提交成功!'
 								});
 								setTimeout(() => {
-									this.$router.push('/');
+									this.$router.go(-1);
 								}, 1500);
 							});
 						})

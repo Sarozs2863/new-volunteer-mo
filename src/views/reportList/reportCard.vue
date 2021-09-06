@@ -44,8 +44,8 @@ export default {
 				.then(() => {
 					this.cancelReport(reportId);
 					setTimeout(() => {
-						this.$parent.getList();
-					}, 1500);
+						this.$emit('getList');
+					}, 1000);
 				})
 				.catch(() => {
 					// on cancel

@@ -58,11 +58,16 @@
 				</van-cell-group>
 			</van-radio-group>
 		</div>
+		<Copyright></Copyright>
 	</div>
 </template>
 
 <script>
+import Copyright from '@/components/Copyright.vue';
 export default {
+	components: {
+		Copyright
+	},
 	data() {
 		return {
 			palceholder: '请输入具体原因',
@@ -96,7 +101,7 @@ export default {
 
 		showOtherReasonArea() {
 			console.log(this.reasons.reason);
-			this.reasons.reason === '4' ? (this.showOtherReason = true) : (this.showOtherReason = false);
+			this.showOtherReason = this.reasons.reason === '4' ? true : false;
 		}
 	}
 };

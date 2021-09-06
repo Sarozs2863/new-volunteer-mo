@@ -10,8 +10,26 @@ export default {
 		state.volunteerToken = token;
 	},
 	setUserInfo(state, userInfo) {
+		// 设置用户基本信息
 		state.userInfo = userInfo;
-		console.log(userInfo);
+		// 根据用户性别设置头像
+		state.gender = require('@/assets/img/people.png');
+		let genderId = userInfo.idCardNumber[16];
+		if (genderId % 2 === 0) {
+			state.gender = require('@/assets/img/girl.png');
+		} else if (genderId % 2 === 1) {
+			state.gender = require('@/assets/img/boy.png');
+		}
+		console.log(userInfo, state.gender);
+	},
+	setCreditLevel(state, data) {
+		state.creditLevel = '';
+		for (let i = 0; i < data.creditLevel; i++) {
+			state.creditLevel += '★';
+		}
+		state.punishedTimes = data.punishedTimes;
+		state.creditLevelCount = data.creditLevel;
+		console.log('creditLevel', state.creditLevel, state.punishedTimes);
 	},
 	setHourView(state, hourView) {
 		state.hourView = hourView;
@@ -32,6 +50,5 @@ export default {
 		state.reportInfo.endTime = details.endTime;
 		state.reportInfo.activityName = details.activityName;
 		state.reportInfo.informPersonNum = details.informPersonNum;
-	},
-	
+	}
 };

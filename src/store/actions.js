@@ -1,13 +1,18 @@
-import { getVolunteerToken, getUserInfo, getHourView, getActsList } from '@/api/user';
+import { getVolunteerToken, getUserInfo, getHourView, getActsList, getCreditLevel } from '@/api/user';
 export default {
 	async setVolunteerToken({ commit, state }) {
-		let { data: token } = await getVolunteerToken();
+		let { data: token } = await getVolunteerToken(state.platform);
 		commit('setVolunteerToken', token);
 	},
 	async setUserInfo({ commit, state }) {
 		console.log('execute setUserInfo');
 		let { data } = await getUserInfo();
 		commit('setUserInfo', data);
+	},
+	async setCreditLevel({ commit, state }) {
+		console.log('execute setCreditLevel');
+		let { data } = await getCreditLevel();
+		commit('setCreditLevel', data);
 	},
 	async setHourView({ commit, state }) {
 		let { data } = await getHourView();

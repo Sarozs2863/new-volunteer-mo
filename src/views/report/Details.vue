@@ -82,12 +82,17 @@
 		<div style="margin: 16px;">
 			<van-button round block type="info" @click="onSubmit()">提交举报</van-button>
 		</div>
+		<Copyright></Copyright>
 	</div>
 </template>
 
 <script>
 import { commitReport } from '@/api/report';
+import Copyright from '@/components/Copyright.vue';
 export default {
+	components: {
+		Copyright
+	},
 	data() {
 		return {
 			showStartPicker: false,
@@ -124,6 +129,10 @@ export default {
 			let res = await commitReport(this.details, form);
 			if (res.code === 0) {
 				this.$toast.success('提交举报成功!');
+				// 提交成功回到首页
+				setTimeout(() => {
+					this.$router.go(-2);
+				}, 1500);
 			} else {
 				this.$toast.fail(res.msg);
 			}
@@ -134,10 +143,6 @@ export default {
 			// } else {
 			// 	this.$toast.fail(res.msg);
 			// }
-			// 提交成功回到首页
-			// setTimeout(() => {
-			// 	this.$router.push('/');
-			// }, 1500);
 		},
 		StartTimeConfirm(time) {
 			this.details.startTime =

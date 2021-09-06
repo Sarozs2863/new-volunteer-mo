@@ -1,3 +1,5 @@
+import { getActDetails } from '../api/recruitAct';
+
 export const constantRouterMap = [
 	// 主页面
 	{
@@ -5,7 +7,7 @@ export const constantRouterMap = [
 		component: () => import('@/views/Home/index'),
 		meta: {
 			title: '志愿者服务',
-			keepAlive: false
+			keepAlive: true
 		}
 	},
 	// 提交工时
@@ -22,9 +24,29 @@ export const constantRouterMap = [
 	// 活动招募页面
 	{
 		path: '/actrecruit',
-		component: () => import('@/views/ActRecruit'),
+		component: () => import('@/views/ActRecruit/ActRecruit.vue'),
 		meta: {
 			title: '志愿者服务-活动招募',
+			keepAlive: false
+		}
+	},
+	// 活动招募详情页面
+	{
+		path: 'recruitdetails',
+		name: 'recruitDetails',
+		component: () => import('@/views/ActRecruit/recruitActDetails.vue'),
+		meta: {
+			title: '活动招募详情',
+			keepAlive: false
+		}
+	},
+	// 活动招募详情页面
+	{
+		path: 'myactdetails',
+		name: 'myActDetails',
+		component: () => import('@/views/ActRecruit/myActDetails.vue'),
+		meta: {
+			title: '活动招募详情',
 			keepAlive: false
 		}
 	},

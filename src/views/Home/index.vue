@@ -19,6 +19,7 @@
 		<ValidCodeCard class="card main-card d-flex jc-center mt-2"></ValidCodeCard>
 		<FuncArea class="func-area" style="margin-top: 15px;"></FuncArea>
 		<ActList></ActList>
+		<copyright></copyright>
 	</div>
 </template>
 
@@ -26,6 +27,7 @@
 import { mapActions } from 'vuex';
 // 活动列表 全局组件
 import ActList from '@/views/Home/components/ActList.vue';
+import copyright from '@/components/Copyright.vue';
 // 六位认证码区域
 import ValidCodeCard from './components/ValidCodeCard.vue';
 // 学生信息区域
@@ -39,7 +41,8 @@ export default {
 		ValidCodeCard,
 		UserInfo,
 		FuncArea,
-		ActList
+		ActList,
+		copyright
 	},
 	data() {
 		return {
@@ -70,7 +73,7 @@ export default {
 			this.$store.commit('setPlatform', platform);
 			this.$store.commit('setPlatformToken', this.platformToken);
 		},
-		...mapActions(['setVolunteerToken', 'setUserInfo', 'setHourView', 'setRecentActs'])
+		...mapActions(['setVolunteerToken', 'setUserInfo', 'setHourView', 'setRecentActs', 'setCreditLevel'])
 	},
 	async mounted() {
 		this.getPlatformToken();
@@ -78,6 +81,7 @@ export default {
 		await this.setUserInfo();
 		await this.setHourView();
 		await this.setRecentActs();
+		await this.setCreditLevel();
 	}
 };
 </script>

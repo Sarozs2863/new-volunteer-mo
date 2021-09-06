@@ -7,7 +7,11 @@ Vue.use(Router)
 const createRouter = () =>
   new Router({
     mode: 'history', // 如果你是 history模式 需要配置vue.config.js publicPath
+<<<<<<< HEAD
     // base: process.env.BASE_URL,
+=======
+    base: process.env.BASE_URL,
+>>>>>>> dev
     scrollBehavior: () => ({ y: 0 }),
     routes: constantRouterMap
   })

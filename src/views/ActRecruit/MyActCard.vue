@@ -1,0 +1,121 @@
+<template>
+	<div>
+		<van-row
+			class="act_card"
+			v-for="(recruitAct, index) in participantedList"
+			:key="index"
+			type="flex"
+			justify="space-around"
+			@click="checkTheAct(recruitAct.activityId)"
+		>
+			<van-col class="left" span="13">
+				<van-row class="act_name">{{ recruitAct.activityName }}</van-row>
+				<van-row class="act_time">活动时间：{{ recruitAct.dayTime }}</van-row>
+				<van-row class="act_organization">主办单位：{{ recruitAct.organization }}</van-row>
+			</van-col>
+			<van-col class="right">
+				<van-row class="activityTime fs-xxs ">
+					{{ recruitAct.activityTime }}
+				</van-row>
+				<van-row>
+					<van-button :type="confirmStatus(recruitAct.activityResult).buttonTypes" plain size="small">
+						{{ confirmStatus(recruitAct.activityResult).actStatus }}
+					</van-button>
+				</van-row>
+			</van-col>
+		</van-row>
+	</div>
+</template>
+
+<script>
+import { mapState } from 'vuex';
+import { getActDetails } from '@/api/recruitAct.js';
+export default {
+	name: 'MyActCard',
+	props: ['participantedList'],
+	computed: {
+		// ...mapState(['actList'])
+	},
+
+	data() {
+		return {};
+	},
+	mounted() {},
+	methods: {
+		confirmStatus(status) {
+			let actStatus = '';
+			let buttonTypes = '';
+			console.log('result', status);
+			if (status === 0) {
+				actStatus = '未开始';
+				buttonTypes = 'warning';
+			} else if (status === 1) {
+				actStatus = '进行中';
+				buttonTypes = 'primary';
+			} else if (status === 2) {
+				actStatus = '已结束';
+				buttonTypes = 'danger';
+			}
+			return {
+				actStatus,
+				buttonTypes
+			};
+		},
+		async checkTheAct(actId) {
+			let res = await getActDetails(actId);
+			console.log('res:', res);
+			this.$router.push({
+				name: 'myActDetails',
+				params: {
+					actDetail: res.data
+				}
+			});
+		}
+	},
+	created() {}
+};
+</script>
+
+<style lang="scss" scoped>
+.act_card:active {
+	filter: brightness(0.9);
+	transition: 0.2s;
+}
+.act_card {
+	background-color: #fff;
+	margin-top: 0.24rem;
+	border-radius: 5px;
+	// box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.1);
+	padding: 0.36rem 0rem;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	.left {
+		// margin-top: 0.3rem;
+		.act_name {
+			margin: 0.1rem 0 0.28rem;
+			font-size: 0.55rem;
+			font-weight: bold;
+		}
+		.act_time {
+			display: flex;
+			font-size: 0.34rem;
+			// font-weight: bold;
+			line-height: 0.3rem;
+		}
+		.act_organization {
+			font-size: 0.34rem;
+			// font-weight: bold;
+			margin: 0.1rem 0;
+		}
+	}
+	.right {
+		// margin: 0.3rem 0 0.15rem;
+		.activityTime {
+			margin-bottom: 6px;
+			display: flex;
+			justify-content: center;
+		}
+	}
+}
+</style>

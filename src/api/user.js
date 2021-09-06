@@ -13,12 +13,20 @@ function getVolunteerToken(platform) {
 		hideloading: false // vant 加载效果
 	});
 }
-
+// 获取个人信息
 function getUserInfo() {
 	return request({
 		url: '/enterPage/studentInfo',
 		method: 'GET',
 		hideloading: true
+	});
+}
+// 获取个人信用等级信息
+function getCreditLevel() {
+	return request({
+		url: '/common/getCreditByToken',
+		method: 'GET',
+		hideloading: false
 	});
 }
 // 获取工时概览 已参与 xx 活动， 已认证 xxx 工时， 未认证 xxx 工时
@@ -30,7 +38,7 @@ function getHourView() {
 		hideloading: true // vant 加载效果
 	});
 }
-
+// 获取活动列表
 function getActsList(param) {
 	return request({
 		url: 'volunteer/public/volunteerTime',
@@ -49,4 +57,4 @@ function submitValidCode() {
 	});
 }
 
-export { getVolunteerToken, getUserInfo, getHourView, getActsList };
+export { getVolunteerToken, getUserInfo, getHourView, getActsList, getCreditLevel };

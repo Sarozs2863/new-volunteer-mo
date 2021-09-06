@@ -1,6 +1,5 @@
 <template>
 	<div>
-		<h1 class="text-center">举报记录页面</h1>
 		<div class="wrap">
 			<div class="back_to_top" v-if="flag_scroll">
 				<van-icon class="back_btn" name="arrow-up" @click="backTop"> </van-icon>
@@ -8,8 +7,9 @@
 			<van-nav-bar title="举报记录" left-arrow fixed placeholder @click-left="$router.go(-1)"> </van-nav-bar>
 			<div class="content">
 				<van-empty v-if="reportList.length === 0" description="你还没有举报记录哦！"></van-empty>
-
-				<ReportCard v-if="reportList.length > 0" :reportList="reportList"></ReportCard>
+				<van-list v-else :finished="finished" finished-text="没有更多举报记录了哦~">
+					<ReportCard @getList="getList" v-if="reportList.length > 0" :reportList="reportList"></ReportCard>
+				</van-list>
 			</div>
 			<!-- <copyright></copyright> -->
 		</div>
@@ -38,6 +38,7 @@ export default {
 			if (res.code === 0) {
 				this.reportList = res.data;
 				this.reportList.reverse();
+				this.finished = true;
 				console.log('reportList', this.reportList);
 			} else {
 				this.$toast.fail(res.msg);

@@ -1,4 +1,3 @@
-import request from '@/api/request.js';
 export default {
 	setPlatform(state, platform) {
 		state.platform = platform;

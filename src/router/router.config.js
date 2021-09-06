@@ -13,18 +13,14 @@ export const constantRouterMap = [
 		path: '/approveAct',
 		name: 'ApproveAct',
 		component: () => import('@/views/approveAct'),
-		meta: { title: '工时提交 - 志愿者服务', keepAlive: false }
-	},
-	{
-		path: '/test',
-		component: () => import('@/views/Test.vue')
+		meta: { title: '志愿者服务 - 工时提交', keepAlive: false }
 	},
 	// 活动招募页面
 	{
 		path: '/actrecruit',
 		component: () => import('@/views/ActRecruit/ActRecruit.vue'),
 		meta: {
-			title: '志愿者服务-活动招募',
+			title: '志愿者服务 - 活动招募',
 			keepAlive: false
 		}
 	},
@@ -34,7 +30,7 @@ export const constantRouterMap = [
 		name: 'recruitDetails',
 		component: () => import('@/views/ActRecruit/recruitActDetails.vue'),
 		meta: {
-			title: '活动招募详情',
+			title: '志愿者服务 - 活动招募',
 			keepAlive: false
 		}
 	},
@@ -44,33 +40,41 @@ export const constantRouterMap = [
 		name: 'myActDetails',
 		component: () => import('@/views/ActRecruit/myActDetails.vue'),
 		meta: {
-			title: '活动招募详情',
+			title: '志愿者服务 - 活动招募',
 			keepAlive: false
 		}
 	},
 	// 信用等级页面
 	{
 		path: '/creditlevel',
-		component: () => import('@/views/CreditLevel')
+		component: () => import('@/views/CreditLevel'),
+		meta: {
+			title: '志愿者服务 - 信用等级',
+			keepAlive: false
+		}
 	},
 	// 工时概览页面
 	{
 		path: '/mytimes',
-		component: () => import('@/views/MyVolTime')
+		component: () => import('@/views/MyVolTime'),
+		meta: {
+			title: '志愿者服务 - 工时概览',
+			keepAlive: false
+		}
 	},
 	// 志愿者活动列表
 	{
 		path: '/actList',
 		name: 'AllActList',
 		component: () => import('@/views/AllActList'),
-		meta: { title: '活动列表 - 志愿者服务', keepAlive: false }
+		meta: { title: '志愿者服务 - 活动列表', keepAlive: false }
 	},
 	// 违规举报页面
 	{
 		path: '/report',
 		component: () => import('@/views/report/Reasons'),
 		meta: {
-			title: '举报详情',
+			title: '志愿者服务 - 举报详情',
 			keepAlive: false
 		}
 	},
@@ -82,7 +86,17 @@ export const constantRouterMap = [
 	// 举报记录页面
 	{
 		path: '/reportlist',
-		component: () => import('@/views/reportList/ReportList')
+		component: () => import('@/views/reportList/ReportList'),
+		meta: {
+			title: '志愿者服务 - 举报记录',
+			keepAlive: false
+		}
+	},
+	// 404页面
+	{
+		path: '/404',
+		name: 'NotFound',
+		component: () => import('@/views/NotFound.vue')
 	},
 	// 404页面
 	{

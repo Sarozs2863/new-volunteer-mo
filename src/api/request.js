@@ -13,6 +13,7 @@ service.interceptors.request.use(
 	(config) => {
 		if (config.url === '/login/mobile' || config.url === '/login/mp') {
 			config.headers['token'] = store.state.platformToken;
+		} else if (config.url === 'https://wusthelper.wustlinghang.cn/mobileapi/v2/jwc/login') {
 		} else {
 			config.headers['token'] = store.state.volunteerToken;
 		}
@@ -24,6 +25,7 @@ service.interceptors.request.use(
 				loadingType: 'spinner'
 			});
 		}
+		console.log(config);
 		return config;
 	},
 	(error) => {

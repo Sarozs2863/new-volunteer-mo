@@ -1,5 +1,15 @@
 import request from './request';
 
+// 手动输入账号密码获取 app端 token
+function login(data) {
+	return request({
+		url: 'https://wusthelper.wustlinghang.cn/mobileapi/v2/jwc/login',
+		method: 'POST',
+		hideloading: false, // vant 加载效果
+		data
+	})
+}
+
 function getVolunteerToken(platform) {
 	let url;
 	if (platform === 'mp') {
@@ -57,4 +67,4 @@ function submitValidCode() {
 	});
 }
 
-export { getVolunteerToken, getUserInfo, getHourView, getActsList, getCreditLevel };
+export { getVolunteerToken, getUserInfo, getHourView, getActsList, getCreditLevel, login };

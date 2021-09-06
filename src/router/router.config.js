@@ -1,5 +1,3 @@
-import { getActDetails } from '../api/recruitAct';
-
 export const constantRouterMap = [
 	// 主页面
 	{

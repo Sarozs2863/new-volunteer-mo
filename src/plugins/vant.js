@@ -32,15 +32,11 @@ import {
 	RadioGroup,
 	Popup,
 	DatetimePicker,
-<<<<<<< HEAD
-	Uploader
-=======
 	Uploader,
 	Calendar,
 	Rate,
 	Tab,
 	Tabs
->>>>>>> 4779ccadfbb9429dad576410072ac9fe2f4abf70
 } from 'vant';
 Vue.use(Button);
 Vue.use(Radio);
@@ -73,10 +69,7 @@ Vue.use(Form);
 Vue.use(Popup);
 Vue.use(DatetimePicker);
 Vue.use(Uploader);
-<<<<<<< HEAD
-=======
 Vue.use(Calendar);
 Vue.use(Rate);
 Vue.use(Tab);
 Vue.use(Tabs);
->>>>>>> 4779ccadfbb9429dad576410072ac9fe2f4abf70

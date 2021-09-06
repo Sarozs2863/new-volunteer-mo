@@ -38,7 +38,7 @@
 							</van-col>
 						</van-row>
 						<div>
-							<van-cell title="点击选择查询日期" :value="date" @click="showDatePicker = true" />
+							<!-- <van-cell title="点击选择查询日期" :value="date" @click="showDatePicker = true" /> -->
 							<van-calendar color="#1989fa" v-model="showDatePicker" @confirm="onConfirm" />
 						</div>
 					</div>
@@ -108,7 +108,7 @@ export default {
 		window.addEventListener('scroll', this.handleScroll, true);
 		let time = new Date();
 		// 默认查询时间为今天
-		this.date = this.formatTimes(time);
+		// this.date = this.formatTimes(time);
 		this.getActList();
 		this.getMyList();
 		console.log('date', this.date);

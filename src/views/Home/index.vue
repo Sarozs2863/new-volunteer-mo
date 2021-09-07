@@ -67,46 +67,72 @@ export default {
 		};
 	},
 	methods: {
+		// 检测登录环境
 		testPlatform() {
 			if (this.$cookies.get('cookie')) {
-				this.platformToken = this.$cookies.get('cookie');
-				return 'andriod';
-			} else if (this.$route.query.token) {
-				this.platformToken = this.$route.query.token;
+				return 'android';
+			} else if (this.$route.query.platform) {
 				if (this.$route.query.platform === 'mp') {
 					return 'mp';
 				} else if (this.$route.query.platform === 'ios') {
 					return 'ios';
 				} else {
-					this.$toast('未检测到用户信息！');
 					return false;
 				}
 			}
 		},
 		getPlatformToken() {
-			let platform = this.testPlatform() || '获取平台信息失败！';
-			this.$toast(platform);
-			this.$store.commit('setPlatform', platform);
-			this.$store.commit('setPlatformToken', this.platformToken);
+			let platform = this.testPlatform();
+			console.log('platform is:' + platform);
+			if (platform) {
+				this.$store.commit('setPlatform', platform);
+				switch (platform) {
+					case 'android':
+						this.$store.commit('setPlatformToken', this.$cookies.get('cookie'));
+						break;
+					case 'mp':
+						if (this.$route.query.token) {
+							this.$store.commit('setPlatformToken', this.$route.query.token);
+						} else {
+							this.$router.replace('/404');
+						}
+						break;
+					case 'ios':
+						if (this.$route.query.token) {
+							this.$store.commit('setPlatformToken', this.$route.query.token);
+						} else {
+							this.$router.replace('/404');
+						}
+						break;
+				}
+			} else {
+				return false;
+			}
 		},
 		async init() {
-			// if (!this.getPlatformToken()) {
-			// 	// 未在cookie或router.query中获取到token，手动登录
-			// 	// this.loginDialogShow = true;
-			// 	this.$toast('warning');
-			// 	return;
-			// }
-			this.getPlatformToken();
-			await this.setVolunteerToken();
-			await this.setUserInfo();
-			await this.setHourView();
-			await this.setRecentActs();
-			await this.setCreditLevel();
+			if (this.getPlatformToken() == false) {
+				this.loginDialogShow = true;
+			} else {
+				await this.setVolunteerToken();
+				await this.setUserInfo();
+				await this.setHourView();
+				await this.setRecentActs();
+				await this.setCreditLevel();
+			}
 		},
 		async webLogin() {
-			// let params = {
-			// }
-			// let res = await login()
+			let data = {
+				stuNum: this.stuNo,
+				jwcPwd: this.password
+			};
+			let res = await login(data);
+			// console.log(res);
+			if (res.code == 10000) {
+				document.cookie = 'cookie=' + res.data;
+			} else {
+				this.$toast(res.msg);
+			}
+			this.init();
 		},
 		...mapActions(['setVolunteerToken', 'setUserInfo', 'setHourView', 'setRecentActs', 'setCreditLevel'])
 	},

@@ -7,7 +7,7 @@ import state from "./state";
 import actions from "./actions";
 import mutations from "./mutations";
 // 活动策划相关单独作为一个模块
-import plan from './modules/plans';
+import plans from './modules/plans';
 Vue.use(Vuex)
 
 // vuex持久化
@@ -25,7 +25,7 @@ const vuexPersist = new VuexPersistence({
 
 const store = new Vuex.Store({
     modules: {
-      plan
+      plans
     },
     state,
     actions,

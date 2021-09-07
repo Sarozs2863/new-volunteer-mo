@@ -1,4 +1,5 @@
 import request from './request';
+import qs from 'qs';
 
 // 手动输入账号密码获取 app端 token
 function login(data) {
@@ -6,7 +7,10 @@ function login(data) {
 		url: 'https://wusthelper.wustlinghang.cn/mobileapi/v2/jwc/login',
 		method: 'POST',
 		hideloading: false, // vant 加载效果
-		data
+		headers:{
+			'Content-Type': 'application/x-www-form-urlencoded'
+		},
+		data: qs.stringify(data)
 	})
 }
 
@@ -36,7 +40,7 @@ function getCreditLevel() {
 	return request({
 		url: '/common/getCreditByToken',
 		method: 'GET',
-		hideloading: false
+		hideloading: true
 	});
 }
 // 获取工时概览 已参与 xx 活动， 已认证 xxx 工时， 未认证 xxx 工时
@@ -63,7 +67,7 @@ function submitValidCode() {
 	return request({
 		url: '/enterPage/studentInfo',
 		method: 'GET',
-		hideloading: true
+		hideloading: false
 	});
 }
 

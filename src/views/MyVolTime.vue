@@ -17,17 +17,17 @@
 				<van-col>{{ $store.state.userInfo.studentNum }}</van-col>
 			</van-row> -->
 			<van-row class="Item-details">
-				<img src="../assets/img/myact.png" width="35px" />
+				<img src="../assets/img/myact.png" width="34px" />
 				<van-col>已参加活动：</van-col>
 				<van-col>{{ $store.state.hourView.activityJoined }}</van-col>
 			</van-row>
 			<van-row class="Item-details">
-				<img src="../assets/img/confirmed.png" width="35px" />
+				<img src="../assets/img/confirmed.png" width="34px" />
 				<van-col>已认证工时：</van-col>
 				<van-col>{{ $store.state.hourView.timePassed }}h</van-col>
 			</van-row>
 			<van-row class="Item-details">
-				<img src="../assets/img/unconfirmed.png" width="35px" />
+				<img src="../assets/img/unconfirmed.png" width="34px" />
 				<van-col>未认证工时：</van-col>
 				<van-col>{{ $store.state.hourView.timeToBePassed }}h</van-col>
 			</van-row>

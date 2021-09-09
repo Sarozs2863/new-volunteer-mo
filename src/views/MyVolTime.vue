@@ -37,7 +37,7 @@
 		</div>
 		<!-- <br /> -->
 		<ActCard
-			style="background-color:rgb(248, 252, 255)"
+			style="background-color:rgb(248, 252, 255);margin-top:35px"
 			v-if="$store.state.recentActs.length > 0"
 			:actList="$store.state.recentActs"
 		></ActCard>
@@ -65,11 +65,11 @@ export default {
 		padding: 10px 20px 10px 10px;
 		box-shadow: 0 8px 12px #ebedf0;
 		margin: 0px 0.4rem;
-		// background-color: rgb(231, 243, 251);
+		background-color: rgb(231, 243, 251);
 	}
 	.myTimes {
 		height: 200px;
-		margin-top: 8px;
+		margin-top: 12px;
 		padding-top: 20px;
 		.Item-details {
 			margin: 4px 10px 10px 24px;
@@ -77,7 +77,7 @@ export default {
 			border-bottom: grey solid 1px;
 			font-family: '华文中宋';
 			display: flex;
-			justify-content: center;
+			justify-content: start;
 		}
 	}
 	.tips {

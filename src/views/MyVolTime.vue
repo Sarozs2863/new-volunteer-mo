@@ -31,16 +31,18 @@
 				<van-col>未认证工时：</van-col>
 				<van-col>{{ $store.state.hourView.timeToBePassed }}h</van-col>
 			</van-row>
-			<div class="tips">
+			<!-- <div class="tips">
 				快去参加更多志愿活动吧~
-			</div>
+			</div> -->
 		</div>
 		<!-- <br /> -->
-		<ActCard
-			style="background-color:rgb(248, 252, 255);margin-top:35px"
-			v-if="$store.state.recentActs.length > 0"
-			:actList="$store.state.recentActs"
-		></ActCard>
+		<div style="width:91%;margin-left:5%">
+			<ActCard
+				style="background-color:rgb(248, 252, 255);margin-top:35px"
+				v-if="$store.state.recentActs.length > 0"
+				:actList="$store.state.recentActs"
+			></ActCard>
+		</div>
 		<copyright style="z-index:1000"></copyright>
 	</div>
 </template>
@@ -62,22 +64,25 @@ export default {
 	.sumcard {
 		border-radius: 0.3rem;
 		background-color: #fff;
-		padding: 10px 20px 10px 10px;
+		padding: 0px 20px 0px 10px;
 		box-shadow: 0 8px 12px #ebedf0;
 		margin: 0px 0.4rem;
-		background-color: rgb(231, 243, 251);
+		background-color: rgb(250, 254, 255);
 	}
 	.myTimes {
 		height: 200px;
-		margin-top: 12px;
+		margin-top: 10px;
 		padding-top: 20px;
 		.Item-details {
-			margin: 4px 10px 10px 24px;
+			margin: 10px 10px 15px 40px;
 			line-height: 40px;
-			border-bottom: grey solid 1px;
-			font-family: '华文中宋';
+			// border-bottom: grey solid 1px;
+			// font-family: '华文中宋';
 			display: flex;
 			justify-content: start;
+		}
+		.Item-details > img {
+			margin-right: 10px;
 		}
 	}
 	.tips {

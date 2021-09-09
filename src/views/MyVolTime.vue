@@ -50,10 +50,17 @@
 <script>
 import Copyright from '../components/Copyright.vue';
 import ActCard from '@/components/ActCard.vue';
+import { mapActions } from 'vuex';
 export default {
 	components: {
 		Copyright,
 		ActCard
+	},
+	mounted() {
+		this.setHourView();
+	},
+	methods: {
+		...mapActions(['setHourView'])
 	}
 };
 </script>

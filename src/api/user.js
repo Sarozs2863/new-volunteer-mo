@@ -7,11 +7,11 @@ function login(data) {
 		url: 'https://wusthelper.wustlinghang.cn/mobileapi/v2/jwc/login',
 		method: 'POST',
 		hideloading: false, // vant 加载效果
-		headers:{
+		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded'
 		},
 		data: qs.stringify(data)
-	})
+	});
 }
 
 function getVolunteerToken(platform) {
@@ -40,7 +40,7 @@ function getCreditLevel() {
 	return request({
 		url: '/common/getCreditByToken',
 		method: 'GET',
-		hideloading: true
+		hideloading: false
 	});
 }
 // 获取工时概览 已参与 xx 活动， 已认证 xxx 工时， 未认证 xxx 工时
@@ -49,7 +49,7 @@ function getHourView() {
 	return request({
 		url: '/volunteer/public/sumTime',
 		method: 'GET',
-		hideloading: true // vant 加载效果
+		hideloading: false // vant 加载效果
 	});
 }
 // 获取活动列表

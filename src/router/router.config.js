@@ -74,7 +74,7 @@ export const constantRouterMap = [
 		path: '/report',
 		component: () => import('@/views/report/Reasons'),
 		meta: {
-			title: '志愿者服务 - 举报详情',
+			title: '志愿者服务 - 违规举报',
 			keepAlive: false
 		}
 	},

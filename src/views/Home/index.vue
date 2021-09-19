@@ -32,6 +32,49 @@
 				<van-field v-model="password" label="密码" placeholder="请输入密码" />
 			</div>
 		</van-dialog>
+		<!-- 首次进入时的信息补全对话框 -->
+		<!-- <van-dialog v-model="modUser" title="信息补全" @confirm="doModUserInfo" class="info_fill" :before-close="testForm">
+			<van-form ref="infoForm">
+				<van-field label="学号" v-model="userData.studentNum" border disabled></van-field>
+				<van-field label="姓名" v-model="userData.studentName" disabled></van-field>
+				<van-field label="届别" v-model="userData.level" disabled></van-field>
+				<van-field label="学院" v-model="userData.collegeName" disabled></van-field>
+				<van-field label="班级" v-model="userData.className" disabled></van-field>
+				<van-field
+					label="身份证号"
+					v-model="userData.idCardNumber"
+					name="idCard"
+					:rules="[
+						{
+							pattern: /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/,
+							message: '身份证号格式有误！'
+						},
+						{ required: true, message: '请填写您的手机号码！' }
+					]"
+				></van-field>
+				<van-field
+					label="手机号"
+					v-model="userData.phone"
+					type="tel"
+					name="phone"
+					:rules="[{ pattern: /^1\d{10}$/, message: '手机号格式有误！' }]"
+				></van-field>
+				<van-field
+					label="qq号"
+					v-model="userData.qqNum"
+					:rules="[{ pattern: /^[1-9][0-9]{4,10}$/, message: 'qq号格式有误！' }]"
+				></van-field>
+				<van-field
+					label="政治面貌"
+					v-model="politicOutlook"
+					@click="politicPicker = true"
+					@focus="noBomBox"
+				></van-field>
+			</van-form>
+		</van-dialog>
+		<van-popup v-model="politicPicker" position="bottom">
+			<van-picker show-toolbar :columns="politicOutlooks" @confirm="onConfirm" @cancel="politicPicker = false" />
+		</van-popup> -->
 	</div>
 </template>
 
@@ -47,7 +90,7 @@ import ValidCodeCard from './components/ValidCodeCard.vue';
 import UserInfo from './components/UserInfo.vue';
 // 功能区
 import FuncArea from './components/FuncArea.vue';
-
+import { isIdCard, isPhone, isQQ } from '@/utils/validate';
 export default {
 	name: 'HomePage',
 	components: {
@@ -63,8 +106,20 @@ export default {
 			notice: '用户反馈qq群：926518229。若工时信息与志愿者证不对应，请联系该活动的活动负责人或向院青队咨询',
 			loginDialogShow: false,
 			stuNo: '',
-			password: ''
+			password: '',
+			userData: {},
+			modUser: false,
+			politicOutlooks: ['中共党员', '中共预备党员', '共青团员', '群众'],
+			politicPicker: false,
+			politicOutlook: ''
 		};
+	},
+	activated() {
+		// 不缓存verifyCode 将六位活动验证码清空
+		this.verifyCode = '';
+		// 工具栏默认不显示
+		this.showPopover = false;
+		this.userData = this.$store.state.userInfo;
 	},
 	methods: {
 		// 检测登录环境
@@ -120,20 +175,69 @@ export default {
 				await this.setCreditLevel();
 			}
 		},
-		async webLogin() {
-			let data = {
-				stuNum: this.stuNo,
-				jwcPwd: this.password
-			};
-			let res = await login(data);
-			// console.log(res);
-			if (res.code == 10000) {
-				document.cookie = 'cookie=' + res.data;
-			} else {
-				this.$toast(res.msg);
-			}
-			this.init();
-		},
+		// async webLogin() {
+		// 	let data = {
+		// 		stuNum: this.stuNo,
+		// 		jwcPwd: this.password
+		// 	};
+		// 	let res = await login(data);
+		// 	// console.log(res);
+		// 	if (res.code == 10000) {
+		// 		document.cookie = 'cookie=' + res.data;
+		// 	} else {
+		// 		this.$toast(res.msg);
+		// 	}
+		// 	this.init();
+		// },
+		// // 阻止对话框关闭
+		// testForm(action, done) {
+		// 	if (action === 'confirm') {
+		// 		return done(false);
+		// 	} else {
+		// 		return done();
+		// 	}
+		// },
+		// // 阻止默认弹出手机键盘
+		// noBomBox(event) {
+		// 	document.activeElement.blur();
+		// },
+		// // 政治面貌的picker
+		// onConfirm(value, index) {
+		// 	console.log(index);
+		// 	this.politicOutlook = value;
+		// 	this.userData.politicalOutlook = index + 1;
+		// 	this.politicPicker = false;
+		// },
+		// // 表单验证规则
+		// validateForm() {
+		// 	if (this.userData.idCardNumber === '') {
+		// 		this.$toast('请输入您的身份证号！');
+		// 		return false;
+		// 	} else if (this.userData.phone === '') {
+		// 		this.$toast('请输入您的手机号！');
+		// 		return false;
+		// 	} else if (this.userData.qqNum === '') {
+		// 		this.$toast('请输入您的qq号！');
+		// 		return false;
+		// 	} else if (!isIdCard(this.userData.idCardNumber)) {
+		// 		this.$toast('身份证号输入格式有误！');
+		// 		console.log('身份证号输入格式有误！');
+		// 		return false;
+		// 	} else if (!isPhone(this.userData.phone)) {
+		// 		this.$toast('手机号输入格式有误！');
+		// 		console.log('手机号输入格式有误！');
+		// 		return false;
+		// 	} else if (!isQQ(this.userData.qqNum)) {
+		// 		this.$toast('qq输入格式有误！');
+		// 		console.log('qq号输入格式有误！');
+		// 		return false;
+		// 	}
+
+		// 	if (this.userData.politicOutlook === '') {
+		// 		this.$toast('请选择您的政治面貌！');
+		// 		return false;
+		// 	}
+		// },
 		...mapActions(['setVolunteerToken', 'setUserInfo', 'setHourView', 'setRecentActs', 'setCreditLevel'])
 	},
 	mounted() {

@@ -1,6 +1,6 @@
 <template>
-	<div>
-		<van-grid :column-num="3" clickable>
+	<div style="z-index:-1">
+		<van-grid :column-num="3" clickable :border="false">
 			<van-grid-item to="/actrecruit" :key="1" icon="todo-list-o" text="活动招募" />
 			<van-grid-item to="/creditlevel" :key="2" icon="smile-o" text="信用等级" />
 			<van-grid-item to="/mytimes" :key="3" icon="notes-o" text="工时概览" />

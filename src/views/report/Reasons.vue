@@ -1,7 +1,6 @@
 <template>
 	<div>
 		<van-nav-bar
-			:style="{ display: $store.state.platform === 'mp' ? 'none' : '' }"
 			title="违规举报"
 			left-text="返回"
 			fixed

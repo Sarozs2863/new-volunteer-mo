@@ -137,7 +137,7 @@ export default {
 	margin-top: 10px;
 }
 .intro_text {
-	font-size: 0.43rem;
+	font-size: 0.44rem;
 	line-height: 30px;
 	margin-left: 10px;
 	text-align: start;

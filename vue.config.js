@@ -10,7 +10,7 @@ const name = defaultSettings.title || 'new-volunteer'
 // 生产环境，测试和正式
 const IS_PROD = ['production', 'prod'].includes(process.env.NODE_ENV)
 module.exports = {
-  publicPath: '/volunteermobile/', // 署应用包时的基本 URL。 vue-router hash 模式使用
+  publicPath: '/volunteermobile', // 署应用包时的基本 URL。 vue-router hash 模式使用
   outputDir: 'volunteermobile', //  生产环境构建文件的目录
   assetsDir: 'static', //  outputDir的静态资源(js、css、img、fonts)目录
   productionSourceMap: false, // 如果你不需要生产环境的 source map，可以将其设置为 false 以加速生产环境构建。

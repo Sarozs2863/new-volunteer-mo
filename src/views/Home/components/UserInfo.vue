@@ -24,7 +24,7 @@
 					<div class="intro_text">
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						欢迎加入<b>武汉科技大学志愿者</b>这个大家庭，我校志愿者一直秉持着奉献、友爱、互助、进步的志愿精神！期待和你的志愿之旅！
-						“志”同道合，“愿”你同行。获取更多志愿资讯，欢迎扫码关注下列账号!
+						“志”同道合，“愿”你同行。获取更多志愿资讯，欢迎扫码关注下列官方账号!
 					</div>
 					<div class="tips_save">
 						长按图片可保存
@@ -137,7 +137,7 @@ export default {
 	margin-top: 10px;
 }
 .intro_text {
-	font-size: 0.454rem;
+	font-size: 0.43rem;
 	line-height: 30px;
 	margin-left: 10px;
 	text-align: start;

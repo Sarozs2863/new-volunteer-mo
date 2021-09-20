@@ -16,7 +16,7 @@
 		<van-notice-bar color="#1989fa" background="#ecf9ff" scrollable left-icon="info-o">
 			此次举报将全程保护您的个人信息，请实事求是、放心填写！
 		</van-notice-bar>
-		<van-row class="text-center m-1 fs-xxs">
+		<van-row class="text-center m-1 fs-xxs" style="font-family:华文行楷">
 			请选择举报原因
 		</van-row>
 		<!-- 单选框 -->

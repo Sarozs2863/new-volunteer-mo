@@ -8,6 +8,15 @@ export const constantRouterMap = [
 			keepAlive: true
 		}
 	},
+	// 主页面
+	{
+		path: '/user',
+		component: () => import('@/views/user/index'),
+		meta: {
+			title: '志愿者服务 - 个人信息',
+			keepAlive: false
+		}
+	},
 	// 提交工时
 	{
 		path: '/approveAct',
@@ -34,7 +43,7 @@ export const constantRouterMap = [
 			keepAlive: false
 		}
 	},
-	// 活动招募详情页面
+	// 我的活动页面
 	{
 		path: 'myactdetails',
 		name: 'myActDetails',
@@ -74,7 +83,7 @@ export const constantRouterMap = [
 		path: '/report',
 		component: () => import('@/views/report/Reasons'),
 		meta: {
-			title: '志愿者服务 - 举报详情',
+			title: '志愿者服务 - 违规举报',
 			keepAlive: false
 		}
 	},
@@ -97,6 +106,15 @@ export const constantRouterMap = [
 		path: '/404',
 		name: 'NotFound',
 		component: () => import('@/views/NotFound.vue')
+	},
+	// 活动策划页面
+	{
+		path: '/applyact',
+		component: () => import('@/views/notsupport'),
+		meta: {
+			title: '活动策划',
+			keepAlive: false
+		}
 	},
 	// 404页面
 	{

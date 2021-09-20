@@ -4,13 +4,43 @@
 			<div class="back_to_top" v-if="flag_scroll">
 				<van-icon class="back_btn" name="arrow-up" @click="backTop"> </van-icon>
 			</div>
-			<van-nav-bar title="活动招募" left-text="返回" left-arrow fixed placeholder @click-left="$router.go(-1)">
+			<van-nav-bar
+				:style="{ display: $store.state.platform === 'mp' ? 'none' : '' }"
+				title="活动招募"
+				left-text="返回"
+				left-arrow
+				fixed
+				placeholder
+				@click-left="$router.go(-1)"
+			>
 			</van-nav-bar>
 			<van-tabs v-model="activeName">
 				<van-tab title="活动报名" name="活动报名">
-					<div>
-						<van-cell title="点击选择查询日期" :value="date" @click="showDatePicker = true" />
-						<van-calendar color="#1989fa" v-model="showDatePicker" @confirm="onConfirm" />
+					<div style="background-color:rgb(248, 252, 255,0.1)">
+						<van-row class="searchByDate">
+							<van-col style="margin:0.6em 1em 1em 1em;">
+								<van-button
+									type="info"
+									style="height:2.4em;border-radius: 0.10333rem;;line-height:20px;margin-top:2px"
+									@click="showDatePicker = true"
+									>选择日期</van-button
+								>
+							</van-col>
+							<van-col>
+								<ul class="date-show">
+									<li class="date-show-item">{{ date.substring(0, 4) }}</li>
+									<span class="date-show-item-word">年</span>
+									<li class="date-show-item">{{ date.substring(5, 7) }}</li>
+									<span class="date-show-item-word">月</span>
+									<li class="date-show-item">{{ date.substring(8, 10) }}</li>
+									<span class="date-show-item-word">日</span>
+								</ul>
+							</van-col>
+						</van-row>
+						<div>
+							<!-- <van-cell title="点击选择查询日期" :value="date" @click="showDatePicker = true" /> -->
+							<van-calendar color="#1989fa" v-model="showDatePicker" @confirm="onConfirm" />
+						</div>
 					</div>
 					<div class="content">
 						<van-empty v-if="ActRecruitList.length === 0" description="这一天暂时没有活动在招募志愿者噢~"></van-empty>
@@ -78,9 +108,10 @@ export default {
 		window.addEventListener('scroll', this.handleScroll, true);
 		let time = new Date();
 		// 默认查询时间为今天
-		this.date = this.formatTimes(time);
+		// this.date = this.formatTimes(time);
 		this.getActList();
 		this.getMyList();
+		console.log('date', this.date);
 	},
 	methods: {
 		//分割线
@@ -198,7 +229,41 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// 返回顶部按钮样式
+/deep/.van-tabs__line {
+	background-color: blue;
+}
+.searchByDate {
+	display: inline;
+}
+.selectedDate {
+	display: block;
+}
+.date-show {
+	display: flex;
+	width: 100%;
+	height: 0.8rem;
+	cursor: pointer;
+	margin-top: 0px;
+}
+.date-show-item {
+	position: relative;
+	display: flex;
+	flex: 1;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	font-size: 0.42333rem;
+	line-height: 1.2;
+	margin: 10px;
+	background-color: #fff;
+	border: solid rgb(150, 148, 148) 0.01667rem;
+	border-radius: 0.10333rem;
+	width: 2.8em;
+}
+.date-show-item-word {
+	line-height: 1.35555rem;
+	font-size: 0.45333rem;
+}
 .back_to_top {
 	position: fixed;
 	bottom: 1.5rem;
@@ -209,10 +274,10 @@ export default {
 	padding: 0.18rem;
 	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	z-index: 10000;
-	.back_btn {
-		font-size: 0.7rem;
-		color: white;
-	}
+}
+.back_btn {
+	font-size: 0.7rem;
+	color: white;
 }
 
 .wrap {
@@ -226,8 +291,7 @@ export default {
 	padding: 0 0.33rem;
 	min-height: 14rem;
 }
-// 修改标签页底部的颜色
-/deep/.van-tabs__line {
+.van-tabs__line {
 	background-color: rgb(0, 110, 255);
 }
 

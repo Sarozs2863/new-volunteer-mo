@@ -5,7 +5,7 @@
 			left-text="返回"
 			left-arrow
 			@click-left="goBack()"
-			:style="{ display: platform == 'android' ? '' : 'none' }"
+			:style="{ display: $store.state.platform === 'mp' ? 'none' : '' }"
 		/>
 
 		<div class="content">

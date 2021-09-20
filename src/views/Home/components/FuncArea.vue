@@ -1,13 +1,12 @@
 <template>
-	<div>
-		<van-grid :column-num="3" clickable>
-			<van-grid-item
-				v-for="value in functions"
-				:to="value.path"
-				:key="value.id"
-				:icon="value.icon"
-				:text="value.text"
-			/>
+	<div style="z-index:-1">
+		<van-grid :column-num="3" clickable :border="false">
+			<van-grid-item to="/actrecruit" :key="1" icon="todo-list-o" text="活动招募" />
+			<van-grid-item to="/creditlevel" :key="2" icon="smile-o" text="信用等级" />
+			<van-grid-item to="/mytimes" :key="3" icon="notes-o" text="工时概览" />
+			<van-grid-item to="/report" :key="4" icon="warn-o" text="违规举报" />
+			<van-grid-item to="/reportlist" :key="5" icon="eye-o" text="举报记录" />
+			<van-grid-item to="" :key="6" icon="edit" text="活动策划" @click="checkIt" />
 		</van-grid>
 	</div>
 </template>
@@ -15,46 +14,12 @@
 <script>
 export default {
 	data() {
-		return {
-			functions: [
-				{
-					id: 1,
-					icon: 'todo-list-o',
-					text: '活动招募',
-					path: '/actrecruit'
-				},
-				{
-					id: 2,
-					icon: 'smile-o',
-					text: '信用等级',
-					path: '/creditlevel'
-				},
-				{
-					id: 3,
-					icon: 'notes-o',
-					text: '工时概览',
-					path: '/mytimes'
-				},
-				{
-					id: 4,
-					icon: 'warn-o',
-					text: '违规举报',
-					path: '/report'
-				},
-				{
-					id: 5,
-					icon: 'eye-o',
-					text: '举报记录',
-					path: '/reportlist'
-				},
-				{
-					id: 6,
-					icon: 'edit',
-					text: '活动策划',
-					path: ''
-				}
-			]
-		};
+		return {};
+	},
+	methods: {
+		checkIt() {
+			this.$toast('该功能暂未开放!\n如有需要请前往管理端使用！');
+		}
 	}
 };
 </script>

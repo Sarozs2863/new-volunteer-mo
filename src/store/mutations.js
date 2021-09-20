@@ -18,13 +18,21 @@ export default {
 			state.gender = require('@/assets/img/girl.png');
 		} else if (genderId % 2 === 1) {
 			state.gender = require('@/assets/img/boy.png');
+		} else {
+			state.gender = require('@/assets/img/people.png');
 		}
 		console.log(userInfo, state.gender);
 	},
 	setCreditLevel(state, data) {
 		state.creditLevel = '';
-		for (let i = 0; i < data.creditLevel; i++) {
-			state.creditLevel += '★';
+		if (data.creditLevel === 0) {
+			state.creditLevel = '⚠';
+			state.creditTag = 'danger';
+		} else {
+			for (let i = 0; i < data.creditLevel; i++) {
+				state.creditLevel += '★';
+				state.creditTag = 'success';
+			}
 		}
 		state.punishedTimes = data.punishedTimes;
 		state.creditLevelCount = data.creditLevel;

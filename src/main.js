@@ -23,19 +23,17 @@ import './filters';
 
 Vue.config.productionTip = false;
 
-
 router.beforeEach((to, from, next) => {
-  /* 小程序端路由发生变化修改页面title */
-  if (to.meta.title) {
-    document.title = to.meta.title
-  }
-  next();
-})
-
+	/* 小程序端路由发生变化修改页面title */
+	if (to.meta.title) {
+		document.title = to.meta.title;
+	}
+	next();
+});
 
 new Vue({
-  el: '#app',
-  router,
-  store,
-  render: h => h(App)
+	el: '#app',
+	router,
+	store,
+	render: (h) => h(App)
 });

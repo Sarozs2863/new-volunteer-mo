@@ -25,11 +25,11 @@ service.interceptors.request.use(
 				loadingType: 'spinner'
 			});
 		}
-		console.log(config);
+		// console.log(config);
 		return config;
 	},
 	(error) => {
-		console.log(error);
+		// console.log(error);
 		return Promise.reject(error);
 	}
 );

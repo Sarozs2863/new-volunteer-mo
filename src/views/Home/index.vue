@@ -47,7 +47,7 @@ import ValidCodeCard from './components/ValidCodeCard.vue';
 import UserInfo from './components/UserInfo.vue';
 // 功能区
 import FuncArea from './components/FuncArea.vue';
-
+import { isIdCard, isPhone, isQQ } from '@/utils/validate';
 export default {
 	name: 'HomePage',
 	components: {
@@ -63,8 +63,16 @@ export default {
 			notice: '用户反馈qq群：926518229。若工时信息与志愿者证不对应，请联系该活动的活动负责人或向院青队咨询',
 			loginDialogShow: false,
 			stuNo: '',
-			password: ''
+			password: '',
+			userData: {},
 		};
+	},
+	activated() {
+		// 不缓存verifyCode 将六位活动验证码清空
+		this.verifyCode = '';
+		// 工具栏默认不显示
+		this.showPopover = false;
+		this.userData = this.$store.state.userInfo;
 	},
 	methods: {
 		// 检测登录环境
@@ -127,13 +135,25 @@ export default {
 			};
 			let res = await login(data);
 			// console.log(res);
-			if(res.code == 10000) {
+			if (res.code == 10000) {
 				document.cookie = 'cookie=' + res.data;
 			} else {
 				this.$toast(res.msg);
 			}
 			this.init();
 		},
+		// // 阻止对话框关闭
+		// testForm(action, done) {
+		// 	if (action === 'confirm') {
+		// 		return done(false);
+		// 	} else {
+		// 		return done();
+		// 	}
+		// },
+		// // 阻止默认弹出手机键盘
+		// noBomBox(event) {
+		// 	document.activeElement.blur();
+		// },
 		...mapActions(['setVolunteerToken', 'setUserInfo', 'setHourView', 'setRecentActs', 'setCreditLevel'])
 	},
 	mounted() {

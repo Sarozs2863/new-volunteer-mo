@@ -1,7 +1,15 @@
 <template>
 	<div>
 		<!-- <h1 class="text-center">违规举报页面</h1> -->
-		<van-nav-bar title="举报详情" left-text="返回" fixed placeholder left-arrow @click-left="$router.go(-1)">
+		<van-nav-bar
+			:style="{ display: $store.state.platform === 'mp' ? 'none' : '' }"
+			title="举报详情"
+			left-text="返回"
+			fixed
+			placeholder
+			left-arrow
+			@click-left="$router.go(-1)"
+		>
 		</van-nav-bar>
 		<van-notice-bar color="#1989fa" background="#ecf9ff" scrollable left-icon="info-o">
 			此次举报将全程保护您的个人信息，请实事求是、放心填写！

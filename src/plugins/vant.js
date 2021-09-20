@@ -1,5 +1,10 @@
 // 按需全局引入 vant组件
 import Vue from 'vue';
+// import { createApp } from 'vue';
+// import { Overlay } from 'vant';
+
+// // const app = createApp();
+// // app.use(Overlay);
 import {
 	Button,
 	List,
@@ -32,11 +37,13 @@ import {
 	RadioGroup,
 	Popup,
 	DatetimePicker,
+	Picker,
 	Uploader,
 	Calendar,
 	Rate,
 	Tab,
-	Tabs
+	Tabs,
+	Overlay
 } from 'vant';
 Vue.use(Button);
 Vue.use(Radio);
@@ -59,6 +66,7 @@ Vue.use(Grid);
 Vue.use(GridItem);
 Vue.use(Skeleton);
 Vue.use(Empty);
+Vue.use(Picker);
 Vue.use(Tag);
 Vue.use(NoticeBar);
 Vue.use(NavBar);
@@ -73,3 +81,4 @@ Vue.use(Calendar);
 Vue.use(Rate);
 Vue.use(Tab);
 Vue.use(Tabs);
+Vue.use(Overlay);

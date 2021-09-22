@@ -152,8 +152,12 @@ export default {
 				this.loginDialogShow = true;
 			} else {
 				await this.setVolunteerToken();
-				let { data: userInfo } = await this.setUserInfo();
-				if (!userInfo.phone) {
+				await this.setUserInfo();
+				// this.setUserInfo().then((res) => {
+				// 	console.log(res);
+				// });
+				console.log(this.$store.state.userInfo);
+				if (!this.$store.state.userInfo.phone) {
 					this.showQRCode = true;
 				}
 				await this.setHourView();

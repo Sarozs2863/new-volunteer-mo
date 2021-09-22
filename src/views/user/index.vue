@@ -332,11 +332,11 @@ export default {
 				delete data.cityId;
 			}
 
-			for (let key in data) {
-				if (!data[key]) {
-					this.$toast('请填写完整！');
-				}
-			}
+			// for (let key in data) {
+			// 	if (!data[key]) {
+			// 		this.$toast('请填写完整！');
+			// 	}
+			// }
 
 			if (data.timeToVolunteer.length == 0) {
 				this.$toast('请选择空闲时间！');
@@ -349,10 +349,12 @@ export default {
 			if (!isIdCard(data.idCardNumber)) {
 				this.$toast('身份证输入格式错误!');
 				return;
-			} else if (!isPhone(data.phone)) {
-				this.$toast('手机号输入格式错误！');
-				return;
-			} else if (!isQQ(data.qqNum)) {
+			}
+			//  else if (!isPhone(data.phone)) {
+			// 	this.$toast('手机号输入格式错误！');
+			// 	return;
+			// }
+			else if (!isQQ(data.qqNum)) {
 				this.$toast('qq号输入格式错误');
 				return;
 			}

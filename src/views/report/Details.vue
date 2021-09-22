@@ -38,6 +38,7 @@
 			label="开始时间"
 			placeholder="点击选择活动大致开始时间"
 			@click="showStartPicker = true"
+			@focus="noBomBox"
 		/>
 		<van-popup v-model="showStartPicker" position="bottom">
 			<van-datetime-picker
@@ -61,6 +62,7 @@
 			label="结束时间"
 			placeholder="点击选择活动大致结束时间"
 			@click="showEndPicker = true"
+			@focus="noBomBox"
 		/>
 		<van-popup v-model="showEndPicker" position="bottom">
 			<van-datetime-picker
@@ -124,6 +126,10 @@ export default {
 		this.details = this.$route.params.reasons;
 	},
 	methods: {
+		// 阻止默认弹出手机键盘
+		noBomBox(event) {
+			document.activeElement.blur();
+		},
 		async onSubmit() {
 			this.details.informPersonNum = this.$store.state.userInfo.studentNum;
 			this.details.college = this.$store.state.userInfo.collegeId;

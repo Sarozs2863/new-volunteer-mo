@@ -362,7 +362,7 @@ export default {
 			await modUserInfo(data).then((res) => {
 				console.log(res);
 				if (res.code == 0) {
-					this.$toast('修改成功！');
+					this.$toast.success('修改成功！');
 					setTimeout(() => {
 						this.$router.back(-1);
 					}, 2000);

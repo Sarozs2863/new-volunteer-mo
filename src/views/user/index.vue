@@ -3,6 +3,8 @@
 		<div class="wrap">
 			<div class="top_bar">
 				<van-nav-bar
+					left-text="返回"
+					left-arrow
 					@click-left="$router.go(-1)"
 					title="用户信息"
 					fixed
@@ -287,7 +289,9 @@ export default {
 				this.userInfo.dormName =
 					(this.userInfo.campus == 1 ? '黄家湖校区-' : '青山校区-') +
 					this.buildingDict[res.data.dormitoryBuilding] +
-					'-' + this.userInfo.dormitoryLayer + '层';
+					'-' +
+					this.userInfo.dormitoryLayer +
+					'层';
 				if (this.userInfo.timeToVolunteerList != null) {
 					this.timeList = this.userInfo.timeToVolunteerList;
 				}
@@ -358,7 +362,7 @@ export default {
 					this.$toast('修改成功！');
 					setTimeout(() => {
 						this.$router.back(-1);
-					}, 2000)
+					}, 2000);
 				} else {
 					this.$toast(res.msg);
 				}
@@ -386,7 +390,7 @@ export default {
 				this.userInfo.cityId = this.cityDict[this.userInfo.cityName];
 				// console.log(this.userInfo.provinceId);
 				// console.log(this.userInfo.cityId);
-			}				
+			}
 			console.log(this.userInfo.provinceId);
 			console.log(this.userInfo.cityId);
 
@@ -418,9 +422,8 @@ export default {
 					this.userInfo.campus = 2;
 					break;
 			}
-			for(let key in this.buildingDict) {
-				if(value[1] == this.buildingDict[key])
-					this.userInfo.dormitoryBuilding = key;
+			for (let key in this.buildingDict) {
+				if (value[1] == this.buildingDict[key]) this.userInfo.dormitoryBuilding = key;
 			}
 			console.log(this.userInfo.dormitoryBuilding);
 			this.userInfo.dormitoryLayer = value[2];

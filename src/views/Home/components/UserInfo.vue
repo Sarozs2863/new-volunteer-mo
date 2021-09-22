@@ -23,8 +23,9 @@
 					</div>
 					<div class="intro_text">
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						欢迎加入<b>武汉科技大学志愿者</b>这个大家庭，我校志愿者一直秉持着奉献、友爱、互助、进步的志愿精神！期待和你的志愿之旅！
-						“志”同道合，“愿”你同行。获取更多志愿资讯，欢迎扫码关注下列官方账号!
+						<b>武汉科技大学青年志愿者服务总队</b
+						>欢迎各位同学加入我校志愿者行列,我校志愿者一直秉持着<b>奉献、友爱、互助、进步</b>的志愿精神！期待和你的志愿之旅!
+						“志”同道合,“愿”你同行。获取更多志愿资讯,欢迎扫码关注下列总队官方账号！
 					</div>
 					<div class="tips_save">
 						长按图片可保存
@@ -44,26 +45,6 @@
 				<div class="no_repeat"><span>不再提醒</span></div>
 			</div>
 		</van-overlay>
-		<!-- <div class="QR_code" v-if="showQRCode">
-			<div class="tips_intro">
-				<div style="text-align:center">
-					<img width="100" height="100" src="@/assets/img/groupflag.png" />
-				</div>
-				<div class="intro_text">
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					欢迎加入武汉科技大学志愿者这个大家庭，我校志愿者一直秉持着奉献、友爱、互助、进步的志愿者精神！期待和你的志愿之旅！
-					“志”同道合，“愿”你同行。获取更多志愿资讯，欢迎扫码关注下列账号!
-				</div>
-				<div class="tips_save">
-					长按图片可保存
-				</div>
-			</div>
-			<div class="tips_codes">
-				<img width="120" height="120" src="@/assets/img/zdwx.png" />
-				<img width="110" height="110" src="@/assets/img/zdqq.png" />
-			</div>
-			<van-button type="info" class="tips_confirm" @click="showQRCode = false">确认</van-button>
-		</div> -->
 	</div>
 </template>
 
@@ -75,14 +56,7 @@ export default {
 			showQRCode: true
 		};
 	},
-	mounted() {
-		// console.log('this.$store.state.creditLevel', this.$store.state.creditLevel);
-		// if (this.$store.state.creditLevel === '⚠') {
-		// 	this.tag_type = 'danger';
-		// } else {
-		// 	this.tag_type = 'success';
-		// }
-	},
+	mounted() {},
 	methods: {
 		setup() {
 			const show = ref(false);

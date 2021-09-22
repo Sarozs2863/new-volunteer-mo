@@ -2,7 +2,7 @@
 	<!-- 头像以及个人信息区域 -->
 	<div>
 		<van-row class="d-flex jc-center ">
-			<van-image @click="$router.push('/user')" round width="2.5rem" height="2.5rem" :src="$store.state.gender" />
+			<van-image @click="jumpToUserInfo" round width="2.5rem" height="2.5rem" :src="$store.state.gender" />
 		</van-row>
 		<van-row style="margin-top:5px" type="flex" justify="center">
 			<span class=" fs-xxs text-background">{{ $store.state.userInfo.studentName }}</span>
@@ -30,7 +30,15 @@ export default {
 		// 	this.tag_type = 'success';
 		// }
 	},
-	methods: {}
+	methods: {
+		jumpToUserInfo() {
+			if(!this.$store.state.volunteerToken) {
+				this.$toast('未检测到用户信息！');
+				return ;
+			}
+			this.$router.push('/user');
+		}
+	}
 };
 </script>
 

@@ -95,7 +95,7 @@
 				</div>
 
 				<van-field label="寝室门牌号：" v-model="userInfo.dormitoryHouseNum" type="digit"></van-field>
-				<van-field label="志愿者编号：" v-model="userInfo.registeredVolunteerNum" type="digit"></van-field>
+				<!-- <van-field label="志愿者编号：" v-model="userInfo.registeredVolunteerNum" type="digit"></van-field> -->
 
 				<!-- 空闲时间 -->
 				<div class="timeToVolunteer">
@@ -310,7 +310,8 @@ export default {
 				politicalOutlook: this.userInfo.politicalOutlook,
 				provinceId: this.userInfo.provinceId,
 				cityId: this.userInfo.cityId,
-				registeredVolunteerNum: this.userInfo.registeredVolunteerNum,
+				// 暂时不需要填写志愿者编号
+				// registeredVolunteerNum: this.userInfo.registeredVolunteerNum,
 				nationId: this.userInfo.nationId,
 				campus: this.userInfo.campus,
 				dormitoryBuilding: this.userInfo.dormitoryBuilding,

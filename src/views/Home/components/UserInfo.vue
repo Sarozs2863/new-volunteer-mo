@@ -14,65 +14,14 @@
 			<van-col class="stu_college text-background">{{ $store.state.userInfo.collegeName }}</van-col>
 			<van-col class="stu_num text-background">{{ $store.state.userInfo.studentNum }}</van-col>
 		</van-row>
-		<!-- 进入时候的弹窗 -->
-		<van-overlay :show="showQRCode" @click="show = false" style="position:absolute;z-index:10000">
-			<div class="QR_code" v-if="showQRCode" @click.stop>
-				<div class="tips_intro">
-					<div style="text-align:center">
-						<img width="100" height="100" src="@/assets/img/groupflag.png" />
-					</div>
-					<div class="intro_text">
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						欢迎加入<b>武汉科技大学志愿者</b>这个大家庭，我校志愿者一直秉持着奉献、友爱、互助、进步的志愿精神！期待和你的志愿之旅！
-						“志”同道合，“愿”你同行。获取更多志愿资讯，欢迎扫码关注下列官方账号!
-					</div>
-					<div class="tips_save">
-						长按图片可保存
-					</div>
-				</div>
-				<div class="tips_codes">
-					<div class="code_items">
-						<img width="120" height="120" src="@/assets/img/zdwx.png" />
-						<div style="margin-top:-10px"><span class="code_type">微信</span></div>
-					</div>
-					<div class="code_items">
-						<img width="110" height="110" src="@/assets/img/zdqq.png" />
-						<div><span class="code_type">QQ</span></div>
-					</div>
-				</div>
-				<van-button type="info" class="tips_confirm" @click="showQRCode = false">确认</van-button>
-				<div class="no_repeat"><span>不再提醒</span></div>
-			</div>
-		</van-overlay>
-		<!-- <div class="QR_code" v-if="showQRCode">
-			<div class="tips_intro">
-				<div style="text-align:center">
-					<img width="100" height="100" src="@/assets/img/groupflag.png" />
-				</div>
-				<div class="intro_text">
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					欢迎加入武汉科技大学志愿者这个大家庭，我校志愿者一直秉持着奉献、友爱、互助、进步的志愿者精神！期待和你的志愿之旅！
-					“志”同道合，“愿”你同行。获取更多志愿资讯，欢迎扫码关注下列账号!
-				</div>
-				<div class="tips_save">
-					长按图片可保存
-				</div>
-			</div>
-			<div class="tips_codes">
-				<img width="120" height="120" src="@/assets/img/zdwx.png" />
-				<img width="110" height="110" src="@/assets/img/zdqq.png" />
-			</div>
-			<van-button type="info" class="tips_confirm" @click="showQRCode = false">确认</van-button>
-		</div> -->
+		
 	</div>
 </template>
 
 <script>
-import { Dialog } from 'vant';
 export default {
 	data() {
 		return {
-			showQRCode: true
 		};
 	},
 	mounted() {
@@ -84,10 +33,7 @@ export default {
 		// }
 	},
 	methods: {
-		setup() {
-			const show = ref(false);
-			return { show };
-		}
+		
 	}
 };
 </script>
@@ -106,24 +52,8 @@ export default {
 	color: rgb(126, 126, 126);
 	letter-spacing: 0.1rem;
 }
-
-.QR_code {
-	position: absolute;
-	margin-left: 5%;
-	margin-top: 10%;
-	background-color: #fff;
-	padding: 0.4rem 0.5rem 1rem 0.5rem;
-	/* box-shadow: 0 px 8px #f7f8fa; */
-	border-radius: 0.6rem;
-	height: 512px;
-	width: 80%;
-	background-color: white;
-	z-index: 9999;
-}
 .tips_intro {
-	/* display: flex; */
-	justify-content: center;
-	line-height: 18px;
+	margin-top: 20px;	
 }
 .tips_codes {
 	display: flex;
@@ -143,13 +73,7 @@ export default {
 	text-align: start;
 	margin-top: 10px;
 }
-.tips_confirm {
-	width: 90%;
-	margin-left: 6%;
-	border-radius: 2rem;
-	height: 38px;
-	margin-top: 10px;
-}
+
 .user-statu {
 	margin-left: 12px;
 	line-height: 34px;

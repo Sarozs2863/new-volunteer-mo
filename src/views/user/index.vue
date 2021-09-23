@@ -285,13 +285,17 @@ export default {
 				console.log(res.data);
 				this.userInfo = res.data;
 				this.userInfo.nationName = this.nationDict[res.data.nationId];
-				this.userInfo.native = res.data.provinceName + (res.data.provinceId > 4 ? res.data.cityName : '');
-				this.userInfo.dormName =
-					(this.userInfo.campus == 1 ? '黄家湖校区-' : '青山校区-') +
+				if(res.data.provinceName != null) {
+					this.userInfo.native = res.data.provinceName + (res.data.provinceId > 4 ? res.data.cityName : '');
+				}
+				if(res.data.campus != null) {
+					this.userInfo.dormName =
+					(this.userInfo.campus === 1 ? '黄家湖校区-' : '青山校区-') +
 					this.buildingDict[res.data.dormitoryBuilding] +
 					'-' +
 					this.userInfo.dormitoryLayer +
 					'层';
+				}
 				if (this.userInfo.timeToVolunteerList != null) {
 					this.timeList = this.userInfo.timeToVolunteerList;
 				}
@@ -332,11 +336,11 @@ export default {
 				delete data.cityId;
 			}
 
-			// for (let key in data) {
-			// 	if (!data[key]) {
-			// 		this.$toast('请填写完整！');
-			// 	}
-			// }
+			for (let key in data) {
+				if (!data[key]) {
+					this.$toast('请填写完整！');
+				}
+			}
 
 			if (data.timeToVolunteer.length == 0) {
 				this.$toast('请选择空闲时间！');
@@ -350,10 +354,10 @@ export default {
 				this.$toast('身份证输入格式错误!');
 				return;
 			}
-			//  else if (!isPhone(data.phone)) {
-			// 	this.$toast('手机号输入格式错误！');
-			// 	return;
-			// }
+			 else if (!isPhone(data.phone)) {
+				this.$toast('手机号输入格式错误！');
+				return;
+			}
 			else if (!isQQ(data.qqNum)) {
 				this.$toast('qq号输入格式错误');
 				return;

@@ -76,7 +76,6 @@ import ValidCodeCard from './components/ValidCodeCard.vue';
 import UserInfo from './components/UserInfo.vue';
 // 功能区
 import FuncArea from './components/FuncArea.vue';
-import { isIdCard, isPhone, isQQ } from '@/utils/validate';
 export default {
 	name: 'HomePage',
 	components: {
@@ -152,14 +151,13 @@ export default {
 				this.loginDialogShow = true;
 			} else {
 				await this.setVolunteerToken();
+				
 				await this.setUserInfo();
-				// this.setUserInfo().then((res) => {
-				// 	console.log(res);
-				// });
-				console.log(this.$store.state.userInfo);
+				console.log('电话号: ' + this.$store.state.userInfo.phone);
 				if (!this.$store.state.userInfo.phone) {
 					this.showQRCode = true;
 				}
+
 				await this.setHourView();
 				await this.setRecentActs();
 				await this.setCreditLevel();

@@ -23,12 +23,7 @@ export default {
 		return {};
 	},
 	mounted() {
-		// console.log('this.$store.state.creditLevel', this.$store.state.creditLevel);
-		// if (this.$store.state.creditLevel === '⚠') {
-		// 	this.tag_type = 'danger';
-		// } else {
-		// 	this.tag_type = 'success';
-		// }
+		
 	},
 	methods: {
 		jumpToUserInfo() {

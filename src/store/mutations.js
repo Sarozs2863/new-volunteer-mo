@@ -13,13 +13,16 @@ export default {
 		state.userInfo = userInfo;
 		// 根据用户性别设置头像
 		state.gender = require('@/assets/img/people.png');
-		let genderId = userInfo.idCardNumber[16];
-		if (genderId % 2 === 0) {
-			state.gender = require('@/assets/img/girl.png');
-		} else if (genderId % 2 === 1) {
-			state.gender = require('@/assets/img/boy.png');
-		} else {
-			state.gender = require('@/assets/img/people.png');
+		// 信息补全之前没有身份证号信息
+		if (userInfo.idCardNumber) {
+			let genderId = userInfo.idCardNumber[16];
+			if (genderId % 2 === 0) {
+				state.gender = require('@/assets/img/girl.png');
+			} else if (genderId % 2 === 1) {
+				state.gender = require('@/assets/img/boy.png');
+			} else {
+				state.gender = require('@/assets/img/people.png');
+			}
 		}
 		console.log(userInfo, state.gender);
 	},

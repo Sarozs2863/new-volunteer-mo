@@ -285,16 +285,16 @@ export default {
 				console.log(res.data);
 				this.userInfo = res.data;
 				this.userInfo.nationName = this.nationDict[res.data.nationId];
-				if(res.data.provinceName != null) {
+				if (res.data.provinceName != null) {
 					this.userInfo.native = res.data.provinceName + (res.data.provinceId > 4 ? res.data.cityName : '');
 				}
-				if(res.data.campus != null) {
+				if (res.data.campus != null) {
 					this.userInfo.dormName =
-					(this.userInfo.campus === 1 ? '黄家湖校区-' : '青山校区-') +
-					this.buildingDict[res.data.dormitoryBuilding] +
-					'-' +
-					this.userInfo.dormitoryLayer +
-					'层';
+						(this.userInfo.campus === 1 ? '黄家湖校区-' : '青山校区-') +
+						this.buildingDict[res.data.dormitoryBuilding] +
+						'-' +
+						this.userInfo.dormitoryLayer +
+						'层';
 				}
 				if (this.userInfo.timeToVolunteerList != null) {
 					this.timeList = this.userInfo.timeToVolunteerList;
@@ -305,6 +305,7 @@ export default {
 			let { data } = await cityList({
 				provinceId: this.provinceDict[values[0]]
 			});
+			console.log(data);
 			this.nativePlaceList[1].values = data.map((item) => item.cityName);
 			data.forEach((e) => {
 				this.cityDict[e.cityName] = e.id;
@@ -339,6 +340,7 @@ export default {
 			for (let key in data) {
 				if (!data[key]) {
 					this.$toast('请填写完整！');
+					return;
 				}
 			}
 
@@ -353,12 +355,10 @@ export default {
 			if (!isIdCard(data.idCardNumber)) {
 				this.$toast('身份证输入格式错误!');
 				return;
-			}
-			 else if (!isPhone(data.phone)) {
+			} else if (!isPhone(data.phone)) {
 				this.$toast('手机号输入格式错误！');
 				return;
-			}
-			else if (!isQQ(data.qqNum)) {
+			} else if (!isQQ(data.qqNum)) {
 				this.$toast('qq号输入格式错误');
 				return;
 			}

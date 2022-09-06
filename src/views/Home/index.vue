@@ -42,18 +42,17 @@
 					</div>
 					<div class="intro_text">
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						武汉科技大学青年志愿者服务总队欢迎各位同学加入我校志愿者行列,我校志愿者一直秉持着奉献、友爱、互助、进步的志愿精神!期待和你的志愿之旅!
-						“志”同道合,“愿”你同行。获取更多志愿资讯,欢迎扫码关注下列总队官方账号！
+						武汉科技大学青年志愿者服务总队欢迎各位同学的加入，我校志愿者一直秉持着奉献、友爱、互助、进步的志愿精神！“志”同道合，“愿”你同行。欢迎扫码关注下列总队官方账号，期待和你的志愿之旅！
 					</div>
 					<div class="tips_save">长按图片可保存</div>
 				</div>
 				<div class="tips_codes">
 					<div class="code_items">
-						<img width="120" height="120" src="@/assets/img/zdwx.png" />
+						<img width="120" height="120" src="@/assets/img/zdwx.jpg" />
 						<div style="margin-top: -10px"><span class="code_type">微信</span></div>
 					</div>
 					<div class="code_items">
-						<img width="110" height="110" src="@/assets/img/zdqq.png" />
+						<img width="110" height="110" src="@/assets/img/zdqq.jpg" />
 						<div><span class="code_type">QQ</span></div>
 					</div>
 				</div>
@@ -87,6 +86,7 @@ export default {
 		return {
 			guideDialogShow: false,
 			notice: '用户反馈QQ群：926518229。若工时信息与志愿者证不对应，请联系该活动的活动负责人或向院青队咨询',
+			//登录弹窗
 			loginDialogShow: false,
 			stuNo: '',
 			password: '',
@@ -192,6 +192,7 @@ export default {
 	},
 	mounted() {
 		this.init();
+		this.showQRCode = true;
 	}
 };
 </script>

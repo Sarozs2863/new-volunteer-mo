@@ -149,7 +149,7 @@
 				<van-field label="爱好及技能：" type="textarea" autosize v-model="userInfo.hobbiesAndSkills"></van-field>
 
 				<div class="btn">
-					<van-button type="info" @click="doModUserInfo()" round style="width: 9rem; margin-top: 0.2rem ;"
+					<van-button type="info" @click="doModUserInfo()" round style="width: 9rem; margin-top: 0.2rem"
 						>确认修改</van-button
 					>
 				</div>

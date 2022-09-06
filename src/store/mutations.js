@@ -28,17 +28,17 @@ export default {
 	},
 	setCreditLevel(state, data) {
 		state.creditLevel = '';
-		if (data.creditLevel === 0) {
+		if (data.currentCreditLevel === 0) {
 			state.creditLevel = '⚠';
 			state.creditTag = 'danger';
 		} else {
-			for (let i = 0; i < data.creditLevel; i++) {
+			for (let i = 0; i < data.currentCreditLevel; i++) {
 				state.creditLevel += '★';
 				state.creditTag = 'success';
 			}
 		}
-		state.punishedTimes = data.punishedTimes;
-		state.creditLevelCount = data.creditLevel;
+		state.punishedTimes = data.timesZero;
+		state.creditLevelCount = data.currentCreditLevel;
 		console.log('creditLevel', state.creditLevel, state.punishedTimes);
 	},
 	setHourView(state, hourView) {

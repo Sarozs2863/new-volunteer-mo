@@ -15,7 +15,7 @@
 				<van-col class="items-font">您的信用等级：</van-col>
 				<van-col>
 					<van-rate
-						v-model="creditlevel"
+						v-model="currentCreditLevel"
 						readonly
 						count="3"
 						:size="25"
@@ -26,7 +26,7 @@
 				</van-col>
 			</van-row>
 			<van-row class="creditItems">
-				<van-col class="items-font">累计0星次数：{{ zeroTimes }}次</van-col>
+				<van-col class="items-font">累计0星次数：{{ timesZero }}次</van-col>
 			</van-row>
 		</div>
 		<div class="creditTips">
@@ -57,13 +57,13 @@
 export default {
 	data() {
 		return {
-			creditlevel: 2,
-			zeroTimes: 0
+			currentCreditLevel: 3,
+			timesZero: 0
 		};
 	},
 	mounted() {
-		this.creditlevel = this.$store.state.creditLevelCount;
-		this.zeroTimes = this.$store.state.punishedTimes;
+		this.currentCreditLevel = this.$store.state.creditLevelCount;
+		this.timesZero = this.$store.state.punishedTimes;
 	}
 };
 </script>

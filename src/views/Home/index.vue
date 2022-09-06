@@ -5,7 +5,7 @@
 			<van-notice-bar left-icon="volume-o" :text="notice" />
 			<!-- 顶部按钮区域 -->
 			<van-row class="d-flex jc-end">
-				<van-icon name="question-o" class="m-10 " size="23px" color="#fff" @click="guideDialogShow = true" />
+				<van-icon name="question-o" class="m-10" size="23px" color="#fff" @click="guideDialogShow = true" />
 			</van-row>
 			<!-- 用户反馈 -->
 			<van-dialog v-model="guideDialogShow" title="用户反馈" confirm-button-color="#006eff">
@@ -16,7 +16,7 @@
 			<UserInfo class="user-info"></UserInfo>
 		</div>
 		<ValidCodeCard class="card main-card d-flex jc-center mt-2"></ValidCodeCard>
-		<FuncArea class="func-area" style="margin-top: 15px;"></FuncArea>
+		<FuncArea class="func-area" style="margin-top: 15px"></FuncArea>
 		<ActList></ActList>
 		<copyright></copyright>
 
@@ -27,7 +27,7 @@
 			confirmButtonColor="#1989FA"
 			@confirm="webLogin"
 		>
-			<div style="margin-top: 20px;">
+			<div style="margin-top: 20px">
 				<van-field v-model="stuNo" label="学号" placeholder="请输入学号" />
 				<van-field v-model="password" label="密码" placeholder="请输入密码" />
 			</div>
@@ -37,7 +37,7 @@
 		<van-dialog v-model="showQRCode" confirmButtonColor="#1989FA">
 			<div class="QR_code">
 				<div class="tips_intro">
-					<div style="text-align:center">
+					<div style="text-align: center">
 						<img width="100" height="100" src="@/assets/img/groupflag.png" />
 					</div>
 					<div class="intro_text">
@@ -45,14 +45,12 @@
 						武汉科技大学青年志愿者服务总队欢迎各位同学加入我校志愿者行列,我校志愿者一直秉持着奉献、友爱、互助、进步的志愿精神!期待和你的志愿之旅!
 						“志”同道合,“愿”你同行。获取更多志愿资讯,欢迎扫码关注下列总队官方账号！
 					</div>
-					<div class="tips_save">
-						长按图片可保存
-					</div>
+					<div class="tips_save">长按图片可保存</div>
 				</div>
 				<div class="tips_codes">
 					<div class="code_items">
 						<img width="120" height="120" src="@/assets/img/zdwx.png" />
-						<div style="margin-top:-10px"><span class="code_type">微信</span></div>
+						<div style="margin-top: -10px"><span class="code_type">微信</span></div>
 					</div>
 					<div class="code_items">
 						<img width="110" height="110" src="@/assets/img/zdqq.png" />
@@ -88,11 +86,12 @@ export default {
 	data() {
 		return {
 			guideDialogShow: false,
-			notice: '用户反馈qq群：926518229。若工时信息与志愿者证不对应，请联系该活动的活动负责人或向院青队咨询',
+			notice: '用户反馈QQ群：926518229。若工时信息与志愿者证不对应，请联系该活动的活动负责人或向院青队咨询',
 			loginDialogShow: false,
 			stuNo: '',
 			password: '',
 			userData: {},
+			//是否展示总队宣传弹窗
 			showQRCode: false
 		};
 	},
@@ -100,7 +99,7 @@ export default {
 		// 不缓存verifyCode 将六位活动验证码清空
 		this.verifyCode = '';
 		// 工具栏默认不显示
-		this.showPopover = false;
+		// this.showPopover = false;
 		this.userData = this.$store.state.userInfo;
 	},
 	methods: {
@@ -151,7 +150,7 @@ export default {
 				this.loginDialogShow = true;
 			} else {
 				await this.setVolunteerToken();
-				
+
 				await this.setUserInfo();
 				console.log('电话号: ' + this.$store.state.userInfo.phone);
 				if (!this.$store.state.userInfo.phone) {

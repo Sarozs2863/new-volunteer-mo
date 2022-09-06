@@ -4,7 +4,9 @@ import { Toast } from 'vant';
 
 // create an axios instance
 const service = axios.create({
-	baseURL: process.env.VUE_APP_BASE_API,
+	// baseURL: process.env.VUE_APP_BASE_API,
+	//测试环境
+	baseURL: 'http://49.234.41.131:1314/volunteer',
 	timeout: 5000
 });
 

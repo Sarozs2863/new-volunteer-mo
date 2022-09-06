@@ -38,7 +38,8 @@ export function getUserInfo() {
 // 获取个人信用等级信息
 export function getCreditLevel() {
 	return request({
-		url: '/common/getCreditByToken',
+		// url: '/common/getCreditByToken',
+		url: '/stuPunished/getStuInfoByNum',
 		method: 'GET',
 		hideloading: false
 	});
@@ -139,22 +140,20 @@ export function cityList(params) {
 	});
 }
 
-
 // 服务意向
 export function intentionList(params) {
 	return request({
-	  url: '/common/serverIntention',
-	  method: 'GET',
-	  params
-	})
-  }
+		url: '/common/serverIntention',
+		method: 'GET',
+		params
+	});
+}
 
-  // 补全用户信息
+// 补全用户信息
 export function modUserInfo(data) {
 	return request({
-	  url: '/volunteer/public/personInfo',
-	  method: 'PUT',
-	  data
-	})
-  }
-  
+		url: '/volunteer/public/personInfo',
+		method: 'PUT',
+		data
+	});
+}

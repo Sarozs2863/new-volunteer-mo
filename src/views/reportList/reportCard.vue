@@ -1,14 +1,19 @@
 <template>
 	<div>
 		<van-row class="act_card" v-for="(report, index) in reportList" :key="index" type="flex" justify="space-around">
-			<van-col class="left" span="13">
+			<van-col class="left" span="14">
 				<van-row class="act_name">{{ report.activityName }}</van-row>
-				<div class="date_crater">举报时间：{{ report.createTime }}</div>
-				<van-row class="organization">被举报人：{{ report.reportedPerson }}</van-row>
+				<div class="date_crater">
+					<b style="display: inline-block; width: 60px">举报时间：</b>{{ report.completeTime }}
+				</div>
+				<van-row class="organization"
+					><b style="display: inline-block; width: 60px">被举报人：</b>{{ report.reportedPersonName }}</van-row
+				>
+				<div class="status"><b style="display: inline-block; width: 60px"> 举报状态：</b>{{ report.status }}</div>
 			</van-col>
 			<van-col class="right">
 				<van-row
-					><van-button type="info" style="margin-left:-20px" @click="confirmCancelReport(report.id)"
+					><van-button type="info" style="margin-left: -20px" @click="confirmCancelReport(report.id)"
 						>撤销举报</van-button
 					></van-row
 				>
@@ -84,8 +89,11 @@ export default {
 				margin-right: 0.15rem;
 			}
 		}
+		.status {
+			margin: 5px 0;
+		}
 		.organization {
-			font-size: 0.35rem;
+			// font-size: 0.35rem;
 			margin: 0.1rem 0;
 		}
 	}

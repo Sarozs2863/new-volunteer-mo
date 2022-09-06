@@ -36,7 +36,8 @@ export default {
 		async getList() {
 			let res = await getReportList();
 			if (res.code === 0) {
-				this.reportList = res.data;
+				this.reportList = res.data.list;
+				console.log('reportList', this.reportList);
 				this.reportList.reverse();
 				this.finished = true;
 				console.log('reportList', this.reportList);

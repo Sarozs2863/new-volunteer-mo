@@ -76,7 +76,7 @@
 		</van-popup>
 		<!-- Ta的姓名 -->
 		<van-field
-			v-model="details.reportedPerson"
+			v-model="details.reportedPersonName"
 			autocomplete="off"
 			name="被举报人姓名"
 			label="Ta的姓名"
@@ -89,7 +89,7 @@
 				<van-uploader :multiple="true" capture="camera" v-model="reportPhotos" />
 			</template>
 		</van-field>
-		<div style="margin: 16px;">
+		<div style="margin: 16px">
 			<van-button round block type="info" @click="onSubmit()">提交举报</van-button>
 		</div>
 		<Copyright></Copyright>
@@ -107,16 +107,16 @@ export default {
 		return {
 			showStartPicker: false,
 			showEndPicker: false,
-			minDate: new Date(2021, 7, 1),
+			minDate: new Date(2022, 8, 1),
 			newMinDate: new Date(),
 			maxDate: new Date(2031, 7, 1),
 			details: {
-				reportedPerson: '',
+				reportedPersonName: '',
 				startTime: '',
 				endTime: '',
-				activityName: '',
-				informPersonNum: '',
-				college: 0
+				activityName: ''
+				// informPersonNum: '',
+				// college: 0
 			},
 			reportPhotos: []
 		};
@@ -131,12 +131,12 @@ export default {
 			document.activeElement.blur();
 		},
 		async onSubmit() {
-			this.details.informPersonNum = this.$store.state.userInfo.studentNum;
-			this.details.college = this.$store.state.userInfo.collegeId;
+			// this.details.informPersonNum = this.$store.state.userInfo.studentNum;
+			// this.details.college = this.$store.state.userInfo.collegeId;
 			const form = new FormData();
 			for (let i = 0; i < this.reportPhotos.length; i++) {
 				console.log('0.file', this.reportPhotos[i].file);
-				form.append('file', this.reportPhotos[i].file);
+				form.append('files', this.reportPhotos[i].file);
 			}
 			console.log(this.details);
 			// console.log(form);

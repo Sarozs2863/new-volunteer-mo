@@ -11,11 +11,11 @@
 			<van-cell center size="large" title="活动名称：" :value="actDetails.activityName" />
 			<van-cell center size="large" title="主办组织：" :value="actDetails.organization" />
 			<van-cell center size="large" title="工时数量：" :value="actDetails.activityTime" />
-			<van-cell center size="large" title="活动时间：" :value="actDetails.dayTime" />
+			<van-cell center size="large" title="活动时间：" :value="actDetails.recruitStart" />
 			<van-cell center size="large" title="活动地点：" :value="actDetails.activityPlace" />
 			<van-cell center size="large" title="活动简介：" :value="actDetails.introductory" />
 		</van-cell-group>
-		<div style="margin:18px">
+		<div style="margin: 18px">
 			<van-button round block type="info" @click="signUp">立即报名</van-button>
 		</div>
 	</div>
@@ -27,19 +27,11 @@ import { signUpTheAct } from '@/api/recruitAct.js';
 export default {
 	data() {
 		return {
-			actDetails: {
-				activityId: 99978,
-				activityName: '0001',
-				dayTime: '14:00-16:00',
-				organization: '计算机学院',
-				activityTime: '10h',
-				activityPlace: '恒大楼门口',
-				introductory:
-					'这是一段活动简介这是一段活动简介这是一段活动简介这是一段活动简介这是一段活动简介这是一段活动简介这是一段活动简介这是一段活动简介这是一段活动简介'
-			}
+			actDetails: {}
 		};
 	},
 	mounted() {
+		console.log('asds');
 		console.log(this.$route.params);
 		this.actDetails = this.$route.params.actDetail;
 	},
@@ -51,7 +43,7 @@ export default {
 				message: '您确认符合此活动所招募志愿者要求，且能准时无误参加吗？如若要退出请在活动正式开始前24h退出。'
 			})
 				.then(async () => {
-					let res = await signUpTheAct(this.actDetails.activityId);
+					let res = await signUpTheAct(this.actDetails.id);
 					if (res.code === 0) {
 						Toast.success('报名成功！');
 						// 提交成功回到首页

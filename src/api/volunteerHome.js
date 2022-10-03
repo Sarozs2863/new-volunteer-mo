@@ -3,7 +3,7 @@ import request from './request';
 // 根据六位验证码获取活动id
 export function getApprovedActId(randomString) {
 	return request({
-		url: '/volunteer/public/timetableInfo/',
+		url: '/public/timetableInfo/',
 		method: 'GET',
 		params: {
 			randomString: randomString

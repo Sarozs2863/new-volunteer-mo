@@ -6,6 +6,7 @@ import { Toast } from 'vant';
 const service = axios.create({
 	// baseURL: process.env.VUE_APP_BASE_API,
 	//测试环境
+	// https://volunteer.ciduid.top/volunteer
 	baseURL: 'http://49.234.41.131:1314/volunteer',
 	timeout: 5000
 });
@@ -61,7 +62,7 @@ service.interceptors.response.use(
 	},
 	(error) => {
 		Toast.clear();
-		console.log('err' + error); // for debug
+		console.log('err ' + error); // for debug
 		switch (error.response.status) {
 			case 401:
 				// ...

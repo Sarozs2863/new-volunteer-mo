@@ -175,7 +175,7 @@ export default {
     return {
       activityId: this.$route.params.activityId,
       activityName: this.$route.params.activityName,
-      tabs: ['已认证', '已驳回', '待认证', '未提交'],
+      tabs: ['未开始','已认证', '已驳回', '待认证', '未提交'],
       active: 0,
       timeSheetList: [],
       volunteerList: [],
@@ -200,7 +200,7 @@ export default {
       this.finished = false
       this.loading = true
       this.pageNum = 1
-      this.status = this.active + 1
+      this.status = this.active
       this.timeSheetList = []
       this.getTimesheetList()
     }
@@ -222,7 +222,7 @@ export default {
     },
     //获取活动列表
     async getTimesheetList () {
-      // 已认证工时表1 已驳回2 待认证3 未确认4
+      // 已认证 未开始0 工时表1 已驳回2 待认证3 未确认4
       let params = {
         activityId: this.$route.params.activityId,
         status: this.status,

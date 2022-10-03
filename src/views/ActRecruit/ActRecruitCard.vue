@@ -9,15 +9,15 @@
 		>
 			<van-col class="left" span="13">
 				<van-row class="act_name">{{ recruitAct.activityName }}</van-row>
-				<van-row class="act_time">活动时间：{{ recruitAct.dayTime }}</van-row>
+				<van-row class="act_time">活动时间：{{ recruitAct.activityStartTime }}</van-row>
 				<van-row class="act_organization">主办单位：{{ recruitAct.organization }}</van-row>
 			</van-col>
 			<van-col class="right">
-				<van-row class="activityTime fs-xxs ">
+				<van-row class="activityTime fs-xxs">
 					{{ recruitAct.activityTime }}
 				</van-row>
 				<van-row>
-					<van-button type="info" size="small" @click="checkTheAct(recruitAct.activityId)">活动详情</van-button>
+					<van-button type="info" size="small" @click="checkTheAct(dataMap.get(recruitAct.id))">活动详情</van-button>
 				</van-row>
 			</van-col>
 		</van-row>
@@ -29,18 +29,18 @@ import { mapState } from 'vuex';
 import { getActDetails } from '@/api/recruitAct.js';
 export default {
 	name: 'ActRecruitCard',
-	props: ['actRecruitList'],
+	props: ['actRecruitList', 'dataMap'],
 	computed: {
 		// ...mapState(['actList'])
 	},
 	methods: {
-		async checkTheAct(actId) {
-			let res = await getActDetails(actId);
-			console.log('res:', res);
+		async checkTheAct(data) {
+			// let res = await getActDetails(actId);
+			console.log('oneData:', data);
 			this.$router.push({
 				name: 'recruitDetails',
 				params: {
-					actDetail: res.data
+					actDetail: data
 				}
 			});
 		}

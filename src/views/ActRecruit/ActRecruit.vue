@@ -16,12 +16,12 @@
 			</van-nav-bar>
 			<van-tabs v-model="activeName">
 				<van-tab title="活动报名" name="活动报名">
-					<div style="background-color:rgb(248, 252, 255,0.1)">
+					<div style="background-color: rgb(248, 252, 255, 0.1)">
 						<van-row class="searchByDate">
-							<van-col style="margin:0.6em 1em 1em 1em;">
+							<van-col style="margin: 0.6em 1em 1em 1em">
 								<van-button
 									type="info"
-									style="height:2.4em;border-radius: 0.10333rem;;line-height:20px;margin-top:2px"
+									style="height: 2.4em; border-radius: 0.10333rem; line-height: 20px; margin-top: 2px"
 									@click="showDatePicker = true"
 									>选择日期</van-button
 								>
@@ -51,7 +51,11 @@
 							@load="getActList()"
 							v-model="loading"
 						>
-							<ActRecruitCard v-if="ActRecruitList.length > 0" :actRecruitList="ActRecruitList"></ActRecruitCard>
+							<ActRecruitCard
+								v-if="ActRecruitList.length > 0"
+								:actRecruitList="ActRecruitList"
+								:dataMap="dataMap"
+							></ActRecruitCard>
 						</van-list>
 					</div>
 				</van-tab>
@@ -69,6 +73,7 @@
 								v-if="participantedList.length > 0"
 								@refreshthelist="getMyList"
 								:participantedList="participantedList"
+								:dataMap="dataMap"
 							></MyActCard>
 						</van-list>
 					</div>
@@ -92,6 +97,7 @@ export default {
 			flag_scroll: false,
 			finished: false,
 			ActRecruitList: [],
+			dataMap: '',
 			participantedList: [],
 			pageNum: 1,
 			date: '',
@@ -147,8 +153,26 @@ export default {
 			// 保证切换日期后能够正常加载列表
 			this.finished = false;
 			let list = res.data.list;
-			console.log('list:', list);
-			console.log('finished:', this.finished);
+
+			//将数据放进map
+			let dataMap = new Map();
+			for (let i = 0; i < list.length; i++) {
+				dataMap.set(list[i].id, list[i]);
+			}
+			if (this.date) {
+				for (let i = 0; i < list.length; i++) {
+					console.log('qwe', list[i].recruitStart);
+					console.log(this.date);
+					console.log(list[i].activityStartTime == this.date);
+
+					if (!(list[i].activityStartTime == this.date)) {
+						list[i] = '';
+						list.length--;
+					}
+				}
+			}
+
+			this.dataMap = dataMap;
 			if (this.pageNum > 1) {
 				this.ActRecruitList = [...this.ActRecruitList, ...list];
 				console.log('ActRecruitListif:', this.ActRecruitList);
@@ -171,13 +195,22 @@ export default {
 				console.log('this.pageNum', this.pageNum);
 			}
 		},
+		//
 		async getMyList() {
 			let res = await getParticipantedList();
+			console.log('res', res);
 			this.loading = false;
 			// 保证切换日期后能够正常加载列表
 			this.finished = false;
 			this.pageNum = 1;
 			let list = res.data.list;
+			//将数据放进map
+			var dataMap = new Map();
+			// if (this.date == '') {
+			for (let i = 0; i < list.length; i++) {
+				dataMap.set(list[i].id, list[i]);
+			}
+			this.dataMap = dataMap;
 			console.log('list:', list);
 			console.log('finished:', this.finished);
 			if (this.pageNum > 1) {

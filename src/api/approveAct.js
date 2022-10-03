@@ -4,7 +4,7 @@ import request from './request';
 // 根据活动id获取活动详情
 export function actDetail(param) {
 	return request({
-		url: '/volunteer/public/activityContent',
+		url: '/public/activityContent',
 		method: 'GET',
 		params: {
 			activityId: param

@@ -35,7 +35,7 @@ function signUpTheAct(actId) {
 // 获取用户已参加的活动列表
 function getParticipantedList() {
 	return request({
-		url: '/recruit/participantList',
+		url: '/recruit/participated',
 		method: 'GET',
 		hideloading: true // vant 加载效果
 	});

@@ -6,20 +6,20 @@
 			:key="index"
 			type="flex"
 			justify="space-around"
-			@click="checkTheAct(recruitAct.activityId)"
+			@click="checkTheAct(dataMap.get(recruitAct.id))"
 		>
 			<van-col class="left" span="13">
 				<van-row class="act_name">{{ recruitAct.activityName }}</van-row>
-				<van-row class="act_time">活动时间：{{ recruitAct.dayTime }}</van-row>
+				<van-row class="act_time">活动时间：{{ recruitAct.activityStartTime }}</van-row>
 				<van-row class="act_organization">主办单位：{{ recruitAct.organization }}</van-row>
 			</van-col>
 			<van-col class="right">
-				<van-row class="activityTime fs-xxs ">
+				<van-row class="activityTime fs-xxs">
 					{{ recruitAct.activityTime }}
 				</van-row>
 				<van-row>
-					<van-button :type="confirmStatus(recruitAct.activityResult).buttonTypes" plain size="small">
-						{{ confirmStatus(recruitAct.activityResult).actStatus }}
+					<van-button :type="confirmStatus(recruitAct.status).buttonTypes" plain size="small">
+						{{ confirmStatus(recruitAct.status).actStatus }}
 					</van-button>
 				</van-row>
 			</van-col>
@@ -32,7 +32,7 @@ import { mapState } from 'vuex';
 import { getActDetails } from '@/api/recruitAct.js';
 export default {
 	name: 'MyActCard',
-	props: ['participantedList'],
+	props: ['participantedList', 'dataMap'],
 	computed: {
 		// ...mapState(['actList'])
 	},
@@ -61,13 +61,13 @@ export default {
 				buttonTypes
 			};
 		},
-		async checkTheAct(actId) {
-			let res = await getActDetails(actId);
-			console.log('res:', res);
+		async checkTheAct(data) {
+			// let res = await getActDetails(actId);
+			console.log('dataasd:', data);
 			this.$router.push({
 				name: 'myActDetails',
 				params: {
-					actDetail: res.data
+					actDetail: data
 				}
 			});
 		}

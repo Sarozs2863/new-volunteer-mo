@@ -11,11 +11,12 @@
 			<van-cell center size="large" title="活动名称：" :value="actDetails.activityName" />
 			<van-cell center size="large" title="主办组织：" :value="actDetails.organization" />
 			<van-cell center size="large" title="工时数量：" :value="actDetails.activityTime" />
-			<van-cell center size="large" title="活动时间：" :value="actDetails.dayTime" />
+			<van-cell center size="large" title="活动时间：" :value="actDetails.activityEndTime" />
 			<van-cell center size="large" title="活动地点：" :value="actDetails.activityPlace" />
 			<van-cell center size="large" title="活动简介：" :value="actDetails.introductory" />
 		</van-cell-group>
-		<div style="margin:18px">
+		<img :src="actDetails.qrCode" alt="Error" />
+		<div style="margin: 18px">
 			<van-button round block type="danger" @click="exitTheAct">退出活动</van-button>
 		</div>
 	</div>
@@ -27,19 +28,11 @@ import { deleteActivity } from '@/api/recruitAct.js';
 export default {
 	data() {
 		return {
-			actDetails: {
-				activityId: 99978,
-				activityName: '0001',
-				dayTime: '14:00-16:00',
-				organization: '计算机学院',
-				activityTime: '10h',
-				activityPlace: '恒大楼门口',
-				introductory:
-					'这是一段活动简介这是一段活动简介这是一段活动简介这是一段活动简介这是一段活动简介这是一段活动简介这是一段活动简介这是一段活动简介这是一段活动简介'
-			}
+			actDetails: {}
 		};
 	},
 	mounted() {
+		console.log('asd');
 		console.log(this.$route.params);
 		this.actDetails = this.$route.params.actDetail;
 	},
@@ -51,7 +44,7 @@ export default {
 				message: '您是否确认要退出该活动？'
 			})
 				.then(async () => {
-					let res = await deleteActivity(this.actDetails.activityId);
+					let res = await deleteActivity(this.actDetails.id);
 					if (res.code === 0) {
 						Toast.success('退出成功！');
 						// 提交成功回到首页
@@ -71,4 +64,10 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+img {
+	margin-left: 20px;
+	width: 100px;
+	height: 100px;
+}
+</style>

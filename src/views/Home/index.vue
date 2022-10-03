@@ -29,7 +29,7 @@
 		>
 			<div style="margin-top: 20px">
 				<van-field v-model="stuNo" label="学号" placeholder="请输入学号" />
-				<van-field v-model="password" label="密码" placeholder="请输入密码" />
+				<van-field v-model="password" type="password" label="密码" placeholder="请输入密码" />
 			</div>
 		</van-dialog>
 
@@ -44,7 +44,7 @@
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						武汉科技大学青年志愿者服务总队欢迎各位同学的加入，我校志愿者一直秉持着奉献、友爱、互助、进步的志愿精神！“志”同道合，“愿”你同行。欢迎扫码关注下列总队官方账号，期待和你的志愿之旅！
 					</div>
-					<div class="tips_save">长按图片可保存</div>
+					<div class="tips_save">截图至对应APP扫描</div>
 				</div>
 				<div class="tips_codes">
 					<div class="code_items">

@@ -6,8 +6,12 @@
 			left-text="返回"
 			left-arrow
 			@click-left="$router.go(-1)"
-		/>
-		<div class="myTimes fs-xxs sumcard ">
+			@click-right="isShowCertificate"
+		>
+			<van-icon name="award-o" slot="right"></van-icon
+		></van-nav-bar>
+
+		<div class="myTimes fs-xxs sumcard">
 			<!-- <van-row class="Item-details">
 				<van-col>姓名：</van-col>
 				<van-col>{{ $store.state.userInfo.studentName }}</van-col>
@@ -36,31 +40,128 @@
 			</div> -->
 		</div>
 		<!-- <br /> -->
-		<div style="width:91%;margin-left:5%">
+		<div style="width: 91%; margin-left: 5%">
 			<ActCard
-				style="background-color:rgb(248, 252, 255);margin-top:35px"
+				style="background-color: rgb(248, 252, 255); margin-top: 35px"
 				v-if="$store.state.recentActs.length > 0"
 				:actList="$store.state.recentActs"
 			></ActCard>
 		</div>
-		<copyright style="z-index:1000"></copyright>
+		<!-- 志愿者证书 打印 -->
+		<van-dialog
+			v-model="showCertificate"
+			className="certificate"
+			close-on-click-overlay
+			:show-cancel-button="false"
+			:show-confirm-button="false"
+		>
+			<div id="canvasBox" slot="default" ref="canvasBox">
+				<div id="canvas" ref="canvas">
+					<img src="../assets/img/certificate.png" alt="" />
+					<div>
+						<p>{{ $store.state.userInfo.studentName }}</p>
+						<span class="ChineseFont">{{ $store.state.hourView.timePassed }}h</span>
+						<span class="EnglishFont">{{ $store.state.hourView.timePassed }}h</span>
+					</div>
+				</div>
+				<div class="downLoad">
+					<van-button disabled icon="guide-o"></van-button>
+					<van-button @click="saveImage($store.state.userInfo.studentName, 'png')">png图片</van-button>
+					<van-button @click="saveImage($store.state.userInfo.studentName, 'jpg')">jpg图片</van-button>
+					<van-button @click="handleExportPDF($store.state.userInfo.studentName)">pdf文档</van-button>
+				</div>
+			</div>
+		</van-dialog>
+		<copyright style="z-index: 1000"></copyright>
 	</div>
 </template>
 
 <script>
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 import Copyright from '../components/Copyright.vue';
 import ActCard from '@/components/ActCard.vue';
 import { mapActions } from 'vuex';
+import { CellGroup } from 'vant';
 export default {
 	components: {
 		Copyright,
 		ActCard
 	},
+	data() {
+		return {
+			showCertificate: false
+		};
+	},
 	mounted() {
 		this.setHourView();
 	},
 	methods: {
-		...mapActions(['setHourView'])
+		...mapActions(['setHourView']),
+		isShowCertificate() {
+			this.showCertificate = true;
+		},
+
+		//导出PDF
+		handleExportPDF(pdfName) {
+			const element = document.getElementById('canvas');
+			window.pageYOffset = 0;
+			document.documentElement.scrollTop = 0;
+			document.body.scrollTop = 0;
+			html2canvas(element, {
+				// height: node.offsetHeight,
+				allowTaint: true,
+				// allowTaint: true,
+				logging: true,
+				scale: 4 // 提升画面质量，但是会增加文件大小
+			}).then(function (canvas) {
+				var contentWidth = canvas.width;
+				var contentHeight = canvas.height;
+				//一页pdf显示html页面生成的canvas高度;
+				var pageHeight = (contentWidth / 592.28) * 841.89;
+				//未生成pdf的html页面高度
+				var leftHeight = contentHeight;
+				//页面偏移
+				var position = 0;
+				//a4纸的尺寸[595.28,841.89]，html页面生成的canvas在pdf中图片的宽高
+				var imgWidth = 595.28;
+				var imgHeight = (592.28 / contentWidth) * contentHeight;
+				var pageData = canvas.toDataURL('image/jpeg', 1.0);
+				var pdf = new jsPDF('', 'pt', 'a4');
+				//有两个高度需要区分，一个是html页面的实际高度，和生成pdf的页面高度(841.89)
+				//当内容未超过pdf一页显示的范围，无需分页
+				pdf.addImage(pageData, 'JPEG', 0, 0, imgWidth, imgHeight);
+				pdf.setFont('simsun');
+				pdf.save(pdfName + '.pdf');
+			});
+		},
+
+		// 导出图片
+		saveImage(imgName, type) {
+			let canvasID = this.$refs.canvas;
+			let dLink = document.createElement('a');
+			html2canvas(canvasID, {
+				useCORS: true, //允许跨域
+				scale: 4,
+				dpi: 300,
+				backgroundColor: null
+			}).then((canvas) => {
+				// 创建
+				let dom = document.body.appendChild(canvas);
+				dom.style.display = 'none';
+				dLink.style.display = 'none';
+				document.body.removeChild(dom);
+				let blob = dom.toDataURL('image/' + type);
+				// 添加信息
+				dLink.setAttribute('href', blob);
+				dLink.setAttribute('download', imgName + '.' + type);
+				document.body.appendChild(dLink);
+				//下载
+				dLink.click();
+				URL.revokeObjectURL(blob);
+				document.body.removeChild(dLink);
+			});
+		}
 	}
 };
 </script>
@@ -97,6 +198,55 @@ export default {
 		text-align: center;
 		font-size: 15px;
 		color: rgba(116, 117, 116, 0.705);
+	}
+	.certificate {
+		width: 320px;
+		height: auto;
+		margin: auto;
+		transition: 0.6s;
+		#canvasBox {
+			height: auto;
+			div {
+				img {
+					width: 320px;
+					height: 453px;
+				}
+				div {
+					p {
+						font-size: 0.8em;
+						position: fixed;
+						// top: 20vh;
+						// left: 11vw;
+						top: 154px;
+						left: 40px;
+					}
+					.ChineseFont {
+						// font-style: ;
+						font-size: 10px;
+						position: fixed;
+						// top: 28vh;
+						// left: 34vw;
+						left: 140px;
+						top: 215px;
+					}
+					.EnglishFont {
+						// font-style: ;
+						font-size: 8px;
+						position: fixed;
+						// top: 28vh;
+						// left: 34vw;
+						left: 180px;
+						top: 262px;
+					}
+				}
+			}
+
+			.downLoad {
+				van-button --normal {
+					font-size: 0.3rem;
+				}
+			}
+		}
 	}
 }
 </style>

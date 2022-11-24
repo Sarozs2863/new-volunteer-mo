@@ -52,8 +52,10 @@
 			v-model="showCertificate"
 			className="certificate"
 			close-on-click-overlay
-			:show-cancel-button="false"
-			:show-confirm-button="false"
+			:show-cancel-button="true"
+			cancel-button-text="下载jpg"
+			:show-confirm-button="true"
+			confirm-button-text="下载png"
 		>
 			<div id="canvasBox" slot="default" ref="canvasBox">
 				<div id="canvas" ref="canvas">
@@ -65,10 +67,10 @@
 					</div>
 				</div>
 				<div class="downLoad">
-					<van-button disabled icon="guide-o"></van-button>
-					<van-button @click="saveImage($store.state.userInfo.studentName, 'png')">png图片</van-button>
-					<van-button @click="saveImage($store.state.userInfo.studentName, 'jpg')">jpg图片</van-button>
-					<van-button @click="handleExportPDF($store.state.userInfo.studentName)">pdf文档</van-button>
+					<!-- <van-button disabled icon="guide-o"></van-button> -->
+					<!-- <van-button @click="saveImage($store.state.userInfo.studentName, 'png')">png图片</van-button> -->
+					<!-- <van-button @click="saveImage($store.state.userInfo.studentName, 'jpg')">jpg图片</van-button> -->
+					<!-- <van-button @click="handleExportPDF($store.state.userInfo.studentName)">pdf文档</van-button> -->
 				</div>
 			</div>
 		</van-dialog>
@@ -103,38 +105,38 @@ export default {
 		},
 
 		//导出PDF
-		handleExportPDF(pdfName) {
-			const element = document.getElementById('canvas');
-			window.pageYOffset = 0;
-			document.documentElement.scrollTop = 0;
-			document.body.scrollTop = 0;
-			html2canvas(element, {
-				// height: node.offsetHeight,
-				allowTaint: true,
-				// allowTaint: true,
-				logging: true,
-				scale: 4 // 提升画面质量，但是会增加文件大小
-			}).then(function (canvas) {
-				var contentWidth = canvas.width;
-				var contentHeight = canvas.height;
-				//一页pdf显示html页面生成的canvas高度;
-				var pageHeight = (contentWidth / 592.28) * 841.89;
-				//未生成pdf的html页面高度
-				var leftHeight = contentHeight;
-				//页面偏移
-				var position = 0;
-				//a4纸的尺寸[595.28,841.89]，html页面生成的canvas在pdf中图片的宽高
-				var imgWidth = 595.28;
-				var imgHeight = (592.28 / contentWidth) * contentHeight;
-				var pageData = canvas.toDataURL('image/jpeg', 1.0);
-				var pdf = new jsPDF('', 'pt', 'a4');
-				//有两个高度需要区分，一个是html页面的实际高度，和生成pdf的页面高度(841.89)
-				//当内容未超过pdf一页显示的范围，无需分页
-				pdf.addImage(pageData, 'JPEG', 0, 0, imgWidth, imgHeight);
-				pdf.setFont('simsun');
-				pdf.save(pdfName + '.pdf');
-			});
-		},
+		// handleExportPDF(pdfName) {
+		// 	const element = document.getElementById('canvas');
+		// 	window.pageYOffset = 0;
+		// 	document.documentElement.scrollTop = 0;
+		// 	document.body.scrollTop = 0;
+		// 	html2canvas(element, {
+		// 		// height: node.offsetHeight,
+		// 		allowTaint: true,
+		// 		// allowTaint: true,
+		// 		logging: true,
+		// 		scale: 4 // 提升画面质量，但是会增加文件大小
+		// 	}).then(function (canvas) {
+		// 		var contentWidth = canvas.width;
+		// 		var contentHeight = canvas.height;
+		// 		//一页pdf显示html页面生成的canvas高度;
+		// 		var pageHeight = (contentWidth / 592.28) * 841.89;
+		// 		//未生成pdf的html页面高度
+		// 		var leftHeight = contentHeight;
+		// 		//页面偏移
+		// 		var position = 0;
+		// 		//a4纸的尺寸[595.28,841.89]，html页面生成的canvas在pdf中图片的宽高
+		// 		var imgWidth = 595.28;
+		// 		var imgHeight = (592.28 / contentWidth) * contentHeight;
+		// 		var pageData = canvas.toDataURL('image/jpeg', 1.0);
+		// 		var pdf = new jsPDF('', 'pt', 'a4');
+		// 		//有两个高度需要区分，一个是html页面的实际高度，和生成pdf的页面高度(841.89)
+		// 		//当内容未超过pdf一页显示的范围，无需分页
+		// 		pdf.addImage(pageData, 'JPEG', 0, 0, imgWidth, imgHeight);
+		// 		pdf.setFont('simsun');
+		// 		pdf.save(pdfName + '.pdf');
+		// 	});
+		// },
 
 		// 导出图片
 		saveImage(imgName, type) {
@@ -213,30 +215,32 @@ export default {
 				}
 				div {
 					p {
-						font-size: 0.8em;
+						font-size: 0.3rem;
 						position: fixed;
+						font-family: 'SimHei';
 						// top: 20vh;
 						// left: 11vw;
-						top: 154px;
-						left: 40px;
+						font-weight: bold;
+						top: 157px;
+						left: 42px;
 					}
 					.ChineseFont {
 						// font-style: ;
-						font-size: 10px;
+						font-size: 0.2rem;
 						position: fixed;
 						// top: 28vh;
 						// left: 34vw;
 						left: 140px;
-						top: 215px;
+						top: 216px;
 					}
 					.EnglishFont {
 						// font-style: ;
-						font-size: 8px;
+						font-size: 0.2rem;
 						position: fixed;
 						// top: 28vh;
 						// left: 34vw;
-						left: 180px;
-						top: 262px;
+						left: 178px;
+						top: 260px;
 					}
 				}
 			}

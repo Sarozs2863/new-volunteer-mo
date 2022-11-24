@@ -29,7 +29,7 @@
                 <van-cell title="工时表 ID "
                           :value="item.volunteerCheckId" />
                 <van-cell title="活动日期"
-                          :value="item.activityDate" />
+                          :value="item.participateDate" />
                 <van-cell title="负责人"
                           :value="item.crater" />
                 <van-cell title="已参与人数"

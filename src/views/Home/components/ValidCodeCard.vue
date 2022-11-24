@@ -48,7 +48,7 @@ export default {
 			// 传活动id
 			const activityId = res.data.activityId;
 			const sheetId = res.data.volunteerCheckId;
-			const activityDate = res.data.activityDate;
+			const participateDate = res.data.participateDate;
 			const activityName = res.data.activityName;
 			const volunteerTimes = res.data.volunteerTimes;
 			const crater = res.data.crater;
@@ -58,7 +58,7 @@ export default {
 				params: {
 					activityId: activityId,
 					sheetId: sheetId,
-					activityDate: activityDate,
+					participateDate: participateDate,
 					randomString: this.verifyCode,
 					volunteerTimes: volunteerTimes,
 					crater: crater,

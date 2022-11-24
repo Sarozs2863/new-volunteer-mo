@@ -66,7 +66,7 @@ export default {
 				volunteerTime: '',
 				activityName: this.$route.params.activityName
 			},
-			date: this.$route.params.activityDate,
+			date: this.$route.params.participateDate,
 			activityId: this.$route.params.activityId,
 			sheetId: this.$route.params.sheetId,
 			randomString: this.$route.params.randomString,

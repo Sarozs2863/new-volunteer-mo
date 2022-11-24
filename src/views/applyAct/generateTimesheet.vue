@@ -108,7 +108,7 @@ export default {
       const data = {
         activityId: this.activityId,
         effectiveTime: this.validTime,
-        activityDate: this.date,
+        participateDate: this.date,
         volunteerTimes: this.defaultHour
         // volunteerTimes: JSON.stringify(this.defaultHour)
       }

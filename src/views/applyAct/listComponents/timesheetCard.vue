@@ -7,7 +7,7 @@
           <van-cell title="工时表 id "
                     :value="item.volunteerCheckId" />
           <van-cell title="日期"
-                    :value="item.activityDate" />
+                    :value="item.participateDate" />
         </div>
       </van-cell-group>
     </div>

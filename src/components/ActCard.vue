@@ -4,7 +4,7 @@
 			<van-col class="left" span="13">
 				<van-row class="act_name">{{ act.activityName }}</van-row>
 				<div class="date_crater">
-					<div class="date">{{ act.participateDate }}</div>
+					<div class="date">{{ formatDate(act.participateDate) }}</div>
 					<div class="crater">{{ act.crater }}</div>
 				</div>
 				<van-row class="organization">{{ act.organizationName }}</van-row>
@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 import { mapState } from 'vuex';
 export default {
 	name: 'ActCard',
@@ -28,7 +29,11 @@ export default {
 	computed: {
 		// ...mapState(['actList'])
 	},
-	methods: {},
+	methods: {
+		formatDate(date) {
+			return moment(date).format('YYYY-MM-DD');
+		}
+	},
 	created() {}
 };
 </script>

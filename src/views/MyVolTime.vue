@@ -21,17 +21,17 @@
 				<van-col>{{ $store.state.userInfo.studentNum }}</van-col>
 			</van-row> -->
 			<van-row class="Item-details">
-				<img src="../assets/img/myact.png" width="34px" height="40px" />
+				<img src="../assets/img/myact.png" width="36px" height="40px" />
 				<van-col>已参加活动：</van-col>
 				<van-col>{{ $store.state.hourView.activityJoined }}</van-col>
 			</van-row>
 			<van-row class="Item-details">
-				<img src="../assets/img/confirmed.png" width="34px" height="40px" />
+				<img src="../assets/img/confirmed.png" width="36px" height="40px" />
 				<van-col>已认证工时：</van-col>
 				<van-col>{{ $store.state.hourView.timePassed }}h</van-col>
 			</van-row>
 			<van-row class="Item-details">
-				<img src="../assets/img/unconfirmed.png" width="34px" height="40px" />
+				<img src="../assets/img/unconfirmed.png" width="36px" height="40px" />
 				<van-col>未认证工时：</van-col>
 				<van-col>{{ $store.state.hourView.timeToBePassed }}h</van-col>
 			</van-row>
@@ -52,14 +52,14 @@
 			v-model="showCertificate"
 			className="certificate"
 			close-on-click-overlay
-			:show-cancel-button="true"
-			cancel-button-text="下载jpg"
-			:show-confirm-button="true"
-			confirm-button-text="下载png"
+			:show-cancel-button="false"
+			:show-confirm-button="false"
+			:lazy-render="false"
+			:overlay="false"
 		>
 			<div id="canvasBox" slot="default" ref="canvasBox">
 				<div id="canvas" ref="canvas">
-					<img src="../assets/img/certificate.png" alt="" />
+					<img id="origin" src="../assets/img/certificate.png" alt="" />
 					<div>
 						<p>{{ $store.state.userInfo.studentName }}</p>
 						<span class="ChineseFont">{{ $store.state.hourView.timePassed }}h</span>
@@ -67,10 +67,8 @@
 					</div>
 				</div>
 				<div class="downLoad">
-					<!-- <van-button disabled icon="guide-o"></van-button> -->
-					<!-- <van-button @click="saveImage($store.state.userInfo.studentName, 'png')">png图片</van-button> -->
-					<!-- <van-button @click="saveImage($store.state.userInfo.studentName, 'jpg')">jpg图片</van-button> -->
-					<!-- <van-button @click="handleExportPDF($store.state.userInfo.studentName)">pdf文档</van-button> -->
+					<van-button @click="showCertificate = false">取消</van-button>
+					<van-button @click="saveImage($store.state.userInfo.studentName)">保存</van-button>
 				</div>
 			</div>
 		</van-dialog>
@@ -79,12 +77,11 @@
 </template>
 
 <script>
-import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import Copyright from '../components/Copyright.vue';
 import ActCard from '@/components/ActCard.vue';
 import { mapActions } from 'vuex';
-import { CellGroup } from 'vant';
+import { CellGroup, Toast } from 'vant';
 export default {
 	components: {
 		Copyright,
@@ -92,17 +89,52 @@ export default {
 	},
 	data() {
 		return {
-			showCertificate: false
+			link: '',
+			showCertificate: true
 		};
 	},
 	mounted() {
+		Toast.loading({
+			message: '加载中...',
+			forbidClick: true,
+			loadingType: 'spinner'
+		});
 		this.setHourView();
+		this.loadImg();
+		this.showCertificate = false;
 	},
 	methods: {
 		...mapActions(['setHourView']),
 		isShowCertificate() {
 			this.showCertificate = true;
 		},
+
+		//加载图片:在mounted之后
+		loadImg() {
+			let canvasID = this.$refs.canvas;
+			html2canvas(canvasID, {
+				useCORS: true, //允许跨域
+				scale: 4,
+				dpi: 300,
+				backgroundColor: null
+			}).then((canvas) => {
+				// 创建
+				let dom = document.body.appendChild(canvas);
+				let blob = dom.toDataURL('image/png', 1.0);
+				this.link = blob;
+				dom.style.display="none";
+				URL.revokeObjectURL(blob);
+			});
+		},
+
+		// 导出图片
+		saveImage(name) {
+			let dLink = document.createElement('a');
+			dLink.href = this.link;
+			dLink.download = name+"_volunteer";
+			dLink.click();
+			document.body.removeChild(dLink);
+		}
 
 		//导出PDF
 		// handleExportPDF(pdfName) {
@@ -137,33 +169,6 @@ export default {
 		// 		pdf.save(pdfName + '.pdf');
 		// 	});
 		// },
-
-		// 导出图片
-		saveImage(imgName, type) {
-			let canvasID = this.$refs.canvas;
-			let dLink = document.createElement('a');
-			html2canvas(canvasID, {
-				useCORS: true, //允许跨域
-				scale: 4,
-				dpi: 300,
-				backgroundColor: null
-			}).then((canvas) => {
-				// 创建
-				let dom = document.body.appendChild(canvas);
-				dom.style.display = 'none';
-				dLink.style.display = 'none';
-				document.body.removeChild(dom);
-				let blob = dom.toDataURL('image/' + type);
-				// 添加信息
-				dLink.setAttribute('href', blob);
-				dLink.setAttribute('download', imgName + '.' + type);
-				document.body.appendChild(dLink);
-				//下载
-				dLink.click();
-				URL.revokeObjectURL(blob);
-				document.body.removeChild(dLink);
-			});
-		}
 	}
 };
 </script>
@@ -206,6 +211,7 @@ export default {
 		height: auto;
 		margin: auto;
 		transition: 0.6s;
+		border: 0.2px solid black;
 		#canvasBox {
 			height: auto;
 			div {
@@ -215,38 +221,43 @@ export default {
 				}
 				div {
 					p {
-						font-size: 0.3rem;
+						font-size: 0.26rem;
 						position: fixed;
 						font-family: 'SimHei';
 						// top: 20vh;
 						// left: 11vw;
 						font-weight: bold;
-						top: 157px;
-						left: 42px;
+						top: 156px;
+						left: 43px;
 					}
 					.ChineseFont {
+						font-family: 'Times New Roman', Times, serif;
 						// font-style: ;
 						font-size: 0.2rem;
 						position: fixed;
 						// top: 28vh;
 						// left: 34vw;
 						left: 140px;
-						top: 216px;
+						top: 214px;
 					}
 					.EnglishFont {
+						font-family: 'Times New Roman', Times, serif;
 						// font-style: ;
 						font-size: 0.2rem;
 						position: fixed;
 						// top: 28vh;
 						// left: 34vw;
 						left: 178px;
-						top: 260px;
+						top: 258px;
 					}
 				}
 			}
 
 			.downLoad {
-				van-button --normal {
+				// border: 0.1px solid black;
+				button {
+					display: inline-block;
+					width: 50%;
 					font-size: 0.3rem;
 				}
 			}

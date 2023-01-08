@@ -14,4 +14,9 @@ export default {
   name: 'App'
 };
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss">
+// html {
+//     -webkit-filter: grayscale(100%);
+//     filter: grayscale(100%);
+// }
+</style>

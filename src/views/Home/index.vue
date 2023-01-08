@@ -192,7 +192,7 @@ export default {
 	},
 	mounted() {
 		this.init();
-		this.showQRCode = true;
+		this.showQRCode = false;
 	}
 };
 </script>

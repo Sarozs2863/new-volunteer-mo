@@ -18,6 +18,8 @@ import 'lib-flexible/flexible.js';
 import VueCookies from 'vue-cookies';
 Vue.use(VueCookies);
 
+
+
 // filters
 import './filters';
 

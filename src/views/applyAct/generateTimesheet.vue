@@ -89,7 +89,7 @@ export default {
     onSelect(date) {
       //   console.log(date)
       this.date = moment(date).format('YYYY-MM-DD')
-      console.log(this.date)
+      // console.log(this.date)
     },
     async onConfirm() {
       if (this.validTime === '') {

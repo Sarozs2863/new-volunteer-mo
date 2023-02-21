@@ -82,6 +82,7 @@ import Copyright from '../components/Copyright.vue';
 import ActCard from '@/components/ActCard.vue';
 import { mapActions } from 'vuex';
 import { CellGroup, Toast } from 'vant';
+var FileSaver = require('file-saver');
 export default {
 	components: {
 		Copyright,
@@ -90,6 +91,7 @@ export default {
 	data() {
 		return {
 			link: '',
+			test: '',
 			showCertificate: true
 		};
 	},
@@ -136,39 +138,9 @@ export default {
 			document.body.removeChild(dLink);
 		}
 
-		//导出PDF
-		// handleExportPDF(pdfName) {
-		// 	const element = document.getElementById('canvas');
-		// 	window.pageYOffset = 0;
-		// 	document.documentElement.scrollTop = 0;
-		// 	document.body.scrollTop = 0;
-		// 	html2canvas(element, {
-		// 		// height: node.offsetHeight,
-		// 		allowTaint: true,
-		// 		// allowTaint: true,
-		// 		logging: true,
-		// 		scale: 4 // 提升画面质量，但是会增加文件大小
-		// 	}).then(function (canvas) {
-		// 		var contentWidth = canvas.width;
-		// 		var contentHeight = canvas.height;
-		// 		//一页pdf显示html页面生成的canvas高度;
-		// 		var pageHeight = (contentWidth / 592.28) * 841.89;
-		// 		//未生成pdf的html页面高度
-		// 		var leftHeight = contentHeight;
-		// 		//页面偏移
-		// 		var position = 0;
-		// 		//a4纸的尺寸[595.28,841.89]，html页面生成的canvas在pdf中图片的宽高
-		// 		var imgWidth = 595.28;
-		// 		var imgHeight = (592.28 / contentWidth) * contentHeight;
-		// 		var pageData = canvas.toDataURL('image/jpeg', 1.0);
-		// 		var pdf = new jsPDF('', 'pt', 'a4');
-		// 		//有两个高度需要区分，一个是html页面的实际高度，和生成pdf的页面高度(841.89)
-		// 		//当内容未超过pdf一页显示的范围，无需分页
-		// 		pdf.addImage(pageData, 'JPEG', 0, 0, imgWidth, imgHeight);
-		// 		pdf.setFont('simsun');
-		// 		pdf.save(pdfName + '.pdf');
-		// 	});
-		// },
+		
+
+		
 	}
 };
 </script>
@@ -254,8 +226,8 @@ export default {
 			}
 
 			.downLoad {
-				// border: 0.1px solid black;
 				button {
+					z-index: 999;
 					display: inline-block;
 					width: 50%;
 					font-size: 0.3rem;

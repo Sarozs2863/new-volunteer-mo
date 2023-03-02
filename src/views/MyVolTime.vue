@@ -68,7 +68,7 @@
 				</div>
 				<div class="downLoad">
 					<van-button @click="showCertificate = false">取消</van-button>
-					<van-button @click="saveImage($store.state.userInfo.studentName)">保存</van-button>
+					<van-button @click="flutterCallJsMethod">保存</van-button>
 				</div>
 			</div>
 		</van-dialog>
@@ -82,7 +82,7 @@ import Copyright from '../components/Copyright.vue';
 import ActCard from '@/components/ActCard.vue';
 import { mapActions } from 'vuex';
 import { CellGroup, Toast } from 'vant';
-var FileSaver = require('file-saver');
+// import { flutterCallJsMethod } from '../utils/sendMessage.js';
 export default {
 	components: {
 		Copyright,
@@ -124,23 +124,17 @@ export default {
 				let dom = document.body.appendChild(canvas);
 				let blob = dom.toDataURL('image/png', 1.0);
 				this.link = blob;
-				dom.style.display="none";
+				dom.style.display = 'none';
 				URL.revokeObjectURL(blob);
 			});
 		},
 
 		// 导出图片
-		saveImage(name) {
-			let dLink = document.createElement('a');
-			dLink.href = this.link;
-			dLink.download = name+"_volunteer";
-			dLink.click();
-			document.body.removeChild(dLink);
+		//通过flutter的方法，与webview交互
+		//交给android处理图片数据
+		flutterCallJsMethod() {
+			VueToFlutter.postMessage(this.link);
 		}
-
-		
-
-		
 	}
 };
 </script>

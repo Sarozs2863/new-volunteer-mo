@@ -130,10 +130,18 @@ export default {
 		},
 
 		// 导出图片
-		//通过flutter的方法，与webview交互
-		//交给android处理图片数据
 		flutterCallJsMethod() {
-			VueToFlutter.postMessage(this.link);
+			let u = navigator.userAgent;
+			if (u.indexOf('Android') > -1 || u.indexOf('Adr') > -1) {
+				//交给android处理图片数据
+				WustHelper.base64ToJpg(this.link);
+			} else if (u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) || u.indexOf('iPhone') > -1 || u.indexOf('iPad') > -1) {
+				//交给ios处理图片数据
+				//通过flutter的方法，与webview交互
+				VueToFlutter.postMessage(this.link);
+			} else {
+				Toast.fail('无法保存');
+			}
 		}
 	}
 };

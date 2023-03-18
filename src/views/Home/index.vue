@@ -108,6 +108,7 @@ export default {
 			if (this.$cookies.get('cookie')) {
 				return 'android';
 			} else if (this.$route.query.platform) {
+				//小程序
 				if (this.$route.query.platform === 'mp') {
 					return 'mp';
 				} else if (this.$route.query.platform === 'ios') {

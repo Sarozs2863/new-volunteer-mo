@@ -58,7 +58,11 @@
 			:overlay="false"
 		>
 			<div id="canvasBox" slot="default" ref="canvasBox">
-				<div id="canvas" ref="canvas">
+				<div class="downLoad" v-if="this.link && this.isMiniProgram">
+					<img :src="this.link" alt="" />
+					<van-button class="bottomButton">请长按保存</van-button>
+				</div>
+				<div v-else id="canvas" ref="canvas">
 					<img id="origin" src="../assets/img/certificate.png" alt="" />
 					<div>
 						<p>{{ $store.state.userInfo.studentName }}</p>
@@ -66,12 +70,18 @@
 						<span class="EnglishFont">{{ $store.state.hourView.timePassed }}h</span>
 					</div>
 				</div>
-				<div class="downLoad">
+				<div class="downLoad" v-show="isMiniProgram && !this.link">
+					<van-button class="bottomButton" @click="showCertificate = false">加载中~~~</van-button>
+				</div>
+				<div class="downLoad" v-show="!isMiniProgram">
 					<van-button @click="showCertificate = false">取消</van-button>
 					<van-button @click="flutterCallJsMethod">保存</van-button>
 				</div>
 			</div>
 		</van-dialog>
+		<div class="button">
+			<van-button v-show="isMiniProgram" @click="isShowCertificate" round>保存证书</van-button>
+		</div>
 		<copyright style="z-index: 1000"></copyright>
 	</div>
 </template>
@@ -82,7 +92,7 @@ import Copyright from '../components/Copyright.vue';
 import ActCard from '@/components/ActCard.vue';
 import { mapActions } from 'vuex';
 import { CellGroup, Toast } from 'vant';
-// import { flutterCallJsMethod } from '../utils/sendMessage.js';
+
 export default {
 	components: {
 		Copyright,
@@ -92,7 +102,8 @@ export default {
 		return {
 			link: '',
 			test: '',
-			showCertificate: true
+			showCertificate: true,
+			isMiniProgram: false
 		};
 	},
 	mounted() {
@@ -104,10 +115,17 @@ export default {
 		this.setHourView();
 		this.loadImg();
 		this.showCertificate = false;
+		let u = navigator.userAgent;
+		this.isMiniProgram = u.indexOf('miniProgram') > -1;
 	},
 	methods: {
 		...mapActions(['setHourView']),
 		isShowCertificate() {
+			Toast.loading({
+				message: '加载中...',
+				forbidClick: true,
+				loadingType: 'spinner'
+			});
 			this.showCertificate = true;
 		},
 
@@ -116,7 +134,7 @@ export default {
 			let canvasID = this.$refs.canvas;
 			html2canvas(canvasID, {
 				useCORS: true, //允许跨域
-				scale: 4,
+				scale: 3,
 				dpi: 300,
 				backgroundColor: null
 			}).then((canvas) => {
@@ -139,6 +157,11 @@ export default {
 				//交给ios处理图片数据
 				//通过flutter的方法，与webview交互
 				VueToFlutter.postMessage(this.link);
+			} else if (u.indexOf('Windows' > -1)) {
+				var a = document.createElement('a'); // 生成一个a元素
+				a.download = 'photo.png'; // 设置图片名称
+				a.href = this.link; // 将生成的URL设置为a.href属性
+				a.click(); // 触发a的单击事件
 			} else {
 				Toast.fail('无法保存');
 			}
@@ -226,8 +249,13 @@ export default {
 					}
 				}
 			}
-
 			.downLoad {
+				.bottomButton {
+					z-index: 999;
+					display: inline-block;
+					width: 99%;
+					font-size: 0.3rem;
+				}
 				button {
 					z-index: 999;
 					display: inline-block;
@@ -236,6 +264,10 @@ export default {
 				}
 			}
 		}
+	}
+	.button {
+		display: flex;
+		justify-content: center;
 	}
 }
 </style>

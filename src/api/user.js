@@ -14,6 +14,18 @@ export function login(data) {
 	});
 }
 
+// 更新学生信息
+export function updateStudentInfo(data) {
+	return request({
+		url: '/volunteer/public/updateStuInfoFromWustHelper',
+		method: 'put',
+		params: {
+			appToken: data
+		}
+		// hideloading: false, // vant 加载效果
+	});
+}
+
 export function getVolunteerToken(platform) {
 	let url;
 	if (platform === 'mp') {

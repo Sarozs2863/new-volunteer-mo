@@ -8,16 +8,20 @@ const service = axios.create({
 	//测试环境
 	baseURL: 'https://volunteer.ciduid.top/volunteer',
 	// baseURL: 'http://49.234.41.131:1314/volunteer',
+	// baseURL: 'https://192.168.54.179:1314/volunteer',
 	timeout: 5000
 });
 
 //  请求拦截
 service.interceptors.request.use(
 	(config) => {
+		// 手机和小程序 登录
 		if (config.url === '/login/mobile' || config.url === '/login/mp') {
 			config.headers['token'] = store.state.platformToken;
 		} else if (config.url === 'https://wusthelper.wustlinghang.cn/mobileapi/v2/jwc/login') {
+			//
 		} else {
+			//
 			config.headers['token'] = store.state.volunteerToken;
 		}
 

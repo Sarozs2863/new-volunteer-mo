@@ -58,22 +58,26 @@
 			:overlay="false"
 		>
 			<div id="canvasBox" slot="default" ref="canvasBox">
-				<div class="downLoad" v-if="this.link && this.isMiniProgram">
-					<img :src="this.link" alt="" />
+				<div class="downLoad" v-if="link && isMiniProgram">
+					<img :src="link" alt="" />
 					<van-button class="bottomButton">请长按保存</van-button>
 				</div>
 				<div v-else id="canvas" ref="canvas">
-					<img id="origin" src="../assets/img/certificate.png" alt="" />
+					<img id="origin" src="../assets/img/certificate - Copy.png" alt="" />
 					<div>
 						<p>{{ $store.state.userInfo.studentName }}</p>
 						<span class="ChineseFont">{{ $store.state.hourView.timePassed }}h</span>
 						<span class="EnglishFont">{{ $store.state.hourView.timePassed }}h</span>
 					</div>
 				</div>
-				<div class="downLoad" v-show="isMiniProgram && !this.link">
+				<div class="downLoad" v-show="isMiniProgram && !link">
 					<van-button class="bottomButton" @click="showCertificate = false">加载中~~~</van-button>
 				</div>
-				<div class="downLoad" v-show="!isMiniProgram">
+				<div class="downLoad" v-show="!isMiniProgram && !link">
+					<van-button>加载中~~</van-button>
+					<!-- <van-button @click="flutterCallJsMethod">保存</van-button> -->
+				</div>
+				<div class="downLoad" v-show="!isMiniProgram && link">
 					<van-button @click="showCertificate = false">取消</van-button>
 					<van-button @click="flutterCallJsMethod">保存</van-button>
 				</div>
@@ -134,8 +138,7 @@ export default {
 			let canvasID = this.$refs.canvas;
 			html2canvas(canvasID, {
 				useCORS: true, //允许跨域
-				scale: 3,
-				dpi: 300,
+				scale: 2,
 				backgroundColor: null
 			}).then((canvas) => {
 				// 创建
@@ -152,6 +155,11 @@ export default {
 			let u = navigator.userAgent;
 			if (u.indexOf('Android') > -1 || u.indexOf('Adr') > -1) {
 				//交给android处理图片数据
+				Toast.loading({
+					message: '下载中...',
+					forbidClick: true,
+					loadingType: 'spinner'
+				});
 				WustHelper.base64ToJpg(this.link);
 			} else if (u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) || u.indexOf('iPhone') > -1 || u.indexOf('iPad') > -1) {
 				//交给ios处理图片数据
@@ -159,7 +167,7 @@ export default {
 				VueToFlutter.postMessage(this.link);
 			} else if (u.indexOf('Windows' > -1)) {
 				var a = document.createElement('a'); // 生成一个a元素
-				a.download = 'photo.png'; // 设置图片名称
+				a.download = this.$store.state.userInfo.studentName + '.png'; // 设置图片名称
 				a.href = this.link; // 将生成的URL设置为a.href属性
 				a.click(); // 触发a的单击事件
 			} else {

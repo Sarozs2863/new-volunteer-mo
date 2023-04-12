@@ -10,7 +10,9 @@
 					fixed
 					placeholder
 					:style="{ display: platform == 'android' ? '' : 'none' }"
+					@click-right="updateInfo"
 				>
+					<van-icon name="underway-o" slot="right" />
 				</van-nav-bar>
 			</div>
 
@@ -159,6 +161,8 @@
 </template>
 
 <script>
+// import axios from 'axios';
+import { updateStudentInfo } from '@/api/user';
 import { mapState } from 'vuex';
 import { isIdCard, isPhone, isQQ } from '@/utils/validate';
 import {
@@ -175,6 +179,7 @@ import {
 export default {
 	data() {
 		return {
+			test: '',
 			userInfo: {},
 			nativePlacePicker: false,
 			nationPicker: false,
@@ -216,6 +221,32 @@ export default {
 		this.initList();
 	},
 	methods: {
+		updateInfo() {
+			this.getInfo();
+		},
+		async getInfo() {
+			const res = await updateStudentInfo(this.$cookies.get('cookie'));
+			console.log(res);
+			// await axios({
+			// 	url: 'http://121.36.13.135:1314/volunteer/volunteer/public/updateStuInfoFromWustHelper',
+			// 	method: 'put',
+			// 	// params: this.$route.query.token, //
+			// 	params: {
+			// 		appToken: this.$cookies.get('cookie')
+			// 	},
+			// 	headers: {
+			// 		token: this.$store.state.volunteerToken
+			// 	}
+			// })
+			// 	.then((res) => {
+			// 		this.test = res;
+			// 		console.log(res);
+			// 	})
+			// 	.catch((err) => {
+			// 		this.test = err;
+			// 		console.log(err);
+			// 	});
+		},
 		async initList() {
 			await provinceList().then((res) => {
 				this.nativePlaceList[0].values = res.data.map((item) => item.provinceName);

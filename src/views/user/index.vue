@@ -175,6 +175,7 @@ import {
 	politicalOutlook,
 	modUserInfo
 } from '@/api/user';
+import { Dialog, Toast } from 'vant';
 
 export default {
 	data() {
@@ -222,30 +223,32 @@ export default {
 	},
 	methods: {
 		updateInfo() {
-			this.getInfo();
+			Dialog.confirm({
+				message: '是否同步信息？'
+			})
+				.then(() => {
+					// 时间短，10分钟之内，不用更新
+					if (new Date() - new Date(localStorage.getItem('syncDate')) < 1000 * 60 * 10) {
+						Toast('已是最新信息啦~');
+					} else {
+						this.getInfo();
+					}
+				})
+				.catch(() => {
+					// on cancel
+				});
 		},
+		// 从教务处获取 新信息，同步到领航服务器
 		async getInfo() {
 			const res = await updateStudentInfo(this.$cookies.get('cookie'));
 			console.log(res);
-			// await axios({
-			// 	url: 'http://121.36.13.135:1314/volunteer/volunteer/public/updateStuInfoFromWustHelper',
-			// 	method: 'put',
-			// 	// params: this.$route.query.token, //
-			// 	params: {
-			// 		appToken: this.$cookies.get('cookie')
-			// 	},
-			// 	headers: {
-			// 		token: this.$store.state.volunteerToken
-			// 	}
-			// })
-			// 	.then((res) => {
-			// 		this.test = res;
-			// 		console.log(res);
-			// 	})
-			// 	.catch((err) => {
-			// 		this.test = err;
-			// 		console.log(err);
-			// 	});
+			if (res.code == 0) {
+				Toast.success(res.msg);
+				// 将同步的时间记录
+				localStorage.setItem('syncDate', new Date());
+			} else {
+				Toast.fail('失败');
+			}
 		},
 		async initList() {
 			await provinceList().then((res) => {

@@ -138,7 +138,7 @@ export default {
 			let canvasID = this.$refs.canvas;
 			html2canvas(canvasID, {
 				useCORS: true, //允许跨域
-				scale: 2,
+				scale: 3,
 				backgroundColor: null
 			}).then((canvas) => {
 				// 创建

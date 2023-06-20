@@ -223,33 +223,37 @@ export default {
 	},
 	methods: {
 		updateInfo() {
-			Dialog.confirm({
-				message: '是否同步信息？'
-			})
-				.then(() => {
-					// 时间短，10分钟之内，不用更新
-					if (new Date() - new Date(localStorage.getItem('syncDate')) < 1000 * 60 * 10) {
-						Toast('已是最新信息啦~');
-					} else {
-						this.getInfo();
-					}
-				})
-				.catch(() => {
-					// on cancel
-				});
+			// Dialog.confirm({
+			// 	message: '是否同步信息？'
+			// })
+			// 	.then(() => {
+			// 时间短，10分钟之内，不用更新
+			// if (new Date() - new Date(localStorage.getItem('syncDate')) < 1000) {
+			// 	Toast('已是最新信息啦~');
+			// } else {
+			// 	this.getInfo();
+			// }
+			// })
+			// .catch(() => {
+			// 	// on cancel
+			// });
 		},
+		// 暂时不用前端更新
 		// 从教务处获取 新信息，同步到领航服务器
-		async getInfo() {
-			const res = await updateStudentInfo(this.$cookies.get('cookie'));
-			console.log(res);
-			if (res.code == 0) {
-				Toast.success(res.msg);
-				// 将同步的时间记录
-				localStorage.setItem('syncDate', new Date());
-			} else {
-				Toast.fail('失败');
-			}
-		},
+		// async getInfo() {
+		// 	console.log('附页cookie');
+		// 	console.log(this.$cookies.get('cookie'));
+		// 	const res = await updateStudentInfo(this.$cookies.get('cookie'));
+		// 	console.log('同步信息');
+		// 	console.log(res);
+		// 	if (res.code == 0) {
+		// 		Toast.success(res.msg);
+		// 		//成功， 将同步的时间记录
+		// 		localStorage.setItem('syncDate', new Date());
+		// 	} else {
+		// 		Toast.fail('失败');
+		// 	}
+		// },
 		async initList() {
 			await provinceList().then((res) => {
 				this.nativePlaceList[0].values = res.data.map((item) => item.provinceName);

@@ -14,7 +14,7 @@
 				<van-button
 					type="info"
 					block
-					class="mt-1 submit-btn "
+					class="mt-1 submit-btn"
 					:disabled="verifyCode.length < 6 ? true : false"
 					@click="commitVerifyCode()"
 					>提交工时</van-button

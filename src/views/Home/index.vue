@@ -63,7 +63,8 @@
 
 <script>
 import { mapActions } from 'vuex';
-import { login } from '@/api/user';
+import { Toast } from 'vant';
+import { login, updateStudentInfo } from '@/api/user';
 // 活动列表 全局组件
 import ActList from '@/views/Home/components/ActList.vue';
 import copyright from '@/components/Copyright.vue';
@@ -161,6 +162,27 @@ export default {
 				await this.setRecentActs();
 				await this.setCreditLevel();
 			}
+			// this.getInfo();
+			// function isLocalStorage() {
+			// 	var testKey = 'test',
+			// 		storage = window.localStorage;
+			// 	try {
+			// 		storage.setItem(testKey, 'testValue');
+			// 		storage.removeItem(testKey);
+			// 		return true;
+			// 	} catch (error) {
+			// 		return false;
+			// 	}
+			// }
+
+			// console.log(isLocalStorage());
+			// if (isLocalStorage()) {
+			// 	if (new Date() - new Date(localStorage.getItem('syncDate')) > 1000 * 30) {
+			// 		this.getInfo();
+			// 	}
+			// } else {
+			// 	Toast.fail('失败');
+			// }
 		},
 
 		async webLogin() {
@@ -191,6 +213,19 @@ export default {
 		// noBomBox(event) {
 		// 	document.activeElement.blur();
 		// },
+
+		// 从教务处获取 新信息，同步到领航服务器
+		// async getInfo() {
+		// 	const res = await updateStudentInfo(this.$cookies.get('cookie'));
+		// 	if (res.code == 0) {
+		// 		Toast.success(res.msg);
+		// 		// 如果成功，将同步的时间记录
+		// 		localStorage.setItem('syncDate', new Date());
+		// 	} else {
+		// 		// Toast.fail('失败');
+		// 	}
+		// },
+
 		...mapActions(['setVolunteerToken', 'setUserInfo', 'setHourView', 'setRecentActs', 'setCreditLevel'])
 	},
 	mounted() {

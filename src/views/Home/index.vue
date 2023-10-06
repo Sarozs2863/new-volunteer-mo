@@ -196,6 +196,9 @@ export default {
 				console.log('教务处的token');
 				console.log(res.data);
 				document.cookie = 'cookie=' + res.data;
+
+
+				
 			} else {
 				this.$toast(res.msg);
 			}

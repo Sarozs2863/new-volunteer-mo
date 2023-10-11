@@ -6,8 +6,8 @@ import { Toast } from 'vant';
 const service = axios.create({
 	// baseURL: process.env.VUE_APP_BASE_API,
 	//测试环境
-	baseURL: "https://fat-admin-volunteer.wustlinghang.cn/volunteer",
-	// baseURL: 'https://volunteer.ciduid.top/volunteer',
+	// baseURL: "https://fat-admin-volunteer.wustlinghang.cn/volunteer",
+	baseURL: 'https://volunteer.ciduid.top/volunteer',
 	// baseURL: 'http://49.234.41.131:1314/volunteer',
 	// baseURL: 'https://192.168.54.179:1314/volunteer',
 	timeout: 5000

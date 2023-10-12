@@ -5,11 +5,10 @@
 	"author": "yunyou <favoritettt@qq.com>",
 	"private": true,
 	"scripts": {
-		"serve": "vue-cli-service serve --open",
 		"dev": "vue-cli-service serve --mode dev",
 		"fat": "vue-cli-service serve --mode fat",
 		"build:test": "vue-cli-service build --mode fat",
-    "build": "vue-cli-service build"
+    	"build": "vue-cli-service build --mode prod"
 	},
 	"dependencies": {
 		"axios": "^0.19.2",

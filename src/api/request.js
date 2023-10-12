@@ -4,10 +4,10 @@ import { Toast } from 'vant';
 
 // create an axios instance
 const service = axios.create({
-	// baseURL: process.env.VUE_APP_BASE_API,
+	baseURL: process.env.VUE_APP_BASE_API,
 	//测试环境
 	// baseURL: "https://fat-admin-volunteer.wustlinghang.cn/volunteer",
-	baseURL: 'https://volunteer.ciduid.top/volunteer',
+	// baseURL: 'https://volunteer.ciduid.top/volunteer',
 	// baseURL: 'http://49.234.41.131:1314/volunteer',
 	// baseURL: 'https://192.168.54.179:1314/volunteer',
 	timeout: 5000
@@ -16,6 +16,7 @@ const service = axios.create({
 //  请求拦截
 service.interceptors.request.use(
 	(config) => {
+		console.log('env', process.env.VUE_APP_BASE_API)
 		// 手机和小程序 登录
 		if (config.url === '/login/mobile' || config.url === '/login/mp') {
 			config.headers['token'] = store.state.platformToken;

@@ -148,10 +148,11 @@ export default {
 			}
 		},
 		async init() {
+			console.log("token",this.getPlatformToken())
 			if (this.getPlatformToken() == false) {
 				this.loginDialogShow = true;
 			} else {
-				await this.setVolunteerToken();
+				await this.setVolunteerToken();// 通过已有token，获取volunteerToken
 				await this.setUserInfo();
 				console.log('电话号: ' + this.$store.state.userInfo.phone);
 				if (!this.$store.state.userInfo.phone) {
@@ -191,14 +192,11 @@ export default {
 				jwcPwd: this.password
 			};
 			let res = await login(data);
-			// console.log(res);
-			if (res.code == 10000) {
+			console.log('res',res);
+			if (res.code == 10000&& res.data) {
 				console.log('教务处的token');
 				console.log(res.data);
 				document.cookie = 'cookie=' + res.data;
-
-
-				
 			} else {
 				this.$toast(res.msg);
 			}

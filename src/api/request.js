@@ -45,6 +45,7 @@ service.interceptors.response.use(
 	(response) => {
 		Toast.clear(); // 加载效果停止
 		const res = response.data;
+		console.log("总res", res)
 		if (res.status && res.status !== 200) {
 			Toast(res.msg);
 			switch (res.status) {
@@ -62,7 +63,14 @@ service.interceptors.response.use(
 				default:
 					return Promise.reject(res || 'error');
 			}
-		} else {
+	} else if (!isNaN(res.code) && (res.code !== 10000 && res.code!== 0)) {
+			switch (res.code) {
+				case 2004:
+					console.log("err")
+					Toast.fail("登录过期，请重新登录")
+			}
+			return Promise.reject(res || 'error');
+		}else {
 			return Promise.resolve(res);
 		}
 	},

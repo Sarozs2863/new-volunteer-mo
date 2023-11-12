@@ -2,6 +2,7 @@
 /node_modules
 /volunteer
 /volunteermobile
+/volunteer-fat
 /dist
 /docs
 # local env files

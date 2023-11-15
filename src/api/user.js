@@ -2,16 +2,21 @@ import request from './request';
 import qs from 'qs';
 
 // 手动输入账号密码获取 app端 token
-export function login(data) {
-	return request({
-		url: 'https://wusthelper.wustlinghang.cn/mobileapi/v2/jwc/login',
-		method: 'POST',
-		hideloading: false, // vant 加载效果
-		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded'
-		},
-		data: qs.stringify(data)
-	});
+export async function login(data) {
+	try {
+		const res = await request({
+			url: 'https://wusthelper.wustlinghang.cn/mobileapi/v2/jwc/login',
+			method: 'POST',
+			hideloading: false, // vant 加载效果
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded'
+			},
+			data: qs.stringify(data)
+		});
+		return res;
+	} catch (err) {
+		console.log("err", err)
+	}
 }
 
 // 更新学生信息

@@ -63,14 +63,18 @@ service.interceptors.response.use(
 				default:
 					return Promise.reject(res || 'error');
 			}
-	} else if (!isNaN(res.code) && (res.code !== 10000 && res.code!== 0)) {
+		} else if (!isNaN(res.code) && (res.code !== 10000 && res.code !== 0)) {
 			switch (res.code) {
 				case 2004:
 					console.log("err")
 					Toast.fail("登录过期，请重新登录")
+				case 30001:
+					Toast.fail(res.msg)
+				default:
+					Toast.fail(res.msg)
 			}
 			return Promise.reject(res || 'error');
-		}else {
+		} else {
 			return Promise.resolve(res);
 		}
 	},
@@ -85,6 +89,7 @@ service.interceptors.response.use(
 				// ...
 				break;
 			default:
+				Toast.fail(error)
 				return Promise.reject(error);
 		}
 	}

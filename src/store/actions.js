@@ -1,13 +1,22 @@
 import { getVolunteerToken, getUserInfo, getHourView, getActsList, getCreditLevel } from '@/api/user';
+import { Toast } from 'vant';
 export default {
 	async setVolunteerToken({ commit, state }) {
 		let { data: token } = await getVolunteerToken(state.platform);
 		commit('setVolunteerToken', token);
 	},
 	async setUserInfo({ commit, state }) {
-		console.log('execute setUserInfo');
-		let { data } = await getUserInfo();
-		commit('setUserInfo', data);
+		try {
+			console.log('execute setUserInfo');
+			const res = await getUserInfo();
+			if (res) {
+				commit('setUserInfo', res.data);
+			} else {
+				Toast.fail("获取身份信息失败")
+			}
+		} catch (e) {
+
+		}
 	},
 	async setCreditLevel({ commit, state }) {
 		console.log('execute setCreditLevel');

@@ -1,5 +1,6 @@
 import request from './request';
 import qs from 'qs';
+import { async } from 'regenerator-runtime';
 
 // 手动输入账号密码获取 app端 token
 export async function login(data) {
@@ -20,8 +21,8 @@ export async function login(data) {
 }
 
 // 更新学生信息
-export function updateStudentInfo(data) {
-	return request({
+export async function updateStudentInfo(data) {
+	return await request({
 		url: '/volunteer/public/updateStuInfoFromWustHelper',
 		method: 'put',
 		params: {
@@ -45,12 +46,17 @@ export function getVolunteerToken(platform) {
 	});
 }
 // 获取个人信息
-export function getUserInfo() {
-	return request({
-		url: '/enterPage/studentInfo',
-		method: 'GET',
-		hideloading: true
-	});
+export async function getUserInfo() {
+	try {
+		const res = await request({
+			url: '/enterPage/studentInfo',
+			method: 'GET',
+			hideloading: true
+		});
+		return res;
+	} catch (e) {
+		console.log("e", e)
+	}
 }
 // 获取个人信用等级信息
 export function getCreditLevel() {
